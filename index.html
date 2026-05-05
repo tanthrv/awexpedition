@@ -498,7 +498,7 @@
     <div class="service-card featured">
       <span class="service-tag">Most Popular</span>
       <h3>Ten Session Package</h3>
-      <div class="service-price">$775 <span>/ package</span></div>
+      <div class="service-price">$815 <span>/ package</span></div>
       <ul>
         <li>Includes free consultation</li>
         <li>One 60-minute setup &amp; goal-setting session</li>
@@ -512,8 +512,8 @@
     <div class="service-card">
       <span class="service-tag">Single Sessions</span>
       <h3>Individual Sessions</h3>
-      <div class="service-price">$175 <span>/ 60 min</span></div>
-      <div style="font-size:0.85rem;opacity:0.6;margin:-0.5rem 0 1rem;font-style:italic;">or $90 / 35 min</div>
+      <div class="service-price">$165 <span>/ 60 min</span></div>
+      <div style="font-size:0.85rem;opacity:0.6;margin:-0.5rem 0 1rem;font-style:italic;">or $95 / 35 min</div>
       <ul>
         <li>First session: if you stop before 30 min and don't want to continue — no charge</li>
         <li>Personalized Journey Map after every session</li>
@@ -526,15 +526,15 @@
   <p class="payment-note">Payments via Cash, Check, Zelle or Venmo.</p>
   <div style="text-align:center;margin-top:1.5rem;">
     <p style="font-size:0.85rem;opacity:0.65;margin-bottom:1rem;">If you are interested in the process but are experiencing financial difficulties, please fill out our Financial Help form.</p>
-    <button onclick="document.getElementById('financialModal').style.display='flex'" style="display:inline-block;text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.8rem 1.8rem;border:1px solid var(--clay);color:var(--clay);background:none;border-radius:2px;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='var(--clay)';this.style.color='var(--cream)'" onmouseout="this.style.background='none';this.style.color='var(--clay)'">Financial Assistance Request</button>
+    <button onclick="document.getElementById('financialModal').style.display='flex'" style="display:inline-block;text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.8rem 1.8rem;border:1px solid var(--clay);color:var(--clay);background:none;border-radius:2px;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='var(--clay)';this.style.color='var(--cream)'" onmouseout="this.style.background='none';this.style.color='var(--clay)'">Financial Support Request</button>
   </div>
 </section>
 
-<!-- FINANCIAL ASSISTANCE MODAL -->
+<!-- Financial Support MODAL -->
 <div id="financialModal" style="display:none;position:fixed;inset:0;background:rgba(44,32,23,0.7);z-index:200;align-items:center;justify-content:center;padding:1.5rem;">
   <div style="background:var(--warm-white);max-width:560px;width:100%;padding:3rem;position:relative;border-radius:2px;max-height:90vh;overflow-y:auto;">
     <button onclick="document.getElementById('financialModal').style.display='none'" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--bark);opacity:0.5;">&times;</button>
-    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:0.5rem;color:var(--bark);">Financial Assistance Request</h3>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:0.5rem;color:var(--bark);">Financial Support Request</h3>
     <p style="font-size:0.85rem;opacity:0.65;margin-bottom:2rem;line-height:1.7;">Your circumstances are your own. All requests are handled with complete discretion.</p>
     <form id="financialForm" action="https://formspree.io/f/xlgadopn" method="POST" onsubmit="handleFinancialSubmit(event)" style="display:flex;flex-direction:column;gap:1.2rem;">
       <div>
@@ -647,7 +647,7 @@
     mobileMenu.classList.remove('open');
   }
 
-  // Financial assistance form
+  // Financial Support form
   async function handleFinancialSubmit(e) {
     e.preventDefault();
     const form = document.getElementById('financialForm');
