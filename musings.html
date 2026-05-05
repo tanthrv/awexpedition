@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musings & More — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(253,250,246,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); padding: 1.5rem 2rem; flex-direction: column; gap: 0; z-index: 99; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { display: block; text-decoration: none; color: var(--bark); font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--mist); opacity: 0.75; transition: opacity 0.2s; }
+  .mobile-menu a:hover { opacity: 1; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu .mob-cta { background: var(--moss); color: var(--cream) !important; padding: 0.9rem 1.5rem !important; border-radius: 2px; opacity: 1 !important; margin-top: 0.5rem; text-align: center; border: none !important; }
+
+  .page-hero { padding: 10rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .page-hero::before { content: 'MUSINGS'; font-family: 'Cormorant Garamond', serif; font-size: 18vw; font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.04); pointer-events: none; white-space: nowrap; }
+  .page-hero-inner { position: relative; max-width: 800px; }
+  .page-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; }
+  .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.5rem; }
+  .page-hero h1 em { font-style: italic; color: var(--sand); }
+  .page-hero p { font-size: 1rem; color: rgba(247,243,238,0.7); max-width: 620px; line-height: 1.9; margin-bottom: 0.8rem; }
+
+  .bucket-nav { background: var(--cream); border-bottom: 1px solid var(--mist); padding: 0 6rem; display: flex; gap: 0; overflow-x: auto; position: sticky; top: 72px; z-index: 50; }
+  .bucket-nav a { text-decoration: none; color: var(--bark); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 1.2rem 1.8rem; border-bottom: 2px solid transparent; white-space: nowrap; opacity: 0.6; transition: opacity 0.2s, border-color 0.2s; }
+  .bucket-nav a:hover { opacity: 1; border-bottom-color: var(--clay); }
+  .bucket-nav a.active { opacity: 1; border-bottom-color: var(--clay); color: var(--clay); }
+
+  .bucket-section { padding: 6rem; border-bottom: 1px solid var(--mist); }
+  .bucket-section:nth-child(even) { background: var(--cream); }
+  .bucket-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 4rem; }
+  .bucket-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+  .bucket-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; line-height: 1.15; margin-bottom: 0.5rem; }
+  .bucket-title em { font-style: italic; color: var(--clay); }
+  .bucket-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--clay); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .bucket-desc { font-size: 0.92rem; opacity: 0.7; line-height: 1.9; max-width: 480px; }
+  .bucket-header-right { display: flex; align-items: flex-end; justify-content: flex-end; }
+  .bucket-letter { font-family: 'Cormorant Garamond', serif; font-size: 12rem; font-weight: 300; line-height: 1; color: var(--mist); opacity: 0.6; user-select: none; }
+
+  .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .post-card { background: var(--warm-white); border: 1px solid var(--mist); padding: 2.5rem; position: relative; transition: transform 0.3s, box-shadow 0.3s; }
+  .post-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(44,32,23,0.08); }
+  .post-card.featured { grid-column: span 2; background: var(--bark); color: var(--cream); border-color: var(--bark); }
+  .post-card.cornerstone { border-color: var(--clay); background: var(--cream); }
+  .post-tag { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+  .post-card.featured .post-tag { color: var(--sand); }
+  .post-card.cornerstone .post-tag { color: var(--moss); }
+  .post-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; line-height: 1.25; margin-bottom: 0.8rem; }
+  .post-card.featured h3 { font-size: 2rem; }
+  .post-card.cornerstone h3 { color: var(--clay); }
+  .post-card p { font-size: 0.88rem; opacity: 0.7; line-height: 1.8; margin-bottom: 1.5rem; }
+  .post-card.featured p { opacity: 0.65; }
+  .post-meta { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.45; display: block; margin-top: 0.5rem; }
+  .coming-soon-card { border: 1px dashed var(--sand); padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 200px; opacity: 0.5; }
+  .coming-soon-card span { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--clay); margin-bottom: 0.5rem; display: block; }
+  .coming-soon-card p { font-size: 0.8rem; opacity: 0.6; }
+  .read-more { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; transition: border-color 0.2s, color 0.2s; }
+  .read-more:hover { border-color: var(--clay); }
+  .post-card.featured .read-more { color: var(--sand); border-color: rgba(212,184,150,0.4); }
+  .post-card.featured .read-more:hover { border-color: var(--sand); }
+
+  .share-story-bar { background: var(--cream); border: 1px solid var(--mist); padding: 1.5rem 2.5rem; margin-top: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .share-story-bar p { font-size: 0.88rem; opacity: 0.7; line-height: 1.6; }
+  .share-story-bar a { display: inline-block; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 1px; white-space: nowrap; }
+
+  .newsletter-section { padding: 6rem; background: var(--moss); text-align: center; }
+  .newsletter-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; color: var(--cream); margin-bottom: 0.8rem; }
+  .newsletter-section h2 em { font-style: italic; color: var(--sand); }
+  .newsletter-section p { color: rgba(247,243,238,0.7); max-width: 480px; margin: 0 auto 2rem; font-size: 0.95rem; line-height: 1.8; }
+  .newsletter-form { display: flex; gap: 0; max-width: 440px; margin: 0 auto; border: 1px solid rgba(212,184,150,0.3); }
+  .newsletter-form input { flex: 1; padding: 0.9rem 1.2rem; background: rgba(255,255,255,0.08); border: none; color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; outline: none; }
+  .newsletter-form input::placeholder { color: rgba(247,243,238,0.4); }
+  .newsletter-form button { padding: 0.9rem 1.8rem; background: var(--clay); border: none; color: var(--cream); cursor: pointer; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; transition: background 0.2s; font-family: 'DM Sans', sans-serif; }
+  .newsletter-form button:hover { background: var(--bark); }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .footer-contact a:hover { color: var(--cream); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .page-hero { padding: 8rem 1.5rem 4rem; }
+    .bucket-nav { padding: 0 1.5rem; }
+    .bucket-section { padding: 4rem 1.5rem; }
+    .bucket-header { grid-template-columns: 1fr; gap: 1rem; }
+    .bucket-header-right { display: none; }
+    .posts-grid { grid-template-columns: 1fr; }
+    .post-card.featured { grid-column: span 1; }
+    .newsletter-section { padding: 4rem 1.5rem; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+    .share-story-bar { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#pillars">The AWE Method</a>
+  <a href="index.html#about">About Tan</a>
+  <a href="index.html#services">Services</a>
+  <a href="musings.html" style="color:var(--clay);opacity:1">Musings & More</a>
+  <a href="https://calendly.com/awexpedition/30min" class="mob-cta">Book a Free Call</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-eyebrow">Reflections, Frameworks & Discoveries</span>
+    <h1>Where the<br>left brain meets<br><em>the inner life</em></h1>
+    <p>Welcome to the musings of an analytical mind on an inner journey. Logic led me to the path and an open heart keeps me on it.</p>
+    <p>Here you will find a collection of musings, original frameworks, practical tools, and discoveries from my journey toward AWE — Awareness, Wonder &amp; Embodiment — my logical spin on spirituality.</p>
+  </div>
+</section>
+
+<div class="bucket-nav">
+  <a href="#musings" class="active">Musings</a>
+  <a href="#tanisms">Tan's Take</a>
+  <a href="#twilight-zone">Twilight Zone Files</a>
+  <a href="#awe-in-action">AWE in Action</a>
+  <a href="#perspectives">Perspectives</a>
+  <a href="#on-the-shelf">On the Shelf</a>
+  <a href="#science-of-manifestation">Science of Manifestation</a>
+</div>
+
+<!-- MUSINGS -->
+<section class="bucket-section" id="musings">
+  <div class="bucket-header">
+    <div class="bucket-header-left">
+      <span class="bucket-tag">Personal Reflections</span>
+      <h2 class="bucket-title">Musings</h2>
+      <p class="bucket-desc">Stories and musings on the journey — moments that cracked something open — witnessing perspective shifts — reminders of the daily practice life so willingly provides — serendipitous discoveries. The universal truths that need to be heard again and again.</p>
+    </div>
+    <div class="bucket-header-right"><span class="bucket-letter">M</span></div>
+  </div>
+  <div class="posts-grid">
+    <div class="post-card featured">
+      <span class="post-tag">Musings · Featured</span>
+      <h3>The Billion Things Rule</h3>
+      <p>The human mind craves control. We have been born and bred to believe that with control, we can avoid suffering. But what if suffering comes from the false belief of control? At a rental car counter in California, a moment of contraction becomes an unexpected lesson in how reality actually works.</p>
+      <a href="billion-things-rule.html" class="read-more">Read the full piece →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Musings</span>
+      <h3>Trigger Happy</h3>
+      <p>Most of us get triggered and we are rarely happy about it. But what if triggers were not problems to eliminate — but the practice itself? A story about rejection letters, a YouTube experiment, and the unexpected gift of being triggered.</p>
+      <a href="trigger-happy.html" class="read-more">Read the full piece →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Musings</span>
+      <h3>Pros and Pros</h3>
+      <p>Most of us were trained to weigh pros and cons. What if every outcome — the promotion and the rejection, the smooth plan and the fallen-apart one — contained equal usefulness?</p>
+      <span class="post-meta">Coming Soon</span>
+    </div>
+    <div class="coming-soon-card">
+      <span>More musings coming soon</span>
+      <p>Subscribe below to be notified when new pieces are published</p>
+    </div>
+    <div class="coming-soon-card">
+      <span>From Left Brain Spirituality</span>
+      <p>Excerpts and reflections from the forthcoming memoir — a logical path to peace, belief not required</p>
+    </div>
+  </div>
+  <div class="share-story-bar">
+    <p>Has a Tanism or musing resonated with you? Have a story of your own? We'd love to hear it — selected stories may be featured here.</p>
+    <a href="mailto:tan@awexpedition.com">Share Your Story →</a>
+  </div>
+</section>
+
+<!-- TANISMS -->
+<section class="bucket-section" id="tanisms">
+  <div class="bucket-header">
+    <div class="bucket-header-left">
+      <span class="bucket-tag">Tan's Take on Timeless Truths</span>
+      <h2 class="bucket-title"><em>Tanisms™</em></h2>
+      <span class="bucket-subtitle">Ideas worth sitting with.</span>
+      <p class="bucket-desc">Frameworks, concepts, and tools born from the intersection of analytical thinking and inner work. Timeless Truths — but through a different lens.</p>
+    </div>
+    <div class="bucket-header-right"><span class="bucket-letter">T</span></div>
+  </div>
+  <div class="posts-grid">
+    <div class="post-card featured">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>The Billion Things Rule</h3>
+      <p>In any given moment, a billion factors converge to produce what is. We see one — the one closest to us, our decision — as the cause. Surprisingly, most don't recognize this for what it is: a form of magical thinking. The Billion Things Rule reveals how life really works.</p>
+      <a href="billion-things-rule-framework.html" class="read-more">Explore the framework →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>Trigger Happy</h3>
+      <p>Most of us get triggered and we are rarely happy about it. But what if you could look at triggers through a different lens? What if you could become Trigger Happy?</p>
+      <a href="trigger-happy-framework.html" class="read-more">Explore the framework →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>Five Minute Emotions</h3>
+      <p>All emotions are helpful but some are here just to bring awareness. Once they have done their job, we can thank them and let them go on their merry way.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>Ok Reality — You Win</h3>
+      <p>Surrender isn't about giving up. It's about acknowledging and facing reality. The quicker you do that, the more energy you will have to level up. Reality always wins the moment — accepting it allows you to win in life.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>The Blue Giraffe</h3>
+      <p>Many think meditation is about clearing your mind but it starts with focusing it. If you tell yourself not to think about the Pink Elephant you will inevitably think about the Pink Elephant. Try a Blue Giraffe instead.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>Pink Pony Pausing</h3>
+      <p>Asking others to help raise your awareness can supercharge your growth. Learn how a Pink Pony Pause can help others help you.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>Everything is Nothing Until We Make it Something</h3>
+      <p>Situations are what we make them. Learn more about seeing through a wider lens.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>Suffering for $100, Alex</h3>
+      <p>Life is full of challenges that we will encounter. But we can face them without suffering. Discover tools that can help us choose to face challenges with clarity and calm instead of suffering.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>Universe is Universe-ing</h3>
+      <p>When we expect the world to be something it isn't, we are practicing attachment to a story that has us controlling the world. Whether it is the weather or another person, we need to see the universe is just universe-ing.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>Collecting Your Keys</h3>
+      <p>We might believe that we hold the key to our own happiness, but most people expect others to bear the responsibility. When we say "X made me so angry," we are giving others control over our happiness — we made copies of our keys and gave them away. It's time to start collecting them back.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>The Ick and the Opening</h3>
+      <p>Sometimes we carry a feeling we can't logic away. We understand the situation completely — we can name the attachment, trace the pattern, articulate the framework — and still, the ick remains. This Tanism explores what the analytical mind can't always access: the heart opening that dissolves in an instant what months of understanding could not. Love isn't a concept. It's a transmutation.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>FoMo is a MoFo</h3>
+      <p>Fear of Missing Out is one of the most common experiences of our time. But when we zoom out, we see the irony: FoMo causes us to miss the one experience that is actually available — the one we're having right now. The antidote to missing out is showing up.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>Being Schizophrenic</h3>
+      <p>When we spend our lives anticipating how others will react and then try to morph ourselves into an acceptable version for them, we live in a state of schizophrenia. By aligning with our true selves, an authentic life will come to us.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>Pros and Pros</h3>
+      <p>A reframe of the classic pros and cons decision model. When non-attachment enters the equation, every outcome reveals its own form of usefulness — and the fear of the wrong choice begins to dissolve.</p>
+      <span class="post-meta">Coming Soon</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>The Vent Wall</h3>
+      <p>On processing, venting, and where your energy is best spent. Sometimes the most efficient listener costs nothing and asks nothing in return.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>Trigger Happy</h3>
+      <p>Most of us get triggered and we are rarely happy about it. But what if you could look at triggers through a different lens? What if you could become Trigger Happy?</p>
+      <a href="trigger-happy-framework.html" class="read-more">Explore the framework →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Tanisms™ · Framework</span>
+      <h3>ReGet</h3>
+      <p>Instead of regret that leaves you wishing things in the past were different — REflect and GET a plan. A simple reframe that turns backward-looking rumination into forward-moving clarity.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TWILIGHT ZONE FILES -->
+<section class="bucket-section" id="twilight-zone">
+  <div class="bucket-header">
+    <div class="bucket-header-left">
+      <span class="bucket-tag">Pop Culture & Inner Life</span>
+      <h2 class="bucket-title">The Twilight<br><em>Zone Files</em></h2>
+      <p class="bucket-desc">Rod Serling didn't just write science fiction. He wrote parables about the human condition — ego, fear, attachment, identity. Each episode is a spiritual teaching in disguise. This series finds the lesson hiding in the twist. <em style="font-size:0.88rem;opacity:0.75;">Spoiler Alert — The twists in these classic episodes are revealed in this series. They are timeless, but if you don't like spoilers, watch the episode first!</em></p>
+    </div>
+    <div class="bucket-header-right"><span class="bucket-letter">TZF</span></div>
+  </div>
+  <div class="posts-grid">
+    <div class="post-card featured">
+      <span class="post-tag">Twilight Zone Files · Entry No. 1</span>
+      <h3>The Genesis Episode — "The Last Night of a Jockey"</h3>
+      <p>"The mouse frees the lion. The small key opens the large door. Size was never the measure of anything that mattered."</p>
+      <a href="tz-last-night-of-a-jockey.html" class="read-more">Read the full piece →</a>
+    </div>
+    <div class="coming-soon-card" style="min-height:280px">
+      <span>More episodes coming</span>
+      <p>The Twilight Zone as spiritual teacher — one episode, one lesson, one piece at a time</p>
+    </div>
+    <div class="coming-soon-card" style="min-height:280px">
+      <span>Have an episode in mind?</span>
+      <p><a href="mailto:tan@awexpedition.com" style="color:var(--clay);text-decoration:none;border-bottom:1px solid var(--sand);">Send your suggestion →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- AWE IN ACTION -->
+<section class="bucket-section" id="awe-in-action">
+  <div class="bucket-header">
+    <div class="bucket-header-left">
+      <span class="bucket-tag">Tools & Practice</span>
+      <h2 class="bucket-title">AWE in<br><em>Action</em></h2>
+      <p class="bucket-desc">Awareness without practice is just information. AWE in Action provides the tools, exercises, and experiments that turn insight into lived experience — the bridge between knowledge and knowing.</p>
+    </div>
+    <div class="bucket-header-right"><span class="bucket-letter">A</span></div>
+  </div>
+  <div class="posts-grid">
+    <div class="post-card featured">
+      <span class="post-tag">AWE in Action · Practice</span>
+      <h3>Three Good Things</h3>
+      <p>One of the most researched practices in positive psychology. Each evening, write down three good things that happened today — and why they happened. Small or large, simple or profound. Do it for one week and notice what shifts.</p>
+      <p style="margin-top:1rem;font-size:0.82rem;opacity:0.55;font-style:italic;">Research by Martin Seligman found that people who practiced Three Good Things daily for one week reported significantly higher levels of happiness and lower levels of depression — effects that lasted up to six months.</p>
+      <a href="three-good-things.html" class="read-more">Read the full practice →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">AWE in Action · For Young Explorers</span>
+      <h3>The Gift of Everything</h3>
+      <p>Gratitude can be practiced anywhere, anytime — and it's never too early to start. This CharacterChums™ book reminds children (and the adults who love them) that life feels richer when lived with a thankful heart. Built on VIA Character Strengths research.</p>
+      <a href="https://www.amazon.com/Tanyee-Cheung-ebook/dp/B0FPMT4ZDP" target="_blank" rel="noopener" class="read-more">Find it on Amazon →</a>
+      <span class="post-meta">Tanyee Cheung · CharacterChums™</span>
+    </div>
+    <div class="coming-soon-card" style="min-height:240px">
+      <span>Meditation Practice</span>
+      <p>A beginner's guide to building a meditation practice — the what, why, and how of starting and sticking with it</p>
+    </div>
+    <div class="coming-soon-card" style="min-height:240px">
+      <span>More practices coming</span>
+      <p>Tools and experiments from the coaching practice — subscribe below to be notified</p>
+    </div>
+  </div>
+</section>
+
+<!-- PERSPECTIVES -->
+<section class="bucket-section" id="perspectives">
+  <div class="bucket-header">
+    <div class="bucket-header-left">
+      <span class="bucket-tag">Published Work</span>
+      <h2 class="bucket-title"><em>Perspectives</em></h2>
+      <p class="bucket-desc">Articles published in CT Lawyer magazine — wellbeing through the lens of the legal profession. Written from inside a demanding career, these pieces explore the same themes as AWExpedition: awareness, resilience, and the analytical mind's path to a fuller life.</p>
+    </div>
+    <div class="bucket-header-right"><span class="bucket-letter">P</span></div>
+  </div>
+  <div class="posts-grid">
+    <div class="post-card featured">
+      <span class="post-tag">Perspectives · Most Recent</span>
+      <h3>Taming the Legal Ego: Separating Professional Identity from the Self</h3>
+      <p>After almost thirty years of legal practice, a carefully crafted professional identity had become default armor — useful, but also a source of suffering. This piece explores witness consciousness, the Billion Things Rule, and Michael Singer's teachings applied directly to the legal profession.</p>
+      <a href="https://www.ctbar.org/docs/default-source/publications/connecticut-lawyer/volume-35/5-mayjune-25/ctl_mayjune25---pdd.pdf" target="_blank" rel="noopener" class="read-more">Read in CT Lawyer →</a>
+      <span class="post-meta">CT Lawyer · May/June 2025</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Perspectives</span>
+      <h3>Meditation — A Journey from No Way to Okay! (To Yes!)</h3>
+      <p>A personal account of going from meditation skeptic to daily practitioner — including the breathing tricks, the apps, and the twitching eye that proved it was working.</p>
+      <a href="perspectives-meditation.html" class="read-more">Read the full article →</a>
+      <span class="post-meta">CT Lawyer · Sep/Oct 2022</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Perspectives</span>
+      <h3>Developing an IRAC Mindset</h3>
+      <p>The legal mind is trained to spot problems — which is great for clients, but hard on wellbeing. A reframe using the lawyer's own tool: IRAC as a framework for optimistic thinking.</p>
+      <a href="perspectives-irac-mindset.html" class="read-more">Read the full article →</a>
+      <span class="post-meta">CT Lawyer · Nov/Dec 2022</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Perspectives</span>
+      <h3>The Hidden Harm of Microaggressions and How We Can Do Better</h3>
+      <p>A candid exploration of how small, often unconscious actions accumulate into real harm — and what awareness, not judgment, can do about it.</p>
+      <a href="https://www.ctbar.org/news/publications/publication/ct-lawyer-magazine---march-april-2023" target="_blank" rel="noopener" class="read-more">Read in CT Lawyer →</a>
+      <span class="post-meta">CT Lawyer · Mar/Apr 2023</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Perspectives</span>
+      <h3>Being the Change: Improving Well-Being in the Legal Profession</h3>
+      <p>On the movement toward wellbeing in law — the systemic work, the individual work, and why the profession's best chance of changing is you.</p>
+      <a href="https://www.ctbar.org/news/publications/publication/ct-lawyer-magazine---may-june-2023" target="_blank" rel="noopener" class="read-more">Read in CT Lawyer →</a>
+      <span class="post-meta">CT Lawyer · May/Jun 2023</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Perspectives</span>
+      <h3>Charred: Stopping Burnout Before It Happens</h3>
+      <p>Burnout doesn't happen overnight — it accumulates. This piece identifies the warning signs, the contributors, and what self-compassion and agency actually look like in practice.</p>
+      <a href="https://www.ctbar.org/news/publications/publication/ct-lawyer-magazine---july-august-2023" target="_blank" rel="noopener" class="read-more">Read in CT Lawyer →</a>
+      <span class="post-meta">CT Lawyer · Jul/Aug 2023</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Perspectives</span>
+      <h3>Avoiding Burnout — Being PALS with Yourself</h3>
+      <p>A follow-up to Charred with concrete actions. PALS — a Practice of Awareness, Love, and Self-Care — and what that actually looks like during a deal closing.</p>
+      <a href="https://www.ctbar.org/news/publications/publication/ct-lawyer-magazine---september-october-23" target="_blank" rel="noopener" class="read-more">Read in CT Lawyer →</a>
+      <span class="post-meta">CT Lawyer · Sep/Oct 2023</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Perspectives</span>
+      <h3>Building Healthy Habits</h3>
+      <p>Four practical wellbeing levers for busy attorneys: mindfulness, movement, nutrition, and sleep. Not revolutionary — just researched, real, and doable.</p>
+      <a href="https://www.ctbar.org/docs/default-source/publications/connecticut-lawyer/ctl-vol-35/3-janfeb-24/wellness.pdf" target="_blank" rel="noopener" class="read-more">Read in CT Lawyer →</a>
+      <span class="post-meta">CT Lawyer · Jan/Feb 2024</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Perspectives</span>
+      <h3>Lawyer Well-Being Week: A Call to the Community</h3>
+      <p>A reflection on what it means to prioritize wellbeing in a profession that too often treats it as a luxury — and an invitation to start today.</p>
+      <a href="https://www.ctbar.org/news/publications/publication/ct-lawyer-magazine---march-april-2024" target="_blank" rel="noopener" class="read-more">Read in CT Lawyer →</a>
+      <span class="post-meta">CT Lawyer · Mar/Apr 2024</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Perspectives</span>
+      <h3>Overcoming the Legal Mindset Dilemma: Cultivating Optimism and WOOP</h3>
+      <p>Lawyers are the one group where pessimism predicts success — but only at work. Martin Seligman, explanatory style, and a powerful framework for holding both realities at once.</p>
+      <a href="https://www.ctbar.org/docs/default-source/publications/connecticut-lawyer/ctl-vol-34/5-mayjune-2024/ctl_mayjune24---wellness.pdf" target="_blank" rel="noopener" class="read-more">Read in CT Lawyer →</a>
+      <span class="post-meta">CT Lawyer · May/Jun 2024</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Perspectives</span>
+      <h3>Legal Well-Being Week Highlights: Desk Yoga, Ergonomics, Sleep & Sound Healing</h3>
+      <p>A practical recap from the CBA Well-Being Summit — desk yoga, ergonomic tips, sleep hygiene, and what happened when a room full of lawyers tried sound healing.</p>
+      <a href="https://www.ctbar.org/news/publications/publication/ct-lawyer-magazine---july-august-2024" target="_blank" rel="noopener" class="read-more">Read in CT Lawyer →</a>
+      <span class="post-meta">CT Lawyer · Jul/Aug 2024</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">Perspectives</span>
+      <h3>Time Mastery &amp; Productivity</h3>
+      <p>One of the most powerful life skills for lawyers and humans alike. Covers the Eisenhower Matrix, time blocking, decision fixing, saying no, and building habits that stick — with WFH tips built in.</p>
+      <a href="perspectives-time-mastery.html" class="read-more">Read the full article →</a>
+      <span class="post-meta">CT Lawyer · Nov/Dec 2021</span>
+    </div>
+    <div class="coming-soon-card">
+      <span>More articles coming</span>
+      <p>Letting Go to Level Up — A Lawyer's Guide</p>
+    </div>
+  </div>
+</section>
+
+<!-- ON THE SHELF -->
+<section class="bucket-section" id="on-the-shelf">
+  <div class="bucket-header">
+    <div class="bucket-header-left">
+      <span class="bucket-tag">Recommendations</span>
+      <h2 class="bucket-title">On the<br><em>Shelf</em></h2>
+      <p class="bucket-desc">Books, films, podcasts, and teachers that have shaped the journey. Shared here because we never know what will open the door, light the way or remind us to live our best.</p>
+    </div>
+    <div class="bucket-header-right"><span class="bucket-letter">S</span></div>
+  </div>
+  <div class="posts-grid">
+    <div class="post-card">
+      <span class="post-tag">On the Shelf · Books</span>
+      <h3><a href="https://www.goodreads.com/book/show/1963638.The_Untethered_Soul" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--sand);">The Untethered Soul</a></h3>
+      <p>Michael Singer's foundational work on the relationship between the self and the voice inside your head. The book that changed everything — highly recommended for the analytical reader who has been waiting for permission to go inward.</p>
+      <span class="post-meta">Michael A. Singer</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">On the Shelf · Books</span>
+      <h3><a href="https://www.goodreads.com/book/show/22609.Authentic_Happiness" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--sand);">Authentic Happiness</a></h3>
+      <p>Martin Seligman's introduction to positive psychology — the science of what makes life worth living, rather than just the study of what goes wrong.</p>
+      <span class="post-meta">Martin E.P. Seligman</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">On the Shelf · Books</span>
+      <h3><a href="https://www.goodreads.com/book/show/4069.Man_s_Search_for_Meaning" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--sand);">Man's Search for Meaning</a></h3>
+      <p>Viktor Frankl's account of finding a path forward in the most unimaginable circumstances. A masterclass in the space between stimulus and response — and why that space is everything.</p>
+      <span class="post-meta">Viktor E. Frankl</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">On the Shelf · Books</span>
+      <h3><a href="https://www.goodreads.com/book/show/94318.Awareness" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--sand);">Awareness</a></h3>
+      <p>Anthony De Mello's masterwork on waking up to reality — sharp, funny, and profoundly unsettling in the best possible way. Essential reading for the left-brain spiritual seeker.</p>
+      <span class="post-meta">Anthony De Mello</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">On the Shelf · Podcast</span>
+      <h3><a href="https://untetheredsoul.com/living-from-a-place-of-surrender" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--sand);">Living from a Place of Surrender</a></h3>
+      <p>Michael Singer's long-running podcast series — a quiet, unhurried companion for the inner journey. Best listened to in the morning or during walks. Life-changing if you let it be.</p>
+      <span class="post-meta">Michael A. Singer</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">On the Shelf · Music</span>
+      <h3><a href="https://www.bobsima.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--sand);">Bob Sima</a></h3>
+      <p>Music that meets you in the quiet places. Bob Sima's songs are part meditation, part permission slip — to slow down, to feel, to remember what matters. A perfect companion for the inner journey.</p>
+      <span class="post-meta">bobsima.com</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">On the Shelf · Music</span>
+      <h3><a href="https://www.samgarrettmusic.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--sand);">Sam Garrett</a></h3>
+      <p>Soulful, grounded, and utterly present. Sam Garrett's music has a way of making the ordinary feel sacred — which is exactly the point.</p>
+      <span class="post-meta">samgarrettmusic.com</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">On the Shelf · TV &amp; Film</span>
+      <h3>Ted Lasso</h3>
+      <p>The most unexpectedly profound show about leadership, kindness, and what it means to show up as your whole self. Beneath the football and the biscuits is a masterclass in AWE.</p>
+      <span class="post-meta">Apple TV+</span>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">On the Shelf · TV &amp; Film</span>
+      <h3>Sliding Doors</h3>
+      <p>Two parallel lives diverging from one missed train. A beautiful visual meditation on the Billion Things Rule — how a billion subsequent factors flow from what appears to be one small variable.</p>
+      <span class="post-meta">1998 · Gwyneth Paltrow</span>
+    </div>
+    <div class="coming-soon-card">
+      <span>More coming</span>
+      <p>Aelea · Additional reads · More films and practices</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCIENCE OF MANIFESTATION -->
+<section class="bucket-section" id="science-of-manifestation">
+  <div class="bucket-header">
+    <div class="bucket-header-left">
+      <span class="bucket-tag">What Positive Psychology Actually Says</span>
+      <h2 class="bucket-title">The Science of<br><em>Manifestation</em></h2>
+      <p class="bucket-desc">Millions of people are still being told to "raise their frequency" and "ask the universe." But what if manifestation is much simpler than a call to the universe? What if raising the frequency is simply living a better life? What if science could explain why "manifestation" works for some and not others? Join me as we uncover the science behind the concepts.</p>
+    </div>
+    <div class="bucket-header-right"><span class="bucket-letter">M</span></div>
+  </div>
+  <div class="posts-grid">
+    <div class="post-card featured">
+      <span class="post-tag">Science of Manifestation · Coming Soon</span>
+      <h3>What The Secret Gets Right — And What It Gets Dangerously Wrong</h3>
+      <p>The Law of Attraction has sold over 35 million copies. Some people swear by it. Others tried and felt blamed for everything that went wrong in their lives. The truth — grounded in positive psychology and decades of research — is more interesting than either side admits.</p>
+      <a href="notify.html" class="read-more">Coming soon — notify me →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">The Laws of A · Coming Soon</span>
+      <h3>The Law of Awareness</h3>
+      <p>The foundation of everything. Mindfulness research, ACT therapy, and cognitive behavioral frameworks all point to the same truth: you cannot change what you cannot see.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">The Laws of A · Coming Soon</span>
+      <h3>The Law of Attention</h3>
+      <p>Your thoughts don't attract objects. But they do direct your attention — and attention changes everything. Csikszentmihalyi's flow research and selective attention studies reveal what the Secret stumbled onto.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">The Laws of A · Coming Soon</span>
+      <h3>The Law of Agency</h3>
+      <p>Bandura's self-efficacy research in one elegant truth: the belief that your actions matter changes what actions you take. Agency isn't given — it's cultivated.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">The Laws of A · Coming Soon</span>
+      <h3>The Law of Association</h3>
+      <p>Social contagion research confirms what you already sense: your environment shapes your trajectory. Positive relationships are not a luxury — they are a PERMA element.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">The Laws of A · Coming Soon</span>
+      <h3>The Law of Action</h3>
+      <p>Gollwitzer's implementation intentions research closes the gap between intention and behavior. Knowing is not enough. The bridge is specific, committed action.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">The Laws of A · Coming Soon</span>
+      <h3>The Law of Appreciation</h3>
+      <p>Gratitude isn't mystical vibration. It's one of the most researched interventions in positive psychology — Emmons, McCullough, Fredrickson's broaden-and-build theory. This is what The Secret stumbled onto without knowing why.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">The Laws of A · Coming Soon</span>
+      <h3>The Law of Abundance</h3>
+      <p>Dweck's growth mindset and scarcity psychology reveal two completely different worlds — both real, both self-reinforcing. Which one you live in is a choice.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">The Laws of A · Coming Soon</span>
+      <h3>The Law of Aspiration</h3>
+      <p>Snyder's hope theory is not wishful thinking — it's goal-directed thinking combined with pathways thinking. The science of how hope actually works, and how to cultivate it deliberately.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">The Laws of A · Coming Soon</span>
+      <h3>The Law of Affection</h3>
+      <p>The research on positive relationships, loving kindness, and compassion is unambiguous: connection is not optional for wellbeing. Oxytocin, belonging, and the science of love.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card">
+      <span class="post-tag">The Laws of A · Coming Soon</span>
+      <h3>The Law of Authenticity</h3>
+      <p>Character strengths, values clarification, and self-determination theory converge on the same insight: living in alignment with who you actually are is not a luxury. It is the condition for flourishing.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+    <div class="post-card cornerstone">
+      <span class="post-tag" style="color:var(--moss)">The Laws of A · The Cornerstone</span>
+      <h3 style="color:var(--clay)">The Law of Acceptance</h3>
+      <p>ACT therapy, psychological flexibility research, and the teachings of Michael Singer all arrive at the same destination: surrender is not defeat. It is the condition for everything else. Acceptance is not the last law — it is the one that makes all the others possible.</p>
+      <a href="notify.html" class="read-more">Coming soon →</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <h2>Stay on the<br><em>journey</em></h2>
+  <p>New musings, Tanisms™, and tools delivered to your inbox. No schedule, no algorithm — just when something is ready to be shared.</p>
+  <form class="newsletter-form" onsubmit="return false;">
+    <input type="email" placeholder="your@email.com" />
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span>™</div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:tan@awexpedition.com">tan@awexpedition.com</a>
+    <a href="tel:9295001559">929-500-1559</a>
+    <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
+    <div style="margin-top:1rem;display:flex;gap:1.5rem;justify-content:flex-end;">
+      <a href="privacy.html" style="font-size:0.78rem;color:var(--sand);opacity:0.8;">Privacy Policy</a>
+      <a href="terms.html" style="font-size:0.78rem;color:var(--sand);opacity:0.8;">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  const sections = document.querySelectorAll('.bucket-section');
+  const navLinks = document.querySelectorAll('.bucket-nav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`.bucket-nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

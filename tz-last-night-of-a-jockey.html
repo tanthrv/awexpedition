@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Last Night of a Jockey — Twilight Zone Files — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(253,250,246,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); padding: 1.5rem 2rem; flex-direction: column; gap: 0; z-index: 99; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { display: block; text-decoration: none; color: var(--bark); font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--mist); opacity: 0.75; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu .mob-cta { background: var(--moss); color: var(--cream) !important; padding: 0.9rem 1.5rem !important; border-radius: 2px; opacity: 1 !important; margin-top: 0.5rem; text-align: center; border: none !important; }
+
+  .article-hero { padding: 9rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .article-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,92,62,0.2) 0%, transparent 60%); }
+  .article-hero-inner { position: relative; max-width: 760px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb span { color: var(--sand); opacity: 0.4; font-size: 0.75rem; }
+  .article-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .article-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.2rem; }
+  .article-hero h1 em { font-style: italic; color: var(--sand); }
+  .article-subtitle { font-size: 1.05rem; color: rgba(247,243,238,0.65); max-width: 560px; line-height: 1.8; }
+
+  .article-body { display: grid; grid-template-columns: 1fr 300px; gap: 5rem; max-width: 1100px; margin: 0 auto; padding: 5rem 6rem; }
+  .article-content p { font-size: 1rem; line-height: 2; opacity: 0.85; margin-bottom: 1.8rem; }
+  .article-content p:first-child::first-letter { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; float: left; line-height: 0.85; margin: 0.1rem 0.15rem 0 0; color: var(--clay); }
+  .pull-quote { border-left: 3px solid var(--clay); padding: 1.2rem 2rem; margin: 2.5rem 0; }
+  .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; font-weight: 300; line-height: 1.5; color: var(--bark); opacity: 1 !important; margin-bottom: 0 !important; }
+  .closing-question { background: var(--cream); border: 1px solid var(--mist); padding: 2rem 2.5rem; margin-top: 2.5rem; }
+  .closing-question p { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; line-height: 1.7; opacity: 0.8 !important; margin-bottom: 1rem !important; }
+  .closing-question p:last-child { margin-bottom: 0 !important; }
+
+  .article-sidebar { padding-top: 0.5rem; }
+  .sidebar-section { margin-bottom: 2.5rem; }
+  .sidebar-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.8rem; border-bottom: 1px solid var(--mist); padding-bottom: 0.5rem; }
+  .sidebar-section p { font-size: 0.85rem; line-height: 1.8; opacity: 0.65; }
+  .sidebar-divider { border: none; border-top: 1px solid var(--mist); margin: 2rem 0; }
+  .cta-box { background: var(--bark); padding: 1.8rem; margin-top: 2rem; }
+  .cta-box p { font-size: 0.85rem; line-height: 1.7; color: rgba(247,243,238,0.7); margin-bottom: 1rem !important; opacity: 1 !important; }
+  .cta-box a { display: inline-block; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sand); border-bottom: 1px solid rgba(212,184,150,0.4); padding-bottom: 2px; }
+  .spoiler-note { background: var(--cream); border: 1px solid var(--sand); padding: 0.8rem 1.2rem; margin-bottom: 2rem; font-size: 0.82rem; opacity: 0.75; font-style: italic; border-radius: 2px; }
+
+  .next-piece { background: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; border-top: 1px solid var(--mist); }
+  .next-piece-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.5rem; }
+  .next-piece h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; }
+  .next-piece p { font-size: 0.88rem; opacity: 0.65; line-height: 1.7; max-width: 500px; }
+  .btn-read { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; margin-top: 1rem; }
+  .next-piece-back { text-align: right; }
+  .next-piece-back a { text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bark); opacity: 0.45; }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .footer-contact a:hover { color: var(--cream); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .article-hero { padding: 8rem 1.5rem 4rem; }
+    .article-body { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; }
+    .article-sidebar { display: none; }
+    .next-piece { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .next-piece-back { text-align: left; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#pillars">The AWE Method</a>
+  <a href="index.html#about">About Tan</a>
+  <a href="index.html#services">Services</a>
+  <a href="musings.html">Musings & More</a>
+  <a href="https://calendly.com/awexpedition/30min" class="mob-cta">Book a Free Call</a>
+</div>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>›</span>
+      <a href="musings.html#twilight-zone">Twilight Zone Files</a>
+    </div>
+    <span class="article-tag">Twilight Zone Files · Entry No. 1</span>
+    <h1>The Genesis Episode —<br><em>"The Last Night<br>of a Jockey"</em></h1>
+    <p class="article-subtitle">A story about labels, the power we hand them, and the serendipitous evening that started it all.</p>
+  </div>
+</section>
+
+<div class="article-body">
+  <div class="article-content">
+    <div class="spoiler-note">⚠ Spoiler Alert — The twist of this episode is revealed below. It is timeless, but if you don't like spoilers, watch the episode first.</div>
+
+    <div class="pull-quote">
+      <p>"The mouse frees the lion. The small key opens the large door. Size was never the measure of anything that mattered."</p>
+    </div>
+
+    <p>Many of us use labels — labels that judge both others and ourselves. Worse yet, we assign meaning to them without a second thought.</p>
+
+    <p>After a situation left me feeling slighted, I found myself asking for advice from friends. As I recounted the story, I found myself describing the way I was left feeling as small — a label I had applied so casually I almost didn't notice it. Most commiserated. Some offered solutions — talk to the person, tell them how their behavior affected you.</p>
+
+    <p>I had practiced enough to know that the resolution couldn't come from the outside. It needed to come from within. But I was stuck. Then a friend offered something more useful than a solution. He offered a question: "What's wrong with small?"</p>
+
+    <p>In that instant, I saw what I had done. I had labelled myself small — and decided, without examination, that small was bad. I could have labelled the other person's behavior as small. I could have chosen to feel big — to rise above, unbothered. Instead, I had handed the label a verdict and accepted it as truth. In the labelling, I had caused my own suffering.</p>
+
+    <p>Labels only have the power we give them. I knew this cognitively but when I was in the thick of it, it was almost impossible to see. That simple question created the necessary pause to see the bigger picture. It had arrived not from a book, not from a practice, but from the awareness inspired by the four words of a friend.</p>
+
+    <p>The lesson landed. I didn't expect to think about it again but then something strange happened.</p>
+
+    <p>That same night, I decided to watch a Twilight Zone episode — something I hadn't done in months. I picked one at random, from a random season, with no particular intention. And then the most beautiful, bizarre thing happened.</p>
+
+    <p>Rod Serling had written the same lesson. Independently. Decades earlier. In a television episode chosen at complete random on the exact evening the lesson had just landed. It was the moment The Twilight Zone Files was born.</p>
+
+    <div class="pull-quote">
+      <p>"You are small, Mr. Grady. Every time you won an honest race, that's when you were a giant. But right now, they just don't come any smaller."</p>
+    </div>
+
+    <p>In <em>The Last Night of a Jockey</em>, Michael Grady spends his life convinced that his stature is the source of his suffering — small physically, small psychologically. In an attempt to become big, he cheats and is banned from racing for life. The episode opens with Grady fuming, defending his actions to his own alter ego — an ego that knows him far too well to be fooled.</p>
+
+    <p>The alter ego grants Grady a wish. He wakes to find himself nearly eight feet tall. Ecstatic, he believes his size now reflects the stature he always deserved. Then the phone rings — he has been reinstated. He can race again. The joy collapses the moment he realizes he is now too large to ride.</p>
+
+    <p>Devastated, Grady pleads with the alter ego to make him small again. The request is denied. The verdict arrives quietly: "You are small, Mr. Grady. Every time you won an honest race, that's when you were a giant. But right now, they just don't come any smaller."</p>
+
+    <p>The twist, as always in the Twilight Zone, is not the surprise. It is the recognition.</p>
+
+    <p>We reach for a label — small, dismissed, overlooked — and in the reaching, hand it a power it was never entitled to. The word is not the thing. The feeling is not the verdict. And yet the mind, so skilled at precision, will defend its definitions with remarkable tenacity.</p>
+
+    <div class="closing-question">
+      <p>What would it mean to question the label before accepting it? To pause — with genuine curiosity rather than judgment — and simply ask: what does that word actually mean?</p>
+      <p>What label are you currently defending — and what might you discover if you questioned it instead?</p>
+    </div>
+  </div>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">About This Series</span>
+      <p>The Twilight Zone Files finds the spiritual teaching hiding inside Rod Serling's classic episodes — one lesson at a time. Each piece begins with a real moment, and ends with the recognition the episode delivers.</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">The Episode</span>
+      <p><strong>The Last Night of a Jockey</strong><br>Season 5, Episode 3<br>Original air date: October 25, 1963<br>Written by Rod Serling<br>Starring Mickey Rooney</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">The Lesson</span>
+      <p>Labels only carry the meaning we assign them. The suffering isn't in the word — it's in the verdict we attach to it.</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="cta-box">
+      <p>Ready to explore what labels you might be handing power to?</p>
+      <a href="https://calendly.com/awexpedition/30min">Book a free conversation →</a>
+    </div>
+  </aside>
+</div>
+
+<div class="next-piece">
+  <div>
+    <span class="next-piece-label">Back to</span>
+    <h3>The Twilight Zone Files</h3>
+    <p>More episodes — more lessons — more of the recognition that was hiding in the twist all along.</p>
+    <a href="musings.html#twilight-zone" class="btn-read">Return to the series →</a>
+  </div>
+  <div class="next-piece-back">
+    <a href="musings.html">← All Musings</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span>™</div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:tan@awexpedition.com">tan@awexpedition.com</a>
+    <a href="tel:9295001559">929-500-1559</a>
+    <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

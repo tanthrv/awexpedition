@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex's Story — A Coaching Journey — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017; --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+
+  .page-hero { padding: 9rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .page-hero::before { content: 'JOURNEY'; font-family: 'Cormorant Garamond', serif; font-size: 16vw; font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.03); pointer-events: none; white-space: nowrap; }
+  .page-hero-inner { position: relative; max-width: 760px; }
+  .page-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; }
+  .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; color: var(--cream); line-height: 1.15; margin-bottom: 1rem; }
+  .page-hero h1 em { font-style: italic; color: var(--sand); }
+  .page-hero p { font-size: 0.9rem; color: rgba(247,243,238,0.6); line-height: 1.8; max-width: 580px; }
+
+  .disclaimer-bar { background: var(--clay); padding: 1.2rem 6rem; }
+  .disclaimer-bar p { font-size: 0.8rem; color: rgba(247,243,238,0.85); line-height: 1.7; }
+  .disclaimer-bar strong { color: var(--cream); }
+
+  .journey-body { max-width: 900px; margin: 0 auto; padding: 5rem 6rem; }
+
+  /* CLIENT HEADER */
+  .client-header { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--mist); }
+  .client-detail-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.3rem; }
+  .client-detail-value { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; }
+  .goal-box { grid-column: span 2; background: var(--bark); color: var(--cream); padding: 2rem 2.5rem; }
+  .goal-box .goal-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); display: block; margin-bottom: 0.5rem; }
+  .goal-box .goal-text { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.4; }
+
+  /* SESSION CARDS */
+  .session { margin-bottom: 4rem; border: 1px solid var(--mist); overflow: hidden; }
+  .session-header { background: var(--bark); color: var(--cream); padding: 1.5rem 2.5rem; display: flex; align-items: center; justify-content: space-between; }
+  .session-number { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sand); }
+  .session-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; color: var(--cream); }
+  .session-date { font-size: 0.75rem; color: rgba(212,184,150,0.5); letter-spacing: 0.1em; }
+  .session-body { padding: 2.5rem; }
+
+  .session-block { margin-bottom: 2rem; }
+  .session-block:last-child { margin-bottom: 0; }
+  .block-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.8rem; border-bottom: 1px solid var(--mist); padding-bottom: 0.5rem; }
+
+  /* Alex's words */
+  .alex-words { background: var(--cream); padding: 1.5rem 2rem; border-left: 3px solid var(--sand); margin-bottom: 0.8rem; }
+  .alex-words p { font-size: 0.9rem; font-style: italic; line-height: 1.8; opacity: 0.85; }
+  .alex-words p::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--sand); line-height: 0; vertical-align: -0.3em; margin-right: 0.2rem; }
+  .alex-words p::after { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--sand); line-height: 0; vertical-align: -0.3em; margin-left: 0.2rem; }
+
+  /* Insights */
+  .insight-item { padding: 0.6rem 0; font-size: 0.9rem; line-height: 1.8; opacity: 0.8; padding-left: 1.2rem; position: relative; }
+  .insight-item::before { content: '→'; position: absolute; left: 0; color: var(--clay); }
+
+  /* Tan's notes */
+  .tan-note { background: rgba(74,92,62,0.06); border: 1px solid rgba(74,92,62,0.15); padding: 1.2rem 1.8rem; font-size: 0.88rem; line-height: 1.8; opacity: 0.8; font-style: italic; }
+
+  /* Homework */
+  .homework-item { padding: 0.5rem 0 0.5rem 1.2rem; font-size: 0.88rem; line-height: 1.7; opacity: 0.8; position: relative; }
+  .homework-item::before { content: '□'; position: absolute; left: 0; color: var(--clay); font-style: normal; }
+
+  /* Progress bar */
+  .progress-section { margin-bottom: 4rem; padding: 2rem 2.5rem; background: var(--cream); border: 1px solid var(--mist); }
+  .progress-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 1.5rem; }
+  .progress-track { display: flex; gap: 0.5rem; align-items: center; }
+  .progress-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--clay); flex-shrink: 0; }
+  .progress-dot.inactive { background: var(--mist); }
+  .progress-line { flex: 1; height: 1px; background: var(--mist); }
+  .progress-line.active { background: var(--clay); }
+
+  /* CTA */
+  .journey-cta { background: var(--bark); padding: 3rem 2.5rem; text-align: center; margin-top: 4rem; }
+  .journey-cta p { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--cream); line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.85; }
+  .journey-cta a { display: inline-block; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 2.2rem; background: var(--clay); color: var(--cream); border-radius: 2px; transition: background 0.2s; }
+  .journey-cta a:hover { background: var(--moss); }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero { padding: 7rem 1.5rem 3rem; }
+    .disclaimer-bar { padding: 1rem 1.5rem; }
+    .journey-body { padding: 3rem 1.5rem; }
+    .client-header { grid-template-columns: 1fr; gap: 1.5rem; }
+    .goal-box { grid-column: span 1; }
+    .session-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-eyebrow">A Coaching Journey · Fictional Story</span>
+    <h1>Alex's<br><em>Story</em></h1>
+    <p>Every client's journey is unique and entirely confidential. This is a fictional narrative that gives you a sense of what the arc of coaching work can look like — the breakthroughs, the stumbles, and the slow, real shift that happens over time.</p>
+    <p style="margin-top:0.8rem;font-size:0.85rem;color:rgba(247,243,238,0.45);">Note: The actual AWE Journey Map™ is a living interactive document — a personalized Google Sheet with embedded prompts, homework, and space for your own reflections that you work with actively between every session. This story illustrates the journey, not the format of the tool.</p>
+  </div>
+</div>
+
+<div class="disclaimer-bar">
+  <p><strong>Fictional story — not a sample of the actual tool.</strong> Alex is not a real person and this narrative was created for illustrative purposes only. The real AWE Journey Map™ is a living Google Sheet — personalized, interactive, and worked on actively between sessions. All actual client work at AWExpedition™ is strictly confidential and never shared. Awareness &amp; Alignment Coaching™ is not therapy, counseling, or mental health treatment. If you are experiencing a mental health crisis, please seek support from a licensed mental health professional.</p>
+</div>
+
+<div class="journey-body">
+
+  <!-- CLIENT HEADER -->
+  <div class="client-header">
+    <div>
+      <span class="client-detail-label">Client</span>
+      <span class="client-detail-value">Alex (fictional)</span>
+    </div>
+    <div>
+      <span class="client-detail-label">Coach</span>
+      <span class="client-detail-value">Tan Cheung — AWExpedition™</span>
+    </div>
+    <div>
+      <span class="client-detail-label">Journey Started</span>
+      <span class="client-detail-value">January 2026</span>
+    </div>
+    <div>
+      <span class="client-detail-label">Sessions Completed</span>
+      <span class="client-detail-value">6 of 10</span>
+    </div>
+    <div class="goal-box">
+      <span class="goal-label">Target Goal</span>
+      <p class="goal-text">"I want to be less reactive at home. I want to stop letting anger take over — especially with the people I love most."</p>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-section">
+    <span class="progress-label">Journey Progress — Session 6 of 10</span>
+    <div class="progress-track">
+      <div class="progress-dot"></div>
+      <div class="progress-line active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-line active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-line active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-line active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-line active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-line"></div>
+      <div class="progress-dot inactive"></div>
+      <div class="progress-line"></div>
+      <div class="progress-dot inactive"></div>
+      <div class="progress-line"></div>
+      <div class="progress-dot inactive"></div>
+      <div class="progress-line"></div>
+      <div class="progress-dot inactive"></div>
+    </div>
+  </div>
+
+  <!-- SESSION 1 -->
+  <div class="session">
+    <div class="session-header">
+      <div>
+        <span class="session-number">Session 01</span>
+        <div class="session-title">The Goal — And the Gap</div>
+      </div>
+      <span class="session-date">January 2026</span>
+    </div>
+    <div class="session-body">
+
+      <div class="session-block">
+        <span class="block-label">Alex's Words</span>
+        <div class="alex-words"><p>I'm fine at work. I can keep it together there. But at home I just lose it sometimes. I don't want to be that person. I want to be less reactive.</p></div>
+        <div class="alex-words"><p>I try not to get angry. I really do try. But it just happens.</p></div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">The Insight That Landed</span>
+        <div class="insight-item">When asked what "trying not to get angry" actually looks like in the moment — Alex paused. He couldn't describe a specific action. The word "try" had become a placeholder for intention, not practice.</div>
+        <div class="insight-item">"I try" ≠ "I do." Awareness of the gap between wanting to change and actually having tools to change is itself the first step.</div>
+        <div class="insight-item">Alex is already aware he has a reactive pattern — that awareness is the foundation everything else builds on.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Tan's Reflection</span>
+        <div class="tan-note">Alex is motivated and self-aware — he knows the pattern exists and genuinely wants to change it. The work ahead is moving from intention to practice. The gap between "I want to" and "I try to" is where we'll spend our time. No judgment on the gap — recognizing it is the beginning.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Homework</span>
+        <div class="homework-item">Notice when anger arises this week — don't try to change it yet, just observe it. What triggers it? What does it feel like in the body?</div>
+        <div class="homework-item">Explore possible practices that might help with reactivity — meditation, breathing exercises, mantras, journaling. Use AI, books, conversations — whatever feels natural. Come to Session 2 with a few options that resonate.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SESSION 2 -->
+  <div class="session">
+    <div class="session-header">
+      <div>
+        <span class="session-number">Session 02</span>
+        <div class="session-title">What Meditation Actually Is</div>
+      </div>
+      <span class="session-date">January 2026</span>
+    </div>
+    <div class="session-body">
+
+      <div class="session-block">
+        <span class="block-label">Alex's Words</span>
+        <div class="alex-words"><p>Everyone keeps saying meditation. I looked it up too. But I tried it before and it just doesn't work for me. My mind won't stop. I can't clear my thoughts.</p></div>
+        <div class="alex-words"><p>I'm willing to try again though. Maybe I was doing it wrong.</p></div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">The Insight That Landed</span>
+        <div class="insight-item">Meditation is not about clearing the mind. It is about focusing the mind — and noticing when it wanders, then gently returning. The wandering IS the practice, not the failure.</div>
+        <div class="insight-item">A mind that won't stop is not a bad meditator's mind — it's a human mind. The goal is not silence. The goal is noticing.</div>
+        <div class="insight-item">Alex had been "trying to achieve" meditation rather than experiencing it. The shift: from performance to presence.</div>
+        <div class="insight-item">Like a gardener tending flowers — when butterflies (thoughts) flutter by, we notice them but return to our flowers. We don't chase the butterflies. We don't fight them. They come and go.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Tan's Reflection</span>
+        <div class="tan-note">Alex's previous meditation "failures" make complete sense — he was trying to empty his mind rather than focus it. Reframing meditation as a skill to practice rather than a state to achieve feels like it landed. His willingness to try again is everything. Starting small matters — three minutes done is infinitely more useful than twenty minutes never started.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Homework</span>
+        <div class="homework-item">Explore three meditation apps: Headspace, Waking Up, Calm. Give each at least 3 days.</div>
+        <div class="homework-item">Start with 3 minutes only. The goal is consistency, not duration.</div>
+        <div class="homework-item">Commit to a trial period that feels comfortable — Alex chose 3 weeks. Not a judgment period, an experiment period.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SESSION 3 -->
+  <div class="session">
+    <div class="session-header">
+      <div>
+        <span class="session-number">Session 03</span>
+        <div class="session-title">Stumbling is the Practice</div>
+      </div>
+      <span class="session-date">February 2026</span>
+    </div>
+    <div class="session-body">
+
+      <div class="session-block">
+        <span class="block-label">Alex's Words</span>
+        <div class="alex-words"><p>It's not working. I tried the apps. I did it for a week but then I stopped. And I still lost my temper twice. Nothing has changed.</p></div>
+        <div class="alex-words"><p>And honestly — those times I got angry, there was a good reason. My kids were being completely unreasonable. Anyone would have reacted the same way. I'm not sure the anger was even the problem.</p></div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">The Insight That Landed</span>
+        <div class="insight-item">When Alex began explaining why his anger was justified, Tan gently noted: there's no need to justify here. The goal isn't to determine whether the anger was "right" — it's to understand whether the reaction served him and his family.</div>
+        <div class="insight-item">The question is never "was I right to feel this?" — feelings are always valid. The question is "what do I want to do with this feeling?"</div>
+        <div class="insight-item">Stumbling after one week is not failure. Habits take time. Building a meditation practice is like building a muscle — one week is the very beginning of the beginning.</div>
+        <div class="insight-item">"Not working" often means "not working yet" — and sometimes means we need to add something else alongside it.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Tan's Reflection</span>
+        <div class="tan-note">The justification moment is important and worth noting. Alex shifted briefly from "how do I change?" to "here's why the other person is wrong." This is a natural defense and completely human — but it's also the pattern we're here to work with. No judgment flagged in session — just a gentle redirect. Worth watching. Alex may benefit from a complementary practice that works more immediately in the moment, rather than waiting for meditation to build over time.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Homework</span>
+        <div class="homework-item">Reflect on what "working" means — what would success look like? What's a realistic marker of progress at this stage?</div>
+        <div class="homework-item">Consider adding an in-the-moment tool alongside meditation — something that can help right when anger arises. Options: counting, a mantra, three deep breaths, walking away briefly.</div>
+        <div class="homework-item">Return to the meditation apps — even 2 minutes. Consistency over duration.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SESSION 4 -->
+  <div class="session">
+    <div class="session-header">
+      <div>
+        <span class="session-number">Session 04</span>
+        <div class="session-title">The Pink Pony Pause</div>
+      </div>
+      <span class="session-date">February 2026</span>
+    </div>
+    <div class="session-body">
+
+      <div class="session-block">
+        <span class="block-label">Alex's Words</span>
+        <div class="alex-words"><p>I've been thinking about what you said — having something in the moment. The breathing helps a little. But I don't always remember to use it. The anger just comes so fast.</p></div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">The Insight That Landed</span>
+        <div class="insight-item">Introducing the Pink Pony Pause™ — enlisting the people around us as awareness partners. When someone notices we're getting activated, they say a neutral, unexpected phrase — "Pink Ponies" — as a gentle signal.</div>
+        <div class="insight-item">The phrase works because it's unexpected enough to interrupt the pattern, but neutral enough not to escalate it.</div>
+        <div class="insight-item">This is a practice of shared awareness — Alex doesn't have to catch himself alone. His family becomes part of the journey.</div>
+        <div class="insight-item">Alex's initial reaction: "I'm not sure my family will go for that." Explored what might make it feel safe and even playful to introduce.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Tan's Reflection</span>
+        <div class="tan-note">Alex warmed to the Pink Pony idea once we reframed it as something he was offering his family — a way to help him — rather than something being done to him. That shift from "being called out" to "being supported" feels important. The family's willingness to participate will be telling. Alex agreed to have the conversation this week.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">What Happened This Week</span>
+        <div class="alex-words"><p>They used it. My daughter said it first. I wasn't even yelling that loud — I don't know why she felt she needed to say it.</p></div>
+        <div class="insight-item">Worth noting: "I wasn't even yelling that loud" suggests the awareness is still building. What feels mild to Alex in the moment may read differently to his family — and that gap is part of what we're working with.</div>
+        <div class="insight-item">AND — he walked away. He was annoyed. He came back ten minutes later, still a little irritated, but he came back. His family was surprised. And appreciative. The problem resolved.</div>
+        <div class="insight-item">That is not a small thing. That is exactly the work.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Homework</span>
+        <div class="homework-item">When Pink Ponies appear, use the time in between to journal — what was happening in the body? What was the thought? What did walking away feel like?</div>
+        <div class="homework-item">Continue the meditation experiment — even 2-3 minutes.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SESSION 5 -->
+  <div class="session">
+    <div class="session-header">
+      <div>
+        <span class="session-number">Session 05</span>
+        <div class="session-title">The Gap is Growing</div>
+      </div>
+      <span class="session-date">March 2026</span>
+    </div>
+    <div class="session-body">
+
+      <div class="session-block">
+        <span class="block-label">Alex's Words</span>
+        <div class="alex-words"><p>Pink Ponies happened twice more. I still don't love hearing it — but it's different now. I hear it and something in me just... slows down a little. I still get annoyed. But I go for a walk. I come back.</p></div>
+        <div class="alex-words"><p>I still get upset though. I don't want to get agitated at all. I feel like I'm still failing.</p></div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">The Insight That Landed</span>
+        <div class="insight-item">The goal was never to stop feeling anger. Anger is information — it's telling Alex something matters to him. The goal is to change the relationship with anger, not to eliminate it.</div>
+        <div class="insight-item">Not getting agitated at all is not the destination — it may not even be possible, or desirable. A person who feels nothing is not a peaceful person. They're a disconnected one.</div>
+        <div class="insight-item">The real shift: anger used to control Alex. Now Alex is starting to work with it. That is enormous progress — even if it doesn't feel like it from inside.</div>
+        <div class="insight-item">Pink Pony hearing differently now — from annoyance to a kind of recognition — is not a small thing. That is the awareness being built, session by session, practice by practice.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Tan's Reflection</span>
+        <div class="tan-note">Alex is measuring himself against a standard of "zero agitation" which is setting him up to feel like he's failing a journey he's actually succeeding at. The reframe today felt important: the point isn't to feel nothing, it's to have agency over what you do with what you feel. He's walking away. He's coming back. His family is noticing. That is the work working. Worth exploring whether we should add a loving-kindness or compassion meditation to the mix — something that cultivates warmth alongside the awareness practice.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Homework</span>
+        <div class="homework-item">Reflect on how far you've come since Session 1. Write it down — specifically. What did "I try" mean then? What does it mean now?</div>
+        <div class="homework-item">Consider where the meditation practice is — is it building? Is it time to add a new dimension, like a loving-kindness or compassion practice?</div>
+        <div class="homework-item">Consider whether there's a new practice or tool worth experimenting with next.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SESSION 6 -->
+  <div class="session">
+    <div class="session-header">
+      <div>
+        <span class="session-number">Session 06</span>
+        <div class="session-title">Continuing the Journey</div>
+      </div>
+      <span class="session-date">March 2026</span>
+    </div>
+    <div class="session-body">
+
+      <div class="session-block">
+        <span class="block-label">Alex's Words</span>
+        <div class="alex-words"><p>I wrote down the list like you asked. From Session 1 to now. I couldn't believe it. I hadn't realized how much had actually shifted. I was so focused on what I still couldn't do that I wasn't seeing what I could.</p></div>
+        <div class="alex-words"><p>I want to keep going. I don't think I'm done. But I feel like I have real tools now. Like I actually have something to work with.</p></div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">The Insight That Landed</span>
+        <div class="insight-item">The practice is not a destination. There is no moment where the work is finished and anger is solved. There is only a deepening relationship with awareness — and a growing toolkit for working with what arises.</div>
+        <div class="insight-item">Alex now has: the Pink Pony Pause, a meditation practice (still building), the walk-away and return pattern, journaling, and — most importantly — the awareness to notice the gap between trigger and reaction.</div>
+        <div class="insight-item">The question now is not "am I fixed?" but "what's next on the journey?"</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Where We Go From Here</span>
+        <div class="insight-item">Option 1 — Continue deepening the current work: add loving-kindness or compassion meditation, continue journaling, deepen the Pink Pony practice.</div>
+        <div class="insight-item">Option 2 — Begin a new goal: Alex mentioned wanting to work on patience at work as well. The awareness tools transfer — the context is new.</div>
+        <div class="insight-item">Option 3 — Continue solo for now, with the option to check in: Alex has the tools. He knows what the practice looks like. Periodic check-ins are always available.</div>
+        <div class="insight-item">Alex decided to continue — with a focus on deepening meditation and beginning to explore compassion practices. New goal exploration deferred to Session 8.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">Tan's Reflection</span>
+        <div class="tan-note">What Alex described in his reflection — the surprise at how much had actually shifted — is one of the most important moments in a coaching journey. The progress is often invisible from inside it. Writing it down made it real. He came in wanting to stop being angry. He's leaving this phase knowing he can work with his anger, that his family is his ally, and that the practice is his to carry forward. That is not a small thing. That is everything.</div>
+      </div>
+
+      <div class="session-block">
+        <span class="block-label">A Reminder</span>
+        <div class="tan-note" style="border-color:var(--clay);background:rgba(181,113,74,0.06);">Practice is an ongoing journey. The question is never whether you've arrived — it's whether you're ready to traverse the next part. And whether you want to do it alone, or with a partner for a while longer. Either answer is the right one.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="journey-cta">
+    <p>"My goal is not for you to reach your goal — it's to increase your AWE."</p>
+    <a href="https://calendly.com/awexpedition/30min">Start Your Journey — Free Consultation →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span>™</div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="/cdn-cgi/l/email-protection#46322728062731233e3623222f322f29286825292b"><span class="__cf_email__" data-cfemail="5125303f11302634292134353825383e3f7f323e3c">[email&#160;protected]</span></a>
+    <a href="tel:9295001

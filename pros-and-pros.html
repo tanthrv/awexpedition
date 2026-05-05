@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pros and Pros — AWExpedition</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+
+  .article-hero { padding: 9rem 6rem 5rem; background: var(--clay); position: relative; overflow: hidden; }
+  .article-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(44,32,23,0.3) 0%, transparent 60%); }
+  .article-hero-inner { position: relative; max-width: 760px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: rgba(247,243,238,0.7); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; transition: opacity 0.2s; }
+  .breadcrumb a:hover { color: var(--cream); }
+  .breadcrumb span { color: rgba(247,243,238,0.4); font-size: 0.75rem; }
+  .article-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(247,243,238,0.8); margin-bottom: 1rem; display: block; }
+  .article-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.5rem; }
+  .article-hero h1 em { font-style: italic; color: rgba(247,243,238,0.7); }
+  .article-subtitle { font-size: 1.1rem; color: rgba(247,243,238,0.7); line-height: 1.8; max-width: 600px; font-style: italic; font-family: 'Cormorant Garamond', serif; }
+
+  .article-body { display: grid; grid-template-columns: 1fr 280px; gap: 6rem; max-width: 1100px; margin: 0 auto; padding: 5rem 6rem; }
+  .article-content p { font-size: 1.05rem; line-height: 1.95; margin-bottom: 1.8rem; color: var(--bark); }
+  .article-content p:first-child::first-letter { font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; font-weight: 300; float: left; line-height: 0.8; margin-right: 0.1em; margin-top: 0.12em; color: var(--clay); }
+  .pull-quote { border-left: 3px solid var(--clay); padding: 1.5rem 2rem; margin: 2.5rem 0; background: var(--cream); }
+  .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem !important; font-style: italic; font-weight: 300; line-height: 1.5 !important; color: var(--bark) !important; margin: 0 !important; }
+
+  .pros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--mist); margin: 2.5rem 0; }
+  .pros-cell { background: var(--cream); padding: 1.8rem; }
+  .pros-cell .pros-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; display: block; }
+  .pros-cell p { font-size: 0.9rem; line-height: 1.8; opacity: 0.8; margin: 0; }
+
+  .article-sidebar { padding-top: 0.5rem; }
+  .sidebar-section { margin-bottom: 3rem; }
+  .sidebar-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+  .sidebar-section p { font-size: 0.85rem; opacity: 0.7; line-height: 1.7; }
+  .sidebar-divider { border: none; border-top: 1px solid var(--mist); margin: 2rem 0; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.8rem; border: 1px solid var(--mist); color: var(--bark); opacity: 0.6; }
+  .cta-box { background: var(--bark); padding: 2rem; margin-top: 3rem; }
+  .cta-box p { font-size: 0.88rem; color: rgba(247,243,238,0.75); line-height: 1.7; margin-bottom: 1.2rem; }
+  .cta-box a { display: block; text-align: center; background: var(--clay); color: var(--cream); text-decoration: none; padding: 0.8rem 1.5rem; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; transition: background 0.2s; }
+  .cta-box a:hover { background: var(--moss); }
+
+  .next-piece { background: var(--cream); border-top: 1px solid var(--mist); padding: 4rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .next-piece-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; display: block; }
+  .next-piece h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.8rem; }
+  .next-piece p { font-size: 0.88rem; opacity: 0.65; line-height: 1.8; margin-bottom: 1.2rem; }
+  .btn-read { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; }
+  .btn-read:hover { border-color: var(--clay); }
+  .next-piece-back { text-align: right; }
+  .next-piece-back a { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bark); opacity: 0.6; border-bottom: 1px solid var(--mist); padding-bottom: 2px; }
+  .next-piece-back a:hover { opacity: 1; }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .article-hero { padding: 8rem 1.5rem 4rem; }
+    .article-body { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; }
+    .article-sidebar { display: none; }
+    .pros-grid { grid-template-columns: 1fr; }
+    .next-piece { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .next-piece-back { text-align: left; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>/</span>
+      <a href="musings.html#tanisms">Tanisms</a>
+    </div>
+    <span class="article-tag">Tanisms · Framework</span>
+    <h1>Pros and<br><em>Pros</em></h1>
+    <p class="article-subtitle">What if every outcome contained its own form of usefulness — and the fear of the wrong choice was always the real problem?</p>
+  </div>
+</section>
+
+<div class="article-body">
+  <article class="article-content">
+    <p>Most of us were trained to consider the pros and cons. Every event is scanned for gain or loss. We brace for disadvantage. We cling to advantage. The model is so embedded in how we think that we rarely question it. But it contains an assumption that deserves examination: that some outcomes are fundamentally better for us than others, and that our peace depends on landing on the right side.</p>
+
+    <p>Non-attachment alters the equation.</p>
+
+    <div class="pros-grid">
+      <div class="pros-cell">
+        <span class="pros-label">If the book sells</span>
+        <p>There is connection and warmth — the satisfaction of having reached someone, of having been understood across distance and time.</p>
+      </div>
+      <div class="pros-cell">
+        <span class="pros-label">If it is ignored</span>
+        <p>There is an opportunity to practice steadiness, compassion, and non-reactivity — skills no success could have taught as well.</p>
+      </div>
+      <div class="pros-cell">
+        <span class="pros-label">If a promotion comes</span>
+        <p>There is growth and expansion — new territory, new capacity, new demands that develop you.</p>
+      </div>
+      <div class="pros-cell">
+        <span class="pros-label">If it does not</span>
+        <p>There is freedom, redirection, and the chance to strengthen resilience — and perhaps the discovery of a truer direction.</p>
+      </div>
+      <div class="pros-cell">
+        <span class="pros-label">If plans unfold smoothly</span>
+        <p>We experience ease — the rare gift of alignment between intention and outcome.</p>
+      </div>
+      <div class="pros-cell">
+        <span class="pros-label">If they fall apart</span>
+        <p>We develop flexibility — the more durable skill, the one that carries us through every future unfolding.</p>
+      </div>
+    </div>
+
+    <p>The outcomes differ. The usefulness does not.</p>
+
+    <div class="pull-quote">
+      <p>This is not forced positivity. It is structural clarity. It is the recognition that attachment is a narrative — and that we are not the narrative.</p>
+    </div>
+
+    <p>For me, this clarity did not arrive in theory. It arrived through loss. When I lost my job, it was painful. Income matters. Stability matters. Identity can quietly entangle itself with title and status.</p>
+
+    <p>But alongside the discomfort came an unexpected recognition. For years I had quietly worried that my children were growing up insulated from hardship. I had grown up poor — not metaphorically poor, but actually poor. And while I would never wish that insecurity upon them, I knew something about it. I knew joy still existed in small spaces. I knew scarcity did not erase love. I knew I could live with little — because I had.</p>
+
+    <p>The loss did not feel like the end of safety. It felt like a reminder of capacity. One outcome would have been continued financial ease. The other brought humility, recalibration, and the opportunity to model resilience for my children in the most honest way I could — not by telling them about it, but by living through it in front of them.</p>
+
+    <p>Both contained value.</p>
+
+    <p>The pain was real. But it was not catastrophic. When preference loosened its grip, what remained was possibility. Non-attachment does not eliminate preference. It removes the belief that one outcome secures us and the other threatens us.</p>
+
+    <div class="pull-quote">
+      <p>When captivity dissolves, every experience becomes workable. Our world becomes one of pros and pros.</p>
+    </div>
+
+    <p>The practice is not passive. It is not the absence of desire or ambition. You can still want the book to sell, the promotion to come, the plan to work. You simply hold the wanting lightly enough that its opposite does not undo you. You remain, in either case, the person who can meet what comes.</p>
+
+    <p>That is not a diminished life. It is the only one that is truly free.</p>
+  </article>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">About this piece</span>
+      <p>Pros and Pros is one of Tan's original frameworks — part of the Tanisms collection and a theme woven throughout her forthcoming memoir, <em>Left Brain Spirituality: A Logical Path to Peace Without Belief</em>.</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Connected ideas</span>
+      <div class="tag-list">
+        <span class="tag">Non-Attachment</span>
+        <span class="tag">Resilience</span>
+        <span class="tag">Decision Making</span>
+        <span class="tag">Identity</span>
+        <span class="tag">Wonder</span>
+      </div>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Related reading</span>
+      <p>The Untethered Soul by Michael Singer · Authentic Happiness by Martin Seligman · Man's Search for Meaning by Viktor Frankl</p>
+    </div>
+    <div class="cta-box">
+      <p>If the idea of loosening attachment to outcomes resonates, Awareness & Alignment Coaching explores exactly this — the patterns that keep us braced, and the practices that open things up.</p>
+      <a href="https://calendly.com/awexpedition/30min">Book a Free Call</a>
+    </div>
+  </aside>
+</div>
+
+<div class="next-piece">
+  <div>
+    <span class="next-piece-label">Read next</span>
+    <h3>The Billion Things Rule</h3>
+    <p>In any given moment, a billion factors have converged to produce what is. We see one — the one closest to us — and mistake it for the cause.</p>
+    <a href="billion-things-rule.html" class="btn-read">Read the piece →</a>
+  </div>
+  <div class="next-piece-back">
+    <a href="musings.html">← Back to Musings & More</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span>™</div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="#" id="emailLinkPAP" style="color:var(--sand);text-decoration:none;font-size:0.85rem;display:block;margin-bottom:0.5rem;">tan@awexpedition.com</a>
+    <a href="tel:9295001559">929-500-1559</a>
+    <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
+  </div>
+</footer>
+<script>
+  const el = document.getElementById('emailLinkPAP');
+  if(el) { const u='tan'; const d='awexpedition.com'; el.href='mailto:'+u+'@'+d; }
+</script>
+</body>
+</html>

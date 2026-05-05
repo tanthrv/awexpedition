@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Billion Things Rule — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--warm-white); color: var(--bark);
+    font-family: 'DM Sans', Georgia, serif;
+    font-weight: 300; line-height: 1.7; overflow-x: hidden;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(253,250,246,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mist);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+
+  /* ARTICLE HERO */
+  .article-hero {
+    padding: 9rem 6rem 5rem;
+    background: var(--bark); position: relative; overflow: hidden;
+  }
+  .article-hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(74,92,62,0.2) 0%, transparent 60%);
+  }
+  .article-hero-inner { position: relative; max-width: 760px; }
+  .breadcrumb {
+    display: flex; gap: 0.5rem; align-items: center;
+    margin-bottom: 2rem;
+  }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb span { color: var(--sand); opacity: 0.4; font-size: 0.75rem; }
+  .article-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .article-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300; line-height: 1.1; color: var(--cream);
+    margin-bottom: 1.5rem;
+  }
+  .article-hero h1 em { font-style: italic; color: var(--sand); }
+  .article-subtitle {
+    font-size: 1.1rem; color: rgba(247,243,238,0.65);
+    line-height: 1.8; max-width: 600px; font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* ARTICLE BODY */
+  .article-body {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 6rem;
+  }
+  .article-content p {
+    font-size: 1.05rem; line-height: 1.95;
+    margin-bottom: 1.8rem; color: var(--bark);
+  }
+  .article-content p:first-child::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.5rem; font-weight: 300;
+    float: left; line-height: 0.8;
+    margin-right: 0.1em; margin-top: 0.12em;
+    color: var(--clay);
+  }
+  .pull-quote {
+    border-left: 3px solid var(--clay);
+    padding: 1.5rem 2rem;
+    margin: 2.5rem 0;
+    background: var(--cream);
+  }
+  .pull-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem !important; font-style: italic;
+    font-weight: 300; line-height: 1.5 !important;
+    color: var(--bark) !important; margin: 0 !important;
+  }
+
+  /* SIDEBAR */
+  .article-sidebar { padding-top: 0.5rem; }
+  .sidebar-section { margin-bottom: 3rem; }
+  .sidebar-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+  .sidebar-section p { font-size: 0.85rem; opacity: 0.7; line-height: 1.7; }
+  .sidebar-divider { border: none; border-top: 1px solid var(--mist); margin: 2rem 0; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.8rem; border: 1px solid var(--mist); color: var(--bark); opacity: 0.6; }
+  .cta-box {
+    background: var(--bark); padding: 2rem;
+    margin-top: 3rem;
+  }
+  .cta-box p { font-size: 0.88rem; color: rgba(247,243,238,0.75); line-height: 1.7; margin-bottom: 1.2rem; }
+  .cta-box a {
+    display: block; text-align: center;
+    background: var(--clay); color: var(--cream);
+    text-decoration: none; padding: 0.8rem 1.5rem;
+    font-size: 0.78rem; letter-spacing: 0.12em;
+    text-transform: uppercase; transition: background 0.2s;
+  }
+  .cta-box a:hover { background: var(--moss); }
+
+  /* NEXT PIECE */
+  .next-piece {
+    background: var(--cream);
+    border-top: 1px solid var(--mist);
+    padding: 4rem 6rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: center;
+  }
+  .next-piece-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; display: block; }
+  .next-piece h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.8rem; }
+  .next-piece p { font-size: 0.88rem; opacity: 0.65; line-height: 1.8; margin-bottom: 1.2rem; }
+  .btn-read { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; transition: border-color 0.2s; }
+  .btn-read:hover { border-color: var(--clay); }
+  .next-piece-back { text-align: right; }
+  .next-piece-back a { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bark); opacity: 0.6; border-bottom: 1px solid var(--mist); padding-bottom: 2px; transition: opacity 0.2s; }
+  .next-piece-back a:hover { opacity: 1; }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .article-hero { padding: 8rem 1.5rem 4rem; }
+    .article-body { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; }
+    .article-sidebar { display: none; }
+    .next-piece { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .next-piece-back { text-align: left; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>/</span>
+      <a href="musings.html#tanisms">Tanisms</a>
+    </div>
+    <span class="article-tag">Tanisms · Framework</span>
+    <h1>The Billion<br><em>Things Rule</em></h1>
+    <p class="article-subtitle">On surrender, reality, and the one factor we always mistake for the cause.</p>
+  </div>
+</section>
+
+<div class="article-body">
+  <article class="article-content">
+    <p>The human mind craves control. We have been born and bred to believe that with control, we can avoid suffering. But what if suffering comes from the false belief of control?</p>
+
+    <p>We believe that the decisions we make determine the trajectory of our life but the truth is our decision is just one of the billion factors that will affect the moment that decision is a part of.</p>
+
+    <p>A few years ago, I rented an electric vehicle while traveling in California. When I returned it, the battery was at roughly seventy-five percent. I assumed there might be a modest charge for not returning it fully charged. I did not expect the additional eighty-five dollars. I had time before my flight. I had TSA PreCheck. I decided to drive back out, charge the car myself before returning it. It felt efficient. Rational. A small correction.</p>
+
+    <p>When I brought the car back the second time, the attendant asked if I needed the shuttle to the airport. I said yes. He told me to wait in the room next to the office. I sat calmly. I checked my phone. I assumed the shuttle would arrive shortly. After twenty minutes, I stepped out and asked the attendant to check on the shuttle.</p>
+
+    <p>"The bus just left," he said, confused. "Everyone got on."</p>
+
+    <p>"Everyone?" I asked. "You told me to wait inside."</p>
+
+    <p>At that moment, something tightened. My chest. My jaw. My narrative. "You made me miss my plane," I said, my voice sharper than I intended. He stared at me. "I made you miss your plane?" "Yes, you did," as I stormed away.</p>
+
+    <p>A few minutes later, the contraction softened. I remembered the teachings and reminded myself that the attendant's directions were just one small factor contributing to the moment. I asked myself what other factors might have contributed. And of course, I found many — I had not confirmed the charging policy in advance. I had assumed the cost. I had chosen to leave extra time but not that much extra time. I had been looking at my phone when the shuttle likely arrived. No one else had been in the waiting room — a detail I had noticed but not questioned. Traffic had been unpredictable that day. The timing had been tight to begin with.</p>
+
+    <p>The habituated self reacted to the discomfort of the situation. It felt wrong. And if the situation felt wrong, someone had to be blamed. I found the perpetrator in the attendant. Letting go of the indignation meant allowing others to be careless and lax. Worse yet, it could mean I was to blame. To allow injustice without resistance felt like an abandonment of self.</p>
+
+    <div class="pull-quote">
+      <p>But what if the surrender was not the loss of self — but the reinforcement of it?</p>
+    </div>
+
+    <p>In the moment of contraction, my mind needed an antagonist. The discomfort demanded a culprit. I crowned the attendant the cause. But the situation had not been a battle. It had been an unfolding.</p>
+
+    <p>The attendant's instruction was one variable among many. My assumptions, my timing, my distraction, traffic, policy — all contributors. I had selected the most visible factor and called it the cause.</p>
+
+    <p>The narrative self protects itself by simplifying complexity. The observing self tolerates complexity. It does not seek explanation, it accepts the unfolding. It would not use energy to ruminate, stew, fight with reality — it would gracefully move forward. When I stopped arguing with what had already happened, the need to blame dissolved.</p>
+
+    <p>Resistance is reactive. It does not weigh the value of actions against outcomes. Surrender, by contrast, is deliberate. It is the decision to stop arguing with reality and to respond instead of react. In that moment, identity shifts. I was no longer the reflexive voice demanding a different outcome. I was the observing self choosing how to meet this one.</p>
+
+    <p>That is not the diminishment of self. It is the strengthening of it.</p>
+
+    <div style="background:var(--cream);border:1px solid var(--mist);border-left:4px solid var(--clay);padding:2rem 2.5rem;margin-top:3rem;">
+      <span style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--clay);display:block;margin-bottom:0.8rem;">Tan's Take on Timeless Truths</span>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;line-height:1.5;margin-bottom:1rem;opacity:1;">This piece is part of the Tanisms™ collection — original frameworks for the examined life. Ideas worth sitting with.</p>
+      <a href="billion-things-rule-framework.html" style="display:inline-block;text-decoration:none;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);border-bottom:1px solid var(--sand);padding-bottom:2px;margin-right:1.5rem;">Explore the framework →</a>
+      <a href="musings.html#tanisms" style="display:inline-block;text-decoration:none;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bark);opacity:0.6;border-bottom:1px solid var(--mist);padding-bottom:2px;">All Tanisms™ →</a>
+    </div>
+  </article>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">About this piece</span>
+      <p>The Billion Things Rule is one of Tan's original frameworks — part of the Tanisms collection and a central theme in her forthcoming memoir, <em>Left Brain Spirituality: A Logical Path to Peace Without Belief</em>.</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Connected ideas</span>
+      <div class="tag-list">
+        <span class="tag">Surrender</span>
+        <span class="tag">Non-Attachment</span>
+        <span class="tag">Awareness</span>
+        <span class="tag">Reactivity</span>
+        <span class="tag">Michael Singer</span>
+      </div>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Related reading</span>
+      <p>The Untethered Soul by Michael Singer · Man's Search for Meaning by Viktor Frankl</p>
+    </div>
+    <div class="cta-box">
+      <p>If this piece resonated, Awareness & Alignment Coaching goes deeper into the patterns that keep us reactive — and the practices that create space.</p>
+      <a href="https://calendly.com/awexpedition/30min">Book a Free Call</a>
+    </div>
+  </aside>
+</div>
+
+<div class="next-piece">
+  <div>
+    <span class="next-piece-label">Read next</span>
+    <h3>Trigger Happy</h3>
+    <p>Most of us get triggered and we are rarely happy about it. But what if triggers were not problems to eliminate — but the practice itself? A story about rejection letters, a YouTube experiment, and the unexpected gift of being triggered.</p>
+    <a href="trigger-happy.html" class="btn-read">Read the piece →</a>
+  </div>
+  <div class="next-piece-back">
+    <a href="musings.html">← Back to Musings & More</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span></div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:tan@awexpedition.com" style="display:block;color:var(--sand);text-decoration:none;font-size:0.85rem;margin-bottom:0.5rem;">tan@awexpedition.com</a>
+    <a href="tel:9295001559">929-500-1559</a>
+    <a href="https://calendly.com/awexpedition/30min">Book a Free Call �

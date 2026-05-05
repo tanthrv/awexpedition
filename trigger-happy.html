@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigger Happy — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(253,250,246,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); padding: 1.5rem 2rem; flex-direction: column; gap: 0; z-index: 99; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { display: block; text-decoration: none; color: var(--bark); font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--mist); opacity: 0.75; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu .mob-cta { background: var(--moss); color: var(--cream) !important; padding: 0.9rem 1.5rem !important; border-radius: 2px; opacity: 1 !important; margin-top: 0.5rem; text-align: center; border: none !important; }
+
+  .article-hero { padding: 9rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .article-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,92,62,0.2) 0%, transparent 60%); }
+  .article-hero-inner { position: relative; max-width: 760px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb span { color: var(--sand); opacity: 0.4; font-size: 0.75rem; }
+  .article-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .article-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.2rem; }
+  .article-hero h1 em { font-style: italic; color: var(--sand); }
+  .article-subtitle { font-size: 1.05rem; color: rgba(247,243,238,0.65); max-width: 560px; line-height: 1.8; }
+
+  .article-body { display: grid; grid-template-columns: 1fr 320px; gap: 5rem; max-width: 1100px; margin: 0 auto; padding: 5rem 6rem; }
+  .article-content p { font-size: 1rem; line-height: 2; opacity: 0.85; margin-bottom: 1.8rem; }
+  .article-content p:first-child::first-letter { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; float: left; line-height: 0.85; margin: 0.1rem 0.15rem 0 0; color: var(--clay); }
+  .pull-quote { border-left: 3px solid var(--clay); padding: 1.2rem 2rem; margin: 2.5rem 0; }
+  .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; font-weight: 300; line-height: 1.5; color: var(--bark); opacity: 1 !important; margin-bottom: 0 !important; }
+
+  .article-sidebar { padding-top: 0.5rem; }
+  .sidebar-section { margin-bottom: 2.5rem; }
+  .sidebar-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.8rem; border-bottom: 1px solid var(--mist); padding-bottom: 0.5rem; }
+  .sidebar-section p { font-size: 0.85rem; line-height: 1.8; opacity: 0.65; }
+  .sidebar-divider { border: none; border-top: 1px solid var(--mist); margin: 2rem 0; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+  .tag { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--mist); padding: 0.3rem 0.8rem; color: var(--bark); opacity: 0.6; }
+  .cta-box { background: var(--bark); padding: 1.8rem; margin-top: 2rem; }
+  .cta-box p { font-size: 0.85rem; line-height: 1.7; color: rgba(247,243,238,0.7); margin-bottom: 1rem !important; opacity: 1 !important; }
+  .cta-box a { display: inline-block; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sand); border-bottom: 1px solid rgba(212,184,150,0.4); padding-bottom: 2px; }
+
+  .tanism-callout { background: var(--cream); border: 1px solid var(--mist); border-left: 4px solid var(--clay); padding: 2rem 2.5rem; margin-top: 3rem; }
+  .tanism-callout-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.8rem; }
+  .tanism-callout p { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; line-height: 1.5; margin-bottom: 1rem; opacity: 1 !important; }
+  .tanism-callout-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .tanism-callout-links a { display: inline-block; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; }
+
+  .next-piece { background: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; border-top: 1px solid var(--mist); }
+  .next-piece-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.5rem; }
+  .next-piece h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; }
+  .next-piece p { font-size: 0.88rem; opacity: 0.65; line-height: 1.7; max-width: 500px; }
+  .btn-read { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; margin-top: 1rem; }
+  .next-piece-back { text-align: right; }
+  .next-piece-back a { text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bark); opacity: 0.45; }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .article-hero { padding: 8rem 1.5rem 4rem; }
+    .article-body { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; }
+    .article-sidebar { display: none; }
+    .next-piece { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .next-piece-back { text-align: left; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#pillars">The AWE Method</a>
+  <a href="index.html#about">About Tan</a>
+  <a href="index.html#services">Services</a>
+  <a href="musings.html">Musings & More</a>
+  <a href="https://calendly.com/awexpedition/30min" class="mob-cta">Book a Free Call</a>
+</div>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>/</span>
+      <a href="musings.html#tanisms">Tan's Take on Timeless Truths</a>
+    </div>
+    <span class="article-tag">Tanisms™ · Musing</span>
+    <h1>Trigger<br><em>Happy</em></h1>
+    <p class="article-subtitle">On the unexpected gift of being triggered — and why the only way out is through.</p>
+  </div>
+</section>
+
+<div class="article-body">
+  <article class="article-content">
+
+    <p>There is a man named Jia Jiang who spent 100 days deliberately seeking rejection. Not accidentally encountering it — deliberately engineering it. He walked up to strangers and made requests he was certain they would refuse. Could he borrow a hundred dollars? Could he play soccer in someone's backyard? Could he get a "burger refill"? He called it rejection therapy, and he filmed every single encounter.</p>
+
+    <p>The most famous moment came at a Krispy Kreme. He walked in and asked the employee behind the counter if she could make him donuts shaped like the Olympic rings — five interlocking circles, each a different color. He expected her to laugh him out of the building. She said sure, give me a few minutes, and she made them. They were perfect.</p>
+
+    <p>What Jia discovered — accidentally, through a project he designed to make himself uncomfortable — was that rejection had a ceiling. The first time he asked a stranger for something outrageous, his heart raced and his face burned. By day thirty, he was almost enjoying it. By day one hundred, the fear was essentially gone. Not because rejection had stopped happening. Because he had practiced receiving it until it lost its grip.</p>
+
+    <div class="pull-quote">
+      <p>The only way to get good at something is to practice. The only way to get good at handling triggers is to be triggered.</p>
+    </div>
+
+    <p>I discovered this the less glamorous way — through a stack of form rejection letters from law firms.</p>
+
+    <p>Coming out of law school, I knew there would be rejections. I had been told to expect them. What I had not been told was what they would actually feel like — that small contraction in the chest when the envelope arrived with the wrong return address, or the email that opened with "After careful consideration..." I knew what those words meant before I finished the sentence.</p>
+
+    <p>The first few stung. Not catastrophically — I had enough self-awareness to know that a rejection letter was not a verdict on my worth as a human being. But they stung. The mind did what minds do: it found reasons. Maybe the cover letter wasn't strong enough. Maybe the interview had gone sideways at that one moment when I stumbled over an answer. Maybe the firm had already made their decision before I walked in.</p>
+
+    <p>The thing about form rejection letters is that they offer nothing to work with. They are not "we chose someone with more experience in securities law." They are not "your interview skills need work." They are a template. A mail merge. Dear Applicant, thank you for your interest. We have decided to move forward with other candidates. We wish you well in your search.</p>
+
+    <p>You were not even rejected by a person. You were rejected by a document.</p>
+
+    <div class="pull-quote">
+      <p>Around the tenth rejection, something shifted. The letter arrived and I noticed — I was already moving on before I finished reading it.</p>
+    </div>
+
+    <p>I am not sure I could identify the exact moment. It was not a breakthrough. It was more like a slow erosion. The tenth rejection stung less than the first. The fifteenth less than the tenth. By the time I had received a couple of acceptances and another dozen rejections, the rejections had become almost unremarkable. Not painless — just no longer significant. The mind had simply run out of new things to say about them.</p>
+
+    <p>What I did not understand then — and what Jia Jiang's story helped me articulate years later — was that I had accidentally done exactly what he did deliberately. I had practiced being rejected until the rejection lost its power. Not by becoming numb. Not by deciding rejection didn't matter. But by receiving it enough times that the nervous system stopped treating it as a threat.</p>
+
+    <p>Triggers work the same way. A trigger is just a rejection letter from reality — reality telling you that what is happening is not what you wanted or expected. The mind contracts. The chest tightens. The narrative starts. Someone has to be responsible for this discomfort. Usually it is the most visible person in the room.</p>
+
+    <p>But what if triggers were not problems to eliminate? What if they were the practice itself?</p>
+
+    <p>Michael Singer describes the spiritual path as one of releasing what has been stored inside — the old hurts, the habituated patterns, the places where the heart has closed to protect itself. Those places don't release on their own. They release when something pokes them. When you are triggered, something real is being surfaced — something that was already there, waiting. The trigger did not create the contraction. It revealed it.</p>
+
+    <p>This reframe changes everything. If a trigger is a problem, you spend your energy trying to avoid it — managing your environment, steering clear of difficult people, hoping nothing too uncomfortable lands on you today. If a trigger is a teacher, you start to get curious. What is this one showing me? Where is this coming from? What has been stored here that wants to move?</p>
+
+    <div class="pull-quote">
+      <p>Being trigger happy doesn't mean reacting to everything. It means welcoming the trigger as the only teacher who shows up when you actually need the lesson.</p>
+    </div>
+
+    <p>Jia Jiang did not set out to become fearless. He set out to become practiced. The fearlessness was a side effect of the practice. And the practice was simply showing up, over and over, to the thing that scared him — until the fear had nothing left to say.</p>
+
+    <p>The rejection letters eventually stopped coming. I got a job. The stack of form letters went into recycling. But the thing they had quietly taught me — that discomfort has a ceiling if you are willing to keep meeting it — that stayed.</p>
+
+    <p>Every trigger since has been, in its own way, a form rejection letter from reality. And I have gotten considerably better at reading them without flinching.</p>
+
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--clay);margin-top:2rem;">So, are you ready to be Trigger Happy?</p>
+
+    <div class="tanism-callout">
+      <span class="tanism-callout-label">Tan's Take on Timeless Truths</span>
+      <p>This piece is part of the Tanisms™ collection — original frameworks for the examined life. Ideas worth sitting with.</p>
+      <div class="tanism-callout-links">
+        <a href="trigger-happy-framework.html">Explore the framework →</a>
+        <a href="musings.html#tanisms">All Tanisms™ →</a>
+      </div>
+    </div>
+
+  </article>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">About this piece</span>
+      <p>Trigger Happy is one of Tan's original frameworks — part of the Tanisms™ collection and an invitation to shift how you think about the events that trigger us in life.</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Connected ideas</span>
+      <div class="tag-list">
+        <span class="tag">Reactivity</span>
+        <span class="tag">Avoidance</span>
+        <span class="tag">Awareness</span>
+        <span class="tag">Impermanence</span>
+        <span class="tag">Resilience</span>
+      </div>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Related reading</span>
+      <p>The Happiness Trap — Russ Harris<br><br>Wherever You Go, There You Are — Jon Kabat-Zinn<br><br>Rejection Proof — Jia Jiang<br><br>The Untethered Soul — Michael Singer</p>
+    </div>
+    <div class="cta-box">
+      <p>If this piece resonated, Awareness & Alignment Coaching™ goes deeper into the patterns that keep us reactive — and the practices that create space between trigger and response.</p>
+      <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
+    </div>
+  </aside>
+</div>
+
+<div class="next-piece">
+  <div>
+    <span class="next-piece-label">Read next</span>
+    <h3>The Billion Things Rule</h3>
+    <p>In any given moment, a billion factors converge to produce what is. We see one — and mistake it for the cause. A story about a rental car, a missed shuttle, and what surrender actually looks like.</p>
+    <a href="billion-things-rule.html" class="btn-read">Read the piece →</a>
+  </div>
+  <div class="next-piece-back">
+    <a href="musings.html">← Back to Musings & More</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span>™</div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:tan@awexpedition.com" style="display:block;color:var(--sand);text-decoration:none;font-size:0.85rem;margin-bottom:0.5rem;">tan@awexpedition.com</a>
+    <a href="tel:9295001559">929-500-1559</a>
+    <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWExpedition™ — Awareness & Alignment Coaching</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE;
+    --warm-white: #FDFAF6;
+    --bark: #2C2017;
+    --moss: #4A5C3E;
+    --clay: #B5714A;
+    --sand: #D4B896;
+    --mist: #E8E0D5;
+    --gold: #C9943A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--warm-white);
+    color: var(--bark);
+    font-family: 'DM Sans', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(253,250,246,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mist);
+    transition: padding 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--bark); text-decoration: none;
+  }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    text-decoration: none; color: var(--bark);
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    opacity: 0.75; transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta {
+    background: var(--moss); color: var(--cream) !important;
+    padding: 0.55rem 1.4rem !important; border-radius: 2px;
+    opacity: 1 !important; transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--bark) !important; }
+  .nav-client {
+    font-size: 0.72rem !important; color: var(--clay) !important;
+    opacity: 0.8 !important; letter-spacing: 0.08em !important;
+    text-transform: none !important; border-bottom: 1px solid var(--sand);
+    padding-bottom: 1px;
+  }
+  .nav-client:hover { opacity: 1 !important; }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 4px; background: none; border: none;
+  }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    display: none; position: fixed; top: 72px; left: 0; right: 0;
+    background: rgba(253,250,246,0.98); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mist); padding: 1.5rem 2rem;
+    flex-direction: column; gap: 0; z-index: 99;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { display: block; text-decoration: none; color: var(--bark); font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--mist); opacity: 0.75; transition: opacity 0.2s; }
+  .mobile-menu a:hover { opacity: 1; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu .mob-cta { background: var(--moss); color: var(--cream) !important; padding: 0.9rem 1.5rem !important; border-radius: 2px; opacity: 1 !important; margin-top: 0.5rem; text-align: center; border: none !important; }
+  .mobile-menu .mob-client { color: var(--clay) !important; font-size: 0.78rem !important; text-transform: none !important; letter-spacing: 0.05em !important; opacity: 0.8 !important; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 4rem 5rem 6rem;
+  }
+  .hero-eyebrow {
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300; line-height: 1.08;
+    letter-spacing: -0.01em; color: var(--bark);
+    margin-bottom: 1.8rem;
+  }
+  .hero-title em { font-style: italic; color: var(--clay); }
+  .hero-sub {
+    font-size: 1rem; line-height: 1.8; color: var(--bark);
+    max-width: 440px; margin-bottom: 1.5rem;
+  }
+  .hero-sub strong { opacity: 0.5; }
+  .btn-group { display: flex; flex-direction: column; gap: 0.8rem; align-items: flex-start; margin-top: 1rem; }
+  .btn-primary {
+    background: var(--clay); color: var(--cream);
+    padding: 0.9rem 2.2rem; text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    border-radius: 2px; transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--bark); transform: translateY(-2px); }
+  .btn-secondary {
+    border: 1px solid var(--sand); color: var(--bark);
+    padding: 0.9rem 2.2rem; text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    border-radius: 2px; transition: border-color 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--bark); transform: translateY(-2px); }
+  .client-booking-link {
+    font-size: 0.78rem; color: var(--clay); text-decoration: none;
+    letter-spacing: 0.05em; opacity: 0.8; transition: opacity 0.2s;
+    border-bottom: 1px solid var(--sand); padding-bottom: 1px;
+  }
+  .client-booking-link:hover { opacity: 1; }
+
+  .hero-image { position: relative; overflow: hidden; }
+  .hero-image::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(74,92,62,0.15) 0%, transparent 60%);
+    z-index: 1;
+  }
+  .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-badge {
+    position: absolute; bottom: 3rem; left: -1.5rem;
+    background: var(--cream); border: 1px solid var(--mist);
+    padding: 1.2rem 1.8rem; z-index: 2;
+    box-shadow: 0 8px 30px rgba(44,32,23,0.12);
+  }
+  .hero-badge .badge-label {
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--clay); display: block; margin-bottom: 0.5rem;
+  }
+  .hero-badge .badge-text {
+    font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+    font-weight: 400; color: var(--bark); line-height: 1.7;
+  }
+
+  /* AWE PILLARS */
+  #pillars { padding: 7rem 6rem; background: var(--bark); color: var(--cream); }
+  .pillars-header { text-align: center; margin-bottom: 5rem; }
+  .section-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--sand); margin-bottom: 1rem; display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300; line-height: 1.15;
+  }
+  .section-title em { font-style: italic; color: var(--sand); }
+  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+  .pillar {
+    background: rgba(255,255,255,0.04); padding: 3rem 2.5rem;
+    border: 1px solid rgba(212,184,150,0.1); transition: background 0.3s;
+  }
+  .pillar:hover { background: rgba(255,255,255,0.08); }
+  .pillar-letter {
+    font-family: 'Cormorant Garamond', serif; font-size: 5rem;
+    font-weight: 300; line-height: 1; color: var(--sand);
+    opacity: 0.4; margin-bottom: 1rem; display: block;
+  }
+  .pillar h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.8rem;
+    font-weight: 400; margin-bottom: 1rem; color: var(--cream);
+  }
+  .pillar p { font-size: 0.9rem; opacity: 0.7; line-height: 1.8; }
+
+  /* ABOUT */
+  #about { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
+  .about-image { position: relative; overflow: hidden; min-height: 500px; }
+  .about-image img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .about-image::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, transparent 70%, var(--warm-white));
+  }
+  .about-text {
+    padding: 6rem 5rem 6rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .about-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300; line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .about-text h2 em { font-style: italic; color: var(--clay); }
+  .about-text p { font-size: 0.95rem; line-height: 1.9; opacity: 0.8; margin-bottom: 1rem; }
+  .credentials { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--mist); }
+  .credentials p { font-size: 0.82rem; opacity: 0.6; line-height: 1.9; }
+  .signature {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+    font-style: italic; color: var(--clay); margin-top: 1.5rem; display: block;
+  }
+
+  /* SERVICES */
+  #services { padding: 7rem 6rem; background: var(--cream); }
+  .services-header { text-align: center; margin-bottom: 4rem; }
+  .services-quote {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;
+    font-style: italic; opacity: 0.75; max-width: 650px;
+    margin: 1rem auto 0; line-height: 1.6; text-align: center;
+  }
+  .services-quote cite {
+    display: block; font-size: 0.8rem; font-style: normal;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--clay); margin-top: 0.5rem; opacity: 0.8;
+  }
+  .style-strip {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 1px; background: var(--mist); margin-bottom: 3rem;
+  }
+  .style-card { background: var(--warm-white); padding: 2rem 1.5rem; text-align: center; }
+  .style-card-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+    font-weight: 400; margin-bottom: 0.5rem;
+  }
+  .style-card p { font-size: 0.82rem; opacity: 0.65; line-height: 1.7; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .service-card {
+    background: var(--warm-white); border: 1px solid var(--mist);
+    padding: 3rem 2.5rem; position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(44,32,23,0.1); }
+  .service-card.featured { background: var(--moss); border-color: var(--moss); color: var(--cream); }
+  .service-tag {
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 1.2rem; display: block;
+  }
+  .service-card.featured .service-tag { color: var(--sand); }
+  .service-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .service-price { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: var(--clay); margin: 1rem 0; line-height: 1; }
+  .service-card.featured .service-price { color: var(--sand); }
+  .service-price span { font-size: 1rem; font-family: 'DM Sans', sans-serif; opacity: 0.6; }
+  .service-card ul { list-style: none; margin: 1.2rem 0 2rem; }
+  .service-card ul li { font-size: 0.88rem; padding: 0.4rem 0; opacity: 0.75; padding-left: 1.2rem; position: relative; line-height: 1.6; }
+  .service-card ul li::before { content: '—'; position: absolute; left: 0; color: var(--clay); }
+  .service-card.featured ul li::before { color: var(--sand); }
+  .btn-card {
+    display: inline-block; text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.8rem 1.8rem; border: 1px solid var(--sand);
+    color: var(--bark); border-radius: 2px; transition: all 0.2s;
+  }
+  .btn-card:hover { background: var(--bark); color: var(--cream); border-color: var(--bark); }
+  .service-card.featured .btn-card { border-color: var(--cream); color: var(--cream); }
+  .service-card.featured .btn-card:hover { background: var(--cream); color: var(--moss); }
+  .payment-note { text-align: center; margin-top: 2rem; font-size: 0.82rem; opacity: 0.55; font-style: italic; }
+
+  /* PROCESS */
+  #process { padding: 7rem 6rem; background: var(--warm-white); }
+  .process-header { text-align: center; margin-bottom: 4rem; }
+  .process-description { max-width: 720px; margin: 0 auto 4rem; text-align: center; font-size: 0.95rem; opacity: 0.75; line-height: 1.9; }
+  .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--mist); }
+  .step { background: var(--warm-white); padding: 2.5rem 2rem; }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: var(--clay); letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .step h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.8rem; }
+  .step p { font-size: 0.85rem; opacity: 0.65; line-height: 1.7; }
+  .step-link { font-size: 0.78rem; color: var(--clay); text-decoration: none; display: inline-block; margin-top: 0.8rem; border-bottom: 1px solid var(--sand); }
+  .step-link:hover { color: var(--bark); border-color: var(--bark); }
+
+  /* CTA */
+  #cta {
+    padding: 7rem 6rem; background: var(--clay);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  #cta::before {
+    content: 'AWE'; font-family: 'Cormorant Garamond', serif;
+    font-size: 20vw; font-weight: 600;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    color: rgba(255,255,255,0.06); pointer-events: none; line-height: 1;
+  }
+  #cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 300; color: var(--cream); line-height: 1.2; margin-bottom: 1.2rem; position: relative; }
+  #cta h2 em { font-style: italic; }
+  #cta p { color: rgba(247,243,238,0.75); font-size: 1rem; max-width: 500px; margin: 0 auto 2.5rem; position: relative; }
+  #cta .btn-primary { background: var(--cream); color: var(--clay); position: relative; }
+  #cta .btn-primary:hover { background: var(--bark); color: var(--cream); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bark); color: var(--cream);
+    padding: 3rem 6rem;
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 2rem;
+  }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .footer-contact a:hover { color: var(--cream); }
+  .footer-client { font-size: 0.78rem !important; color: rgba(212,184,150,0.6) !important; border-bottom: 1px solid rgba(212,184,150,0.3); padding-bottom: 1px; display: inline-block; margin-bottom: 0.8rem !important; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-text { padding: 3rem 1.5rem 2rem; }
+    .hero-image { min-height: 350px; }
+    #pillars { padding: 4rem 1.5rem; }
+    .pillars-grid { grid-template-columns: 1fr; gap: 2px; }
+    #about { grid-template-columns: 1fr; }
+    .about-text { padding: 3rem 1.5rem; }
+    .about-image { min-height: 350px; }
+    #services { padding: 4rem 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .style-strip { grid-template-columns: 1fr 1fr; }
+    #process { padding: 4rem 1.5rem; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    #cta { padding: 5rem 1.5rem; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+    .hero-badge { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="#pillars">The AWE Method</a></li>
+    <li><a href="#about">About Tan</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="musings.html">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+    <li><a href="https://calendly.com/awexpedition/coaching-session" class="nav-client">Existing Clients →</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#pillars" onclick="closeMobile()">The AWE Method</a>
+  <a href="#about" onclick="closeMobile()">About Tan</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="musings.html">Musings & More</a>
+  <a href="https://calendly.com/awexpedition/30min" class="mob-cta">Book a Free Call</a>
+  <a href="https://calendly.com/awexpedition/coaching-session" class="mob-client">Already a client? Book a session →</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <span class="hero-eyebrow">Awareness &amp; Alignment™ Coaching</span>
+    <h1 class="hero-title">Embark on your<br><em>transformative</em><br>journey</h1>
+    <p class="hero-sub">Discover the path to living your best you by cultivating a mindset of <strong><span style="color:var(--clay);font-weight:700">A</span>wareness, <span style="color:var(--clay);font-weight:700">W</span>onder &amp; <span style="color:var(--clay);font-weight:700">E</span>mbodiment.</strong></p>
+    <div class="btn-group">
+      <a href="https://calendly.com/awexpedition/30min" class="btn-primary">Book a Free Call</a>
+      <a href="#about" class="btn-secondary">Learn More</a>
+      <a href="https://calendly.com/awexpedition/coaching-session" class="client-booking-link">Already a client? Book a session →</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.squarespace-cdn.com/content/v1/65b3236ca91de65d970e68fc/1706909813834-RKNKL2D0597X8XNNUATU/image-asset.jpeg" alt="AWExpedition — nature" />
+    <div class="hero-badge" style="bottom:auto;top:50%;transform:translateY(-50%);left:-1.5rem;">
+      <span class="badge-label">Credentials</span>
+      <span class="badge-text">
+        Masters of Applied Positive Psychology, UPenn<br>
+        Certified Positive Psychology Coach, Positive Acorn<br>
+        Certified Sleep Coach, Spencer Institute<br>
+        Juris Doctorate, New York University<br>
+        Committed Practitioner of the Wisdom of Michael Singer
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- AWE PILLARS -->
+<section id="pillars">
+  <div class="pillars-header">
+    <span class="section-eyebrow">The AWE Method</span>
+    <h2 class="section-title" style="color:var(--cream)">The Pillars of<br><em>Living in Alignment</em></h2>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar">
+      <span class="pillar-letter">A</span>
+      <h3><span style="color:var(--sand)">A</span>wareness</h3>
+      <p>Most of us go through life on auto-pilot. Developing Awareness enables us to understand ourselves and our relationship with the world on a much deeper level. Together we will uncover the patterns, beliefs and emotions that shape your life — fostering self-reflection and mindfulness so you can navigate challenges with clarity and insight.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-letter">W</span>
+      <h3><span style="color:var(--sand)">W</span>onder</h3>
+      <p>Once we have Awareness we can approach life's unfolding with Wonder. The AWE Method will help crystallize your Why, Open you to possibilities and try Novel approaches to Discovery through Experimentation and Reflection. Awareness and Alignment Coaching will uncover patterned and habituated beliefs and actions. Through a co-creative process, we will explore different methods and practices that foster a healthy mindset and a shift in perspective allowing you to live a more fulfilling life and become the best you.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-letter">E</span>
+      <h3><span style="color:var(--sand)">E</span>mbodiment</h3>
+      <p>With Awareness and Wonder, we will explore practices and tools to help you on your journey so you can embody the perspective and insights you gain. With clearer goals that align with your true self, you will be better equipped to continue your travels, with or without a guide.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-image">
+    <img src="Play_3.jpg" alt="Tan Cheung — AWExpedition Coach" />
+  </div>
+  <div class="about-text">
+    <span class="section-eyebrow">About Tan — Meet Your Guide</span>
+    <h2>Hi, I'm Tan —<br>your <em>partner in growth</em></h2>
+    <p>For much of my life, I believed the path was clear — achieve enough, and peace would follow. I built the career, the titles, the markers. And for a long time, the model seemed to work.</p>
+    <p>It took a collision of losses — the sudden death of a colleague, a layoff on the heels of peak achievement, a marriage unraveling, a father's illness — all within four months, to crack that equation open. What surprised me most wasn't the hardship. It was that I found more genuine peace in the rubble than I ever had in the structure.</p>
+    <p>That discovery sent me on a different kind of expedition — inward.</p>
+    <p>My path has been shaped by two powerful influences. The teachings of Michael Singer — author of <em>The Untethered Soul</em> — moved me so deeply, both figuratively and literally, that I left New York City and relocated to Alachua, Florida to immerse myself in his teachings, all while continuing my legal career remotely. Alongside that, I deepened my understanding of human flourishing through the study of positive psychology under Martin Seligman as part of my Applied Positive Psychology Masters degree. The intersection of Eastern contemplative practice and Western science is at the heart of how I guide this work.</p>
+    <p>My grand expedition was shaped by thirty years practicing corporate law — in the public sector, Big Law, and in-house at a Fortune 50 company. Those years gave me deep insight into the challenges the profession carries. During my legal career, I had the privilege of mentoring others navigating the same path. I was honored to be recognised for this with the <a href="https://www.ctbar.org/news/cba-news/cba-in-the-news/news-detail/2023/03/14/attorney-tanyee-cheung-receives-2023-ladder-award" target="_blank" rel="noopener" style="color:var(--clay);text-decoration:none;border-bottom:1px solid var(--sand);">Ladder Award</a> presented by the Connecticut Bar Association – Women in the Law and Young Lawyers Sections. For reflections specific to the legal profession, visit <a href="musings.html#perspectives" style="color:var(--clay);text-decoration:none;border-bottom:1px solid var(--sand);">Perspectives</a>.</p>
+    <p>My role as your guide is to co-create a safe, non-judgmental space for you to become more aware and aligned — to bring greater awareness to your values, habits, surroundings, and goals, uncover patterns standing in your way, and explore practices and tools to help your life come into alignment with your true self.</p>
+    <p>I believe deeply that <strong>you are the expert in YOU</strong> — capable, whole, and deserving of a full and authentic life. I would be honored to be a part of your journey.</p>
+    <span class="signature">With Gratitude, Tan</span>
+    <div class="credentials">
+      <p>
+        Masters of Applied Positive Psychology — University of Pennsylvania<br>
+        Juris Doctorate — New York University School of Law<br>
+        Certified Positive Psychology Coach — Positive Acorn<br>
+        Certified Sleep Coach — Spencer Institute<br>
+        Committed Practitioner of the Wisdom of Michael Singer
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <span class="section-eyebrow">Work With Tan</span>
+    <h2 class="section-title" style="color:var(--bark)">Choose your<br><em>path forward</em></h2>
+    <p class="services-quote">
+      "The greatest discovery of my generation is that human beings can alter their lives by altering their attitudes of mind."
+      <cite>— William James</cite>
+    </p>
+  </div>
+
+  <div class="style-strip">
+    <div class="style-card">
+      <div class="style-card-title">No Judgment</div>
+      <p>Whatever you bring, I won't judge it. You are safe here.</p>
+    </div>
+    <div class="style-card">
+      <div class="style-card-title">Awareness &amp; Alignment</div>
+      <p>Cultivate greater awareness and develop the skills and tools you need to become more aligned with your true nature.</p>
+    </div>
+    <div class="style-card">
+      <div class="style-card-title">Your Journey Map</div>
+      <p>After each session you receive a living Google Doc — yours to keep, edit, and build on.</p>
+    </div>
+    <div class="style-card">
+      <div class="style-card-title">The Goal</div>
+      <p>The goal is not to reach a destination but to become more aware of the journey.</p>
+    </div>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-tag">Get Started</span>
+      <h3>Free Consultation</h3>
+      <div class="service-price">$0 <span>/ 40 min</span></div>
+      <ul>
+        <li>Explore what's brought you here</li>
+        <li>Determine if A&amp;A Coaching is a good fit</li>
+        <li>Explore other modalities if more aligned</li>
+        <li>No commitment required</li>
+      </ul>
+      <a href="https://calendly.com/awexpedition/30min" class="btn-card">Book Free Call</a>
+    </div>
+    <div class="service-card featured">
+      <span class="service-tag">Most Popular</span>
+      <h3>Ten Session Package</h3>
+      <div class="service-price">$775 <span>/ package</span></div>
+      <ul>
+        <li>Includes free consultation</li>
+        <li>One 60-minute setup &amp; goal-setting session</li>
+        <li>Nine focused 35-minute coaching sessions</li>
+        <li>Personalized Journey Map after every session</li>
+        <li>Develop tools to live authentically</li>
+        <li>Flexible self-scheduling via Calendly</li>
+      </ul>
+      <a href="https://calendly.com/awexpedition/coaching-session" class="btn-card">Book Session</a>
+    </div>
+    <div class="service-card">
+      <span class="service-tag">Single Sessions</span>
+      <h3>Individual Sessions</h3>
+      <div class="service-price">$175 <span>/ 60 min</span></div>
+      <div style="font-size:0.85rem;opacity:0.6;margin:-0.5rem 0 1rem;font-style:italic;">or $90 / 35 min</div>
+      <ul>
+        <li>First session: if you stop before 30 min and don't want to continue — no charge</li>
+        <li>Personalized Journey Map after every session</li>
+        <li>60 or 35 minute sessions: focused &amp; intentional</li>
+        <li>Flexible scheduling via Calendly</li>
+      </ul>
+      <a href="https://calendly.com/awexpedition/coaching-session" class="btn-card">Book Session</a>
+    </div>
+  </div>
+  <p class="payment-note">Payments via Cash, Check, Zelle or Venmo.</p>
+  <div style="text-align:center;margin-top:1.5rem;">
+    <p style="font-size:0.85rem;opacity:0.65;margin-bottom:1rem;">If you are interested in the process but are experiencing financial difficulties, please fill out our Financial Help form.</p>
+    <button onclick="document.getElementById('financialModal').style.display='flex'" style="display:inline-block;text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.8rem 1.8rem;border:1px solid var(--clay);color:var(--clay);background:none;border-radius:2px;transition:all 0.2s;cursor:pointer;" onmouseover="this.style.background='var(--clay)';this.style.color='var(--cream)'" onmouseout="this.style.background='none';this.style.color='var(--clay)'">Financial Assistance Request</button>
+  </div>
+</section>
+
+<!-- FINANCIAL ASSISTANCE MODAL -->
+<div id="financialModal" style="display:none;position:fixed;inset:0;background:rgba(44,32,23,0.7);z-index:200;align-items:center;justify-content:center;padding:1.5rem;">
+  <div style="background:var(--warm-white);max-width:560px;width:100%;padding:3rem;position:relative;border-radius:2px;max-height:90vh;overflow-y:auto;">
+    <button onclick="document.getElementById('financialModal').style.display='none'" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--bark);opacity:0.5;">&times;</button>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:0.5rem;color:var(--bark);">Financial Assistance Request</h3>
+    <p style="font-size:0.85rem;opacity:0.65;margin-bottom:2rem;line-height:1.7;">Your circumstances are your own. All requests are handled with complete discretion.</p>
+    <form id="financialForm" action="https://formspree.io/f/xlgadopn" method="POST" onsubmit="handleFinancialSubmit(event)" style="display:flex;flex-direction:column;gap:1.2rem;">
+      <div>
+        <label style="display:block;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.6;margin-bottom:0.4rem;">Name</label>
+        <input type="text" name="name" required style="width:100%;padding:0.75rem 1rem;border:1px solid var(--mist);background:var(--cream);font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--bark);border-radius:2px;outline:none;">
+      </div>
+      <div>
+        <label style="display:block;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.6;margin-bottom:0.4rem;">Email</label>
+        <input type="email" name="email" required style="width:100%;padding:0.75rem 1rem;border:1px solid var(--mist);background:var(--cream);font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--bark);border-radius:2px;outline:none;">
+      </div>
+      <div>
+        <label style="display:block;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.6;margin-bottom:0.4rem;">Current Work Status</label>
+        <input type="text" name="work_status" placeholder="e.g. student, retired, looking for employment" required style="width:100%;padding:0.75rem 1rem;border:1px solid var(--mist);background:var(--cream);font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--bark);border-radius:2px;outline:none;">
+      </div>
+      <div>
+        <label style="display:block;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.6;margin-bottom:0.4rem;">Discount Request</label>
+        <select name="discount_request" required style="width:100%;padding:0.75rem 1rem;border:1px solid var(--mist);background:var(--cream);font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--bark);border-radius:2px;outline:none;">
+          <option value="" disabled selected>Select a discount level</option>
+          <option value="25%">25%</option>
+          <option value="50%">50%</option>
+          <option value="75%">75%</option>
+        </select>
+      </div>
+      <div>
+        <label style="display:block;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.6;margin-bottom:0.4rem;">Brief Explanation of Your Circumstances</label>
+        <textarea name="circumstances" rows="4" required style="width:100%;padding:0.75rem 1rem;border:1px solid var(--mist);background:var(--cream);font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--bark);border-radius:2px;outline:none;resize:vertical;"></textarea>
+      </div>
+      <button type="submit" style="background:var(--clay);color:var(--cream);border:none;padding:0.9rem 2rem;font-family:'DM Sans',sans-serif;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:background 0.2s;">Submit Request</button>
+      <p style="font-size:0.78rem;opacity:0.5;text-align:center;font-style:italic;">Your information is kept strictly confidential.</p>
+    </form>
+    <div id="financialSuccess" style="display:none;text-align:center;padding:2rem 0;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--clay);margin-bottom:0.8rem;">Thank you for reaching out.</p>
+      <p style="font-size:0.9rem;opacity:0.7;line-height:1.7;">Your request has been received. Tan will be in touch within a few days.</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="process">
+  <div class="process-header">
+    <span class="section-eyebrow">How It Works</span>
+    <h2 class="section-title" style="color:var(--bark)">Awareness &amp; Alignment<br><em>Process</em></h2>
+  </div>
+  <p class="process-description">The Awareness &amp; Alignment™ Model is a thought-provoking, creative partnership to bring greater awareness of habituated programs and patterns that inhibit you from living the most joyful and liberated life possible. The starting place is a goal — but the goal is not simply to achieve it. It's to bring awareness to the motives and meanings around it. In so doing, you will likely discover what is holding you back, and we will co-creatively explore ways to overcome those blockers — or you might find goals that better align with your true self. Throughout the journey you will be supported with honesty, care, non-judgment and deep respect for the expert you are in you.</p>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>Free Consultation</h4>
+      <p>We meet to explore what's brought you here and whether the Awareness &amp; Alignment™ Model is a good fit — or whether another modality might be more aligned at this point in your journey.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>Alignment</h4>
+      <p>If the AWE Method and the Awareness &amp; Alignment™ Model is in alignment with your needs, we begin with a one-hour session to clarify your target goal(s) and possible challenges.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>Personalized Journey Map</h4>
+      <p>After the session you will receive a Personalized Journey Map that you will work with in between sessions.</p>
+      <a href="journey-map-sample.html" class="step-link">View a sample →</a>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h4>Perspective &amp; Practice</h4>
+      <p>During our sessions, you will likely gain new perspective or insights. With this Awareness, we will use Wonder to co-create practices that help you break old patterns and create new, healthier habits.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <h4>Continuing Your Journey</h4>
+      <p>My goal is to hone skills and practices for you to continue your journey — with or without a guide. Within ten sessions, most clients have what they need to fly…but the journey is yours. We can continue toward a new goal, check in occasionally, or you can simply fly. You are the master of your travels.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <h2>Ready to live your<br><em>best you?</em></h2>
+  <p>Take the first step toward transformative growth with a free 40-minute consultation — no commitment required.</p>
+  <a href="https://calendly.com/awexpedition/30min" class="btn-primary">Schedule Your Free Call</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span>™</div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:tan@awexpedition.com" style="color:var(--sand);text-decoration:none;font-size:0.85rem;display:block;margin-bottom:0.5rem;">tan@awexpedition.com</a>
+    <a href="tel:9295001559">929-500-1559</a>
+    <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
+    <a href="https://calendly.com/awexpedition/coaching-session" class="footer-client">Existing Clients — Book a Session →</a>
+    <div style="margin-top:1rem;display:flex;gap:1.5rem;justify-content:flex-end;">
+      <a href="privacy.html" style="font-size:0.78rem;color:var(--sand);opacity:0.8;">Privacy Policy</a>
+      <a href="terms.html" style="font-size:0.78rem;color:var(--sand);opacity:0.8;">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  // Financial assistance form
+  async function handleFinancialSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('financialForm');
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('financialSuccess').style.display = 'block';
+      }
+    } catch(err) { form.submit(); }
+  }
+
+  // Close modal on backdrop click
+  document.getElementById('financialModal').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });</script>
+</body>
+</html>

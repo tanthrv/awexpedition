@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Mastery &amp; Productivity — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017; --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(253,250,246,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); padding: 1.5rem 2rem; flex-direction: column; gap: 0; z-index: 99; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { display: block; text-decoration: none; color: var(--bark); font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--mist); opacity: 0.75; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu .mob-cta { background: var(--moss); color: var(--cream) !important; padding: 0.9rem 1.5rem !important; border-radius: 2px; opacity: 1 !important; margin-top: 0.5rem; text-align: center; border: none !important; }
+  .article-hero { padding: 9rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .article-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,92,62,0.2) 0%, transparent 60%); }
+  .article-hero-inner { position: relative; max-width: 760px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb span { color: var(--sand); opacity: 0.4; font-size: 0.75rem; }
+  .article-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .article-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.2rem; }
+  .article-hero h1 em { font-style: italic; color: var(--sand); }
+  .article-subtitle { font-size: 1.05rem; color: rgba(247,243,238,0.65); max-width: 560px; line-height: 1.8; }
+  .article-body { display: grid; grid-template-columns: 1fr 300px; gap: 5rem; max-width: 1100px; margin: 0 auto; padding: 5rem 6rem; }
+  .article-content p { font-size: 1rem; line-height: 2; opacity: 0.85; margin-bottom: 1.8rem; }
+  .article-content p:first-child::first-letter { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; float: left; line-height: 0.85; margin: 0.1rem 0.15rem 0 0; color: var(--clay); }
+  .article-content h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--clay); margin: 2rem 0 0.8rem; }
+  .pull-quote { border-left: 3px solid var(--clay); padding: 1.2rem 2rem; margin: 2.5rem 0; }
+  .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; font-weight: 300; line-height: 1.5; color: var(--bark); opacity: 1 !important; margin-bottom: 0 !important; }
+  .matrix-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--mist); margin: 2rem 0; }
+  .matrix-cell { background: var(--cream); padding: 1.5rem; }
+  .matrix-cell.dark { background: var(--bark); color: var(--cream); }
+  .matrix-cell h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; color: var(--clay); }
+  .matrix-cell.dark h4 { color: var(--sand); }
+  .matrix-cell p { font-size: 0.82rem; opacity: 0.75; line-height: 1.6; margin-bottom: 0; }
+  .matrix-cell .action { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clay); margin-top: 0.5rem; display: block; }
+  .matrix-cell.dark .action { color: var(--sand); }
+  .tip-box { background: var(--cream); border: 1px solid var(--mist); border-left: 4px solid var(--moss); padding: 1.5rem 2rem; margin: 1.5rem 0; }
+  .tip-box p { font-size: 0.9rem; line-height: 1.8; opacity: 0.8; margin-bottom: 0.5rem; }
+  .tip-box p:last-child { margin-bottom: 0; }
+  .article-sidebar { padding-top: 0.5rem; }
+  .sidebar-section { margin-bottom: 2.5rem; }
+  .sidebar-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.8rem; border-bottom: 1px solid var(--mist); padding-bottom: 0.5rem; }
+  .sidebar-section p { font-size: 0.85rem; line-height: 1.8; opacity: 0.65; }
+  .sidebar-divider { border: none; border-top: 1px solid var(--mist); margin: 2rem 0; }
+  .cta-box { background: var(--bark); padding: 1.8rem; margin-top: 2rem; }
+  .cta-box p { font-size: 0.85rem; line-height: 1.7; color: rgba(247,243,238,0.7); margin-bottom: 1rem !important; opacity: 1 !important; }
+  .cta-box a { display: inline-block; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sand); border-bottom: 1px solid rgba(212,184,150,0.4); padding-bottom: 2px; }
+  .next-piece { background: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; border-top: 1px solid var(--mist); }
+  .next-piece-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.5rem; }
+  .next-piece h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; }
+  .next-piece p { font-size: 0.88rem; opacity: 0.65; line-height: 1.7; max-width: 500px; }
+  .btn-read { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; margin-top: 1rem; }
+  .next-piece-back { text-align: right; }
+  .next-piece-back a { text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bark); opacity: 0.45; }
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .footer-contact a:hover { color: var(--cream); }
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .hamburger { display: flex; }
+    .article-hero { padding: 8rem 1.5rem 4rem; }
+    .article-body { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; }
+    .article-sidebar { display: none; }
+    .matrix-grid { grid-template-columns: 1fr; }
+    .next-piece { grid-template-columns: 1fr; padding: 3rem 1.5rem; } .next-piece-back { text-align: left; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; } .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#pillars">The AWE Method</a>
+  <a href="index.html#about">About Tan</a>
+  <a href="index.html#services">Services</a>
+  <a href="musings.html">Musings & More</a>
+  <a href="https://calendly.com/awexpedition/30min" class="mob-cta">Book a Free Call</a>
+</div>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>›</span>
+      <a href="musings.html#perspectives">Perspectives</a>
+    </div>
+    <span class="article-tag">Perspectives · CT Lawyer · Nov/Dec 2021</span>
+    <h1>Time Mastery<br><em>&amp; Productivity</em></h1>
+    <p class="article-subtitle">One of the most powerful life skills. The Eisenhower Matrix, time blocking, decision fixing, saying no, and building habits that last.</p>
+  </div>
+</section>
+
+<div class="article-body">
+  <div class="article-content">
+    <p>One of the most powerful life skills is time mastery. For lawyers, developing and honing this skill can help improve both business and personal relationships, productivity, and well-being. The COVID-19 pandemic added a few extra balls to the juggling act that attorneys have been practicing well before work and non-work life began to meld into one another. As some of us slowly became one with our computers, we started to lose our balance without even realizing it. We became "masters" of multi-tasking. Unfortunately, studies show that multi-tasking in reality is task-switching — moving between tasks as opposed to doing multiple tasks at the same time. Researchers at the University of Michigan found that participants lost time when they multi-tasked, and the time lost increased with the complexity and the unfamiliarity of the tasks.</p>
+
+    <p>Think of your brain like open tabs on the computer screen — the more tabs you have open, the slower your computer goes. So if multi-tasking isn't the answer, what is? After reading hundreds of articles on productivity, the fundamental time mastery skills are: To Do Lists, Time Blocking, Decision Fixing, Saying No, and a Thoughtful End to the Day.</p>
+
+    <h3>To Do Lists — The Eisenhower Matrix</h3>
+
+    <p>Many of us have probably had to-do lists but often the list is done with items off the top of our head. We don't actually think about how we organize our lists. This method requires us to consciously bucket our activities into four quadrants.</p>
+
+    <div class="matrix-grid">
+      <div class="matrix-cell dark">
+        <h4>Quadrant 1 — Important &amp; Immediate</h4>
+        <p>Deadlines, crises, key meetings</p>
+        <span class="action">→ Manage and Do</span>
+      </div>
+      <div class="matrix-cell">
+        <h4>Quadrant 2 — Not Important &amp; Immediate</h4>
+        <p>Emails, phone calls, other meetings that interrupt flow</p>
+        <span class="action">→ Minimize and Delegate</span>
+      </div>
+      <div class="matrix-cell">
+        <h4>Quadrant 3 — Important &amp; Not Immediate</h4>
+        <p>Life planning, relationships, health, sleep, exercise, meditation, hobbies</p>
+        <span class="action">→ Plan and Do</span>
+      </div>
+      <div class="matrix-cell dark">
+        <h4>Quadrant 4 — Not Important or Immediate</h4>
+        <p>Busy work, escape, time wasters, work that can be outsourced</p>
+        <span class="action">→ Eliminate</span>
+      </div>
+    </div>
+
+    <p>Quadrant 2 items are in our face leading us to believe they require our immediate attention — but they don't. Set aside time for them, delegate where possible, and decline if they are not a priority. Quadrant 3 items — sleep, healthy relationships, exercise, meditation, hobbies — are the nourishment we need to maintain our balance. Without replenishing ourselves, we become more susceptible to burnout. We need to actively block out time for these. Quadrant 4 time wasters don't need to be eliminated entirely, but when we are aware of where our time is going, we can make deliberate choices. Consider tying time wasters to Quadrant 3 activities: allow yourself to look at your news feed for five minutes after completing ten minutes of meditation.</p>
+
+    <h3>Time Blocking</h3>
+
+    <p>Time blocking helps us stay away from the productivity suck of task-switching. Set aside a set amount of time to do your most difficult work — your "Productivity Period" — and don't allow interruptions. This means not responding to emails, picking up the phone, or chatting with the random person who walks by your desk. These time blocks can be as short as 25 minutes to be effective. You can then take a 10-minute email break. You may find that you have the most focus first thing in the morning or maybe late at night — time block around your personal productive times.</p>
+
+    <div class="pull-quote">
+      <p>Professional, quality work is not perfect work. Productivity is about efficient, high-quality work in a reasonable time frame.</p>
+    </div>
+
+    <h3>Decision Fixing</h3>
+
+    <p>Time is so precious that we all want every minute we can get. We often don't realize that when we have choices, the minutes we take to make a decision can add up. By removing choices, we can gain time and calm. Automate some basic decisions like your wardrobe, meal choices, or food shopping. Create a standard food shopping list, set a meal menu (Taco Tuesdays!), create your uniform rotation. By setting these basic functions on auto-pilot, we can save our energy and time for more important work.</p>
+
+    <h3>Saying No (or Saying Yes to Productivity)</h3>
+
+    <p>A wise partner once told me, drafting the most protective, "perfect" contract for your client that no one will sign or that blows up a deal is actually not perfect. Proofreading your work is good; proofreading your work four times to ensure there is not a single typo is wasting your client's money. Similarly, taking on too much work will lead to lower productivity and contribute to burnout. Saying "No" to unreasonable and harmful demands is a skill that we need to cultivate. Becoming familiar with phrases such as "I would love to help, but my plate is full" or "I wouldn't be able to give that project the time it deserves" sets up your "no" in a thoughtful, non-dismissive tone.</p>
+
+    <h3>Thoughtful End to the Day</h3>
+
+    <p>Take 15 minutes at the end of each day to evaluate your day and learn from it. Do you need to re-prioritize your goals? Did the task you thought would take an hour take three? Like any other activity we seek to master, time mastery takes practice and reflection.</p>
+
+    <p>The first step we need to take to achieve time mastery is to be aware of where you are spending your time. To avoid becoming discouraged, don't try to tackle everything at once. Audit your time for seven days straight and then pick one habit to implement. Habits are best formed with a SNAP mindset: <strong>S</strong>tart strong, <strong>N</strong>o exceptions, <strong>A</strong>lways act, and <strong>P</strong>ractice the will. Pick one thing, get good at that, and then cultivate the next habit. Over time, your newfound habits will help you become a master of your time and energy.</p>
+
+    <p style="font-size:0.82rem;opacity:0.5;margin-top:2rem;font-style:italic;">Originally published in CT Lawyer Magazine, Nov/Dec 2021. Tanyee Cheung was at the time a debt finance partner at Finn, Dixon &amp; Herling, LLP and co-chair of the Connecticut Bar Association's Wellbeing Committee.</p>
+  </div>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">About This Series</span>
+      <p>Perspectives collects Tan's articles published in CT Lawyer magazine — wellbeing through the lens of the legal profession.</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">The Five Skills</span>
+      <p>To Do Lists (Eisenhower Matrix)<br>Time Blocking<br>Decision Fixing<br>Saying No<br>Thoughtful End to the Day</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">The SNAP Framework</span>
+      <p><strong>S</strong>tart strong<br><strong>N</strong>o exceptions<br><strong>A</strong>lways act<br><strong>P</strong>ractice the will</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Related</span>
+      <p><a href="perspectives-meditation.html" style="color:var(--clay);text-decoration:none;border-bottom:1px solid var(--sand);">Meditation — No Way to Okay →</a></p>
+      <p style="margin-top:0.8rem"><a href="perspectives-irac-mindset.html" style="color:var(--clay);text-decoration:none;border-bottom:1px solid var(--sand);">Developing an IRAC Mindset →</a></p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="cta-box">
+      <p>Struggling with time, boundaries, or the relentless pull of Quadrant 2?</p>
+      <a href="https://calendly.com/awexpedition/30min">Book a free conversation →</a>
+    </div>
+  </aside>
+</div>
+
+<div class="next-piece">
+  <div>
+    <span class="next-piece-label">Back to</span>
+    <h3>All Perspectives</h3>
+    <p>More articles from the archive — wellbeing through the lens of the legal profession.</p>
+    <a href="musings.html#perspectives" class="btn-read">Return to Perspectives →</a>
+  </div>
+  <div class="next-piece-back">
+    <a href="musings.html">← All Musings</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span>™</div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:tan@awexpedition.com">tan@awexpedition.com</a>
+    <a href="tel:9295001559">929-500-1559</a>
+    <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+</script>
+</body>
+</html>

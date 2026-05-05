@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stay Notified — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017; --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bark); color: var(--cream); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+  .container { max-width: 520px; width: 100%; text-align: center; }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; letter-spacing: 0.04em; color: var(--cream); text-decoration: none; display: block; margin-bottom: 3rem; opacity: 0.6; }
+  .logo span { color: var(--sand); }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.15; margin-bottom: 1rem; }
+  h1 em { font-style: italic; color: var(--sand); }
+  p { font-size: 0.95rem; color: rgba(247,243,238,0.65); line-height: 1.9; margin-bottom: 2.5rem; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .notify-form { display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 0 auto; }
+  .notify-form input { padding: 1rem 1.2rem; background: rgba(255,255,255,0.07); border: 1px solid rgba(212,184,150,0.25); color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; border-radius: 2px; }
+  .notify-form input::placeholder { color: rgba(247,243,238,0.35); }
+  .notify-form input:focus { border-color: rgba(212,184,150,0.6); }
+  .notify-form button { padding: 1rem; background: var(--clay); border: none; color: var(--cream); cursor: pointer; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; border-radius: 2px; transition: background 0.2s; }
+  .notify-form button:hover { background: var(--moss); }
+  .back-link { display: inline-block; margin-top: 2.5rem; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sand); text-decoration: none; opacity: 0.6; transition: opacity 0.2s; }
+  .back-link:hover { opacity: 1; }
+  .success-msg { display: none; background: rgba(74,92,62,0.3); border: 1px solid rgba(74,92,62,0.5); padding: 1.5rem; border-radius: 2px; font-size: 0.9rem; color: var(--sand); margin-top: 1rem; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="musings.html" class="logo">AW<span>Expedition</span>™</a>
+  <h1>This piece is on<br>its <em>way</em></h1>
+  <p>Leave your email and we'll let you know the moment it's published. No schedule, no algorithm — just when something is ready to be shared.</p>
+  <form class="notify-form" onsubmit="handleSubmit(event)">
+    <input type="email" id="emailInput" placeholder="your@email.com" required />
+    <button type="submit">Notify Me When It's Live</button>
+  </form>
+  <div class="success-msg" id="successMsg">You're on the list — we'll be in touch when it's ready. Thank you! 🌿</div>
+  <a href="musings.html" class="back-link">← Back to Musings & More</a>
+</div>
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const email = document.getElementById('emailInput').value;
+    window.location.href = 'mailto:tan@awexpedition.com?subject=Notify Me: AWExpedition New Content&body=Please notify me when new content is published. My email: ' + email;
+    document.getElementById('successMsg').style.display = 'block';
+  }
+</script>
+</body>
+</html>

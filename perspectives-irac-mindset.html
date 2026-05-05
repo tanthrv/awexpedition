@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developing an IRAC Mindset — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017; --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(253,250,246,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); padding: 1.5rem 2rem; flex-direction: column; gap: 0; z-index: 99; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { display: block; text-decoration: none; color: var(--bark); font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--mist); opacity: 0.75; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu .mob-cta { background: var(--moss); color: var(--cream) !important; padding: 0.9rem 1.5rem !important; border-radius: 2px; opacity: 1 !important; margin-top: 0.5rem; text-align: center; border: none !important; }
+  .article-hero { padding: 9rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .article-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,92,62,0.2) 0%, transparent 60%); }
+  .article-hero-inner { position: relative; max-width: 760px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb span { color: var(--sand); opacity: 0.4; font-size: 0.75rem; }
+  .article-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .article-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.2rem; }
+  .article-hero h1 em { font-style: italic; color: var(--sand); }
+  .article-subtitle { font-size: 1.05rem; color: rgba(247,243,238,0.65); max-width: 560px; line-height: 1.8; }
+  .article-body { display: grid; grid-template-columns: 1fr 300px; gap: 5rem; max-width: 1100px; margin: 0 auto; padding: 5rem 6rem; }
+  .article-content p { font-size: 1rem; line-height: 2; opacity: 0.85; margin-bottom: 1.8rem; }
+  .article-content p:first-child::first-letter { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; float: left; line-height: 0.85; margin: 0.1rem 0.15rem 0 0; color: var(--clay); }
+  .pull-quote { border-left: 3px solid var(--clay); padding: 1.2rem 2rem; margin: 2.5rem 0; }
+  .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; font-weight: 300; line-height: 1.5; color: var(--bark); opacity: 1 !important; margin-bottom: 0 !important; }
+  .irac-section { background: var(--cream); border: 1px solid var(--mist); border-left: 4px solid var(--clay); padding: 2rem 2.5rem; margin: 2rem 0; }
+  .irac-section h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--clay); margin-bottom: 0.8rem; }
+  .irac-section p { font-size: 0.92rem; line-height: 1.9; opacity: 0.8; margin-bottom: 0.6rem; }
+  .irac-section p:last-child { margin-bottom: 0; }
+  .thinking-traps { background: var(--bark); color: var(--cream); padding: 2rem 2.5rem; margin: 2.5rem 0; }
+  .thinking-traps h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--sand); margin-bottom: 1.2rem; }
+  .thinking-traps ul { list-style: none; }
+  .thinking-traps ul li { font-size: 0.88rem; padding: 0.5rem 0 0.5rem 1.2rem; position: relative; opacity: 0.75; border-bottom: 1px solid rgba(212,184,150,0.15); }
+  .thinking-traps ul li:last-child { border-bottom: none; }
+  .thinking-traps ul li::before { content: '—'; position: absolute; left: 0; color: var(--clay); }
+  .thinking-traps ul li strong { color: var(--sand); font-weight: 500; }
+  .article-sidebar { padding-top: 0.5rem; }
+  .sidebar-section { margin-bottom: 2.5rem; }
+  .sidebar-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.8rem; border-bottom: 1px solid var(--mist); padding-bottom: 0.5rem; }
+  .sidebar-section p { font-size: 0.85rem; line-height: 1.8; opacity: 0.65; }
+  .sidebar-divider { border: none; border-top: 1px solid var(--mist); margin: 2rem 0; }
+  .cta-box { background: var(--bark); padding: 1.8rem; margin-top: 2rem; }
+  .cta-box p { font-size: 0.85rem; line-height: 1.7; color: rgba(247,243,238,0.7); margin-bottom: 1rem !important; opacity: 1 !important; }
+  .cta-box a { display: inline-block; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sand); border-bottom: 1px solid rgba(212,184,150,0.4); padding-bottom: 2px; }
+  .next-piece { background: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; border-top: 1px solid var(--mist); }
+  .next-piece-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.5rem; }
+  .next-piece h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; }
+  .next-piece p { font-size: 0.88rem; opacity: 0.65; line-height: 1.7; max-width: 500px; }
+  .btn-read { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; margin-top: 1rem; }
+  .next-piece-back { text-align: right; }
+  .next-piece-back a { text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bark); opacity: 0.45; }
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .footer-contact a:hover { color: var(--cream); }
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .hamburger { display: flex; }
+    .article-hero { padding: 8rem 1.5rem 4rem; }
+    .article-body { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; }
+    .article-sidebar { display: none; }
+    .next-piece { grid-template-columns: 1fr; padding: 3rem 1.5rem; } .next-piece-back { text-align: left; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; } .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#pillars">The AWE Method</a>
+  <a href="index.html#about">About Tan</a>
+  <a href="index.html#services">Services</a>
+  <a href="musings.html">Musings & More</a>
+  <a href="https://calendly.com/awexpedition/30min" class="mob-cta">Book a Free Call</a>
+</div>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>›</span>
+      <a href="musings.html#perspectives">Perspectives</a>
+    </div>
+    <span class="article-tag">Perspectives · CT Lawyer · Nov/Dec 2022</span>
+    <h1>Developing an<br><em>IRAC Mindset</em></h1>
+    <p class="article-subtitle">The legal mind is trained to spot problems — which is great for clients, but hard on wellbeing. A reframe using the lawyer's own tool.</p>
+  </div>
+</section>
+
+<div class="article-body">
+  <div class="article-content">
+    <p>Almost universally, optimists tend to be more successful than pessimists. Education, military, athletics, the list goes on and on. There is one striking exception. Lawyers. Research reveals a surprising correlation between pessimism and success in law school. Students at the University of Virginia School of Law, Class of 1987, were tested for optimism-pessimism with the Attributional Style Questionnaire ("ASQ"). In sharp contrast to results in other areas of life, the students with a pessimistic explanatory style performed better than those with an optimistic one.</p>
+
+    <p>Right about now, you might be trying on your optimism coat thinking to yourself, good thing I am a pessimist! I would encourage you to keep the optimism coat on AND at the same time recognize that it's not a good thing to have a pessimistic explanatory style. Unfortunately, whether we are by nature more pessimistic or cultivate this pessimism through countless hours of issue spotting practice, most lawyers do not leave their pessimism at the office. If you have a pessimistic explanatory style, it likely pervades other parts of your life — and studies almost universally show optimists have greater wellbeing, success, and relationships. So what is a lawyer to do? How do we retain our ability to issue spot and develop a more optimistic style?</p>
+
+    <p>We develop an IRAC mindset. IRAC mindset isn't IRAC writing. In mindset, IRAC stands for <strong>I</strong>dentify, <strong>R</strong>ealistic Views, <strong>A</strong>pply Thinking Tools, and <strong>C</strong>reate Your World.</p>
+
+    <div class="irac-section">
+      <h3>I — Identify</h3>
+      <p>To develop a more optimistic explanatory style, we need to be aware of ourselves and the many thinking traps humans are prone to fall into and challenge ourselves to identify and overcome them. Thinking traps are cognitive distortions — inaccurate thoughts usually reinforcing negative thinking patterns — that influence our view of reality. All humans are susceptible to thinking traps, but lawyers who are trained to spot problems may be especially susceptible to seeing problems where there aren't any.</p>
+      <p>One common thinking trap is catastrophizing. As a young lawyer, every mistake I made immediately led my mind down the path of tanking the deal, losing my job, becoming homeless, and being abandoned by my dog. We need to recognize what thinking traps we're prone to fall into and how we can begin to slowly shift our way of thinking.</p>
+    </div>
+
+    <div class="thinking-traps">
+      <h3>Common Thinking Traps</h3>
+      <ul>
+        <li><strong>Mind Reading</strong> — Expecting others to know what you want; believing you know what others are thinking</li>
+        <li><strong>Me, Me, Me</strong> — Believing you are the sole cause of the problem; it's all my fault</li>
+        <li><strong>Them, Them, Them</strong> — Believing others or circumstances are the sole cause; I didn't do anything wrong</li>
+        <li><strong>Catastrophizing</strong> — Believing the worst case scenario will happen</li>
+        <li><strong>Helplessness</strong> — Believing you have no control and negative events affect everything</li>
+      </ul>
+    </div>
+
+    <div class="irac-section">
+      <h3>R — Realistic Views</h3>
+      <p>Once we are aware of our thinking traps, we can examine the situation through a lens of realism. "My dog doesn't actually care about my typo and likely won't abandon me." "Actually, I have been on deals where I have seen mistakes and the deal didn't crater." If a mistake meant losing your job, there probably wouldn't be any lawyers in the world.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>While issue spotting is an important part of a lawyer's job, our clients pay us for solutions, not problems.</p>
+    </div>
+
+    <div class="irac-section">
+      <h3>A — Apply Thinking Tools</h3>
+      <p>Identifying our thinking traps and seeing the world through a realistic lens are two of the thinking tools we can use. Another powerful tool is reframing. We often believe that an activating event (A) creates a consequence (C). In fact, there is a vital piece missing: B — Belief. The same event does not lead to the same consequence for each person. Depending on an individual's belief, the consequences can be vastly different.</p>
+      <p>Consider a litigation associate who realized late one evening that the brief he filed had line numbers alongside the pages — not meeting filing requirements. He panicked throughout the evening, didn't sleep, and was emotionally drained the next day. The activating event did not cause these outcomes — his belief did. An optimistic "SuperLawyer" facing the same situation would ask colleagues for advice over dinner, get a good night's sleep, and face the morning refreshed. (For those who need to know: the court accepted a clean version of the brief the next day.)</p>
+    </div>
+
+    <div class="irac-section">
+      <h3>C — Creating Our World</h3>
+      <p>The final pillar of the IRAC mindset is Creating Our World. The universe will do what it will do. Much of life is outside our control. Events will happen that will make us uncomfortable, angry, sad, insecure. These feelings are natural, and we should not try to resist feeling. The question is: after we have allowed for our feeling, then what?</p>
+      <p>When you face an unpleasant situation, do you focus on the unpleasant situation or finding a solution? If there isn't a solution, do you shift to something else? We are not in control of events, but we are in control of what we pay attention to, how we respond, and whether we continue forward or stop. We can create a world of excitement, curiosity, learning, and hope — or one of fear, hardships, and despair. This is our choice, our power.</p>
+    </div>
+
+    <p>Victor Frankl famously noted: "When we are no longer able to change a situation, we are challenged to change ourselves." I hope that you join me and rise to the challenge, cultivate an IRAC mindset through continual practice, and create that better world for yourself.</p>
+
+    <p style="font-size:0.82rem;opacity:0.5;margin-top:2rem;font-style:italic;">Originally published in CT Lawyer Magazine, Nov/Dec 2022. Tanyee Cheung was at the time a debt finance partner at Finn Dixon &amp; Herling LLP and co-chair of the Connecticut Bar Association's Wellbeing Committee.</p>
+  </div>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">About This Series</span>
+      <p>Perspectives collects Tan's articles published in CT Lawyer magazine — wellbeing through the lens of the legal profession.</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">IRAC Mindset</span>
+      <p><strong>I</strong> — Identify thinking traps<br><strong>R</strong> — Realistic Views<br><strong>A</strong> — Apply Thinking Tools<br><strong>C</strong> — Create Your World</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Related</span>
+      <p><a href="perspectives-meditation.html" style="color:var(--clay);text-decoration:none;border-bottom:1px solid var(--sand);">Meditation — No Way to Okay →</a></p>
+      <p style="margin-top:0.8rem"><a href="perspectives-time-mastery.html" style="color:var(--clay);text-decoration:none;border-bottom:1px solid var(--sand);">Time Mastery &amp; Productivity →</a></p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="cta-box">
+      <p>Want to explore your own thinking traps and build a more optimistic lens?</p>
+      <a href="https://calendly.com/awexpedition/30min">Book a free conversation →</a>
+    </div>
+  </aside>
+</div>
+
+<div class="next-piece">
+  <div>
+    <span class="next-piece-label">Next in Perspectives</span>
+    <h3>Time Mastery &amp; Productivity</h3>
+    <p>One of the most powerful life skills for lawyers — the Eisenhower Matrix, time blocking, decision fixing, and building habits that last.</p>
+    <a href="perspectives-time-mastery.html" class="btn-read">Read the article →</a>
+  </div>
+  <div class="next-piece-back">
+    <a href="musings.html#perspectives">← All Perspectives</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span>™</div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:tan@awexpedition.com">tan@awexpedition.com</a>
+    <a href="tel:9295001559">929-500-1559</a>
+    <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+</script>
+</body>
+</html>

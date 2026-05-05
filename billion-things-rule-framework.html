@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Billion Things Rule — Framework — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+
+  /* HERO */
+  .framework-hero {
+    padding: 9rem 6rem 5rem;
+    background: var(--bark);
+    position: relative; overflow: hidden;
+  }
+  .framework-hero::before {
+    content: 'BTR';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22vw; font-weight: 600;
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255,255,255,0.03);
+    pointer-events: none; white-space: nowrap;
+  }
+  .framework-hero-inner { position: relative; max-width: 800px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb span { color: var(--sand); opacity: 0.4; font-size: 0.75rem; }
+  .framework-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .framework-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.5rem; }
+  .framework-hero h1 em { font-style: italic; color: var(--sand); }
+  .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-style: italic;
+    color: rgba(247,243,238,0.75);
+    line-height: 1.6; max-width: 600px;
+    border-left: 3px solid var(--clay);
+    padding-left: 1.5rem; margin-top: 1rem;
+  }
+
+  /* FRAMEWORK BODY */
+  .framework-body {
+    max-width: 900px; margin: 0 auto;
+    padding: 5rem 6rem;
+  }
+
+  /* CONCEPT */
+  .concept-section { margin-bottom: 4rem; }
+  .section-label {
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--clay);
+    margin-bottom: 1.2rem; display: block;
+  }
+  .concept-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300;
+    margin-bottom: 1.5rem; line-height: 1.2;
+  }
+  .concept-section p {
+    font-size: 1.05rem; line-height: 1.95;
+    opacity: 0.85; margin-bottom: 1.2rem;
+  }
+
+  /* FRAMEWORK CARDS GRID */
+  .framework-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--mist);
+    margin: 4rem 0;
+  }
+  .framework-card {
+    background: var(--warm-white);
+    padding: 2.5rem;
+  }
+  .framework-card.full-width {
+    grid-column: span 2;
+    background: var(--cream);
+  }
+  .framework-card.dark {
+    background: var(--bark);
+    color: var(--cream);
+  }
+  .card-label {
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--clay);
+    margin-bottom: 1rem; display: block;
+  }
+  .framework-card.dark .card-label { color: var(--sand); }
+  .framework-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400;
+    margin-bottom: 1rem; line-height: 1.3;
+  }
+  .framework-card p {
+    font-size: 0.9rem; line-height: 1.8; opacity: 0.75;
+  }
+  .framework-card.dark p { opacity: 0.7; }
+  .framework-card ul {
+    list-style: none; margin-top: 0.5rem;
+  }
+  .framework-card ul li {
+    font-size: 0.9rem; padding: 0.4rem 0;
+    padding-left: 1.2rem; position: relative;
+    opacity: 0.75; line-height: 1.6;
+  }
+  .framework-card ul li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--clay);
+  }
+  .framework-card.dark ul li::before { color: var(--sand); }
+
+  /* SCRIPT HIGHLIGHT */
+  .script-box {
+    background: var(--clay);
+    padding: 2.5rem 3rem;
+    margin: 4rem 0;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .script-box::before {
+    content: '" "';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12rem; font-weight: 300;
+    position: absolute; top: -2rem; left: 1rem;
+    color: rgba(255,255,255,0.08);
+    line-height: 1; pointer-events: none;
+  }
+  .script-box .script-label {
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(247,243,238,0.6);
+    margin-bottom: 1rem; display: block;
+  }
+  .script-box .script-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300; font-style: italic;
+    color: var(--cream); line-height: 1.3;
+    position: relative;
+  }
+
+  /* IN PRACTICE */
+  .practice-section { margin: 4rem 0; }
+  .practice-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300;
+    margin-bottom: 2rem;
+  }
+  .practice-example {
+    border-left: 3px solid var(--mist);
+    padding: 1.2rem 2rem;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .practice-example:hover { border-left-color: var(--clay); }
+  .practice-example .example-label {
+    font-size: 0.68rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--clay);
+    margin-bottom: 0.5rem; display: block;
+  }
+  .practice-example p {
+    font-size: 0.95rem; line-height: 1.8; opacity: 0.8;
+  }
+
+  /* REFLECTION */
+  .reflection-box {
+    background: var(--cream);
+    border: 1px solid var(--mist);
+    padding: 2.5rem 3rem;
+    margin: 4rem 0;
+  }
+  .reflection-box .reflection-label {
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--clay);
+    margin-bottom: 1.2rem; display: block;
+  }
+  .reflection-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300;
+    margin-bottom: 1rem; line-height: 1.3;
+  }
+  .reflection-box p {
+    font-size: 0.9rem; line-height: 1.8; opacity: 0.7;
+  }
+
+  /* CONNECTIONS */
+  .connections-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--mist); margin: 4rem 0;
+  }
+  .connection-card {
+    background: var(--warm-white); padding: 2rem 1.8rem;
+  }
+  .connection-type {
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--clay);
+    margin-bottom: 0.8rem; display: block;
+  }
+  .connection-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem;
+  }
+  .connection-card p {
+    font-size: 0.82rem; opacity: 0.65; line-height: 1.7;
+  }
+
+  /* TANISM CTA */
+  .tanism-cta {
+    background: var(--bark); padding: 3rem;
+    margin: 4rem 0; display: flex;
+    align-items: center; justify-content: space-between;
+    gap: 2rem;
+  }
+  .tanism-cta-text .cta-label {
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sand);
+    margin-bottom: 0.8rem; display: block;
+  }
+  .tanism-cta-text p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-style: italic;
+    color: var(--cream); line-height: 1.5;
+  }
+  .tanism-cta-links { display: flex; flex-direction: column; gap: 0.8rem; flex-shrink: 0; }
+  .btn-tanism {
+    display: inline-block; text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 0.8rem 1.8rem;
+    white-space: nowrap; transition: all 0.2s;
+  }
+  .btn-tanism.primary { background: var(--clay); color: var(--cream); }
+  .btn-tanism.primary:hover { background: var(--moss); }
+  .btn-tanism.secondary { border: 1px solid rgba(212,184,150,0.4); color: var(--sand); }
+  .btn-tanism.secondary:hover { border-color: var(--sand); color: var(--cream); }
+
+  /* FOOTER */
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .framework-hero { padding: 8rem 1.5rem 4rem; }
+    .framework-body { padding: 3rem 1.5rem; }
+    .framework-grid { grid-template-columns: 1fr; }
+    .framework-card.full-width { grid-column: span 1; }
+    .connections-grid { grid-template-columns: 1fr; }
+    .tanism-cta { flex-direction: column; }
+    .tanism-cta-links { flex-direction: row; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="framework-hero">
+  <div class="framework-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>/</span>
+      <a href="musings.html#tanisms">Tan's Take on Timeless Truths</a>
+    </div>
+    <span class="framework-tag">Tanism · Framework</span>
+    <h1>The Billion<br><em>Things Rule</em></h1>
+    <p class="tagline">This moment is the result of a billion things. It's not personal.</p>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="framework-body">
+
+  <!-- CONCEPT -->
+  <div class="concept-section">
+    <span class="section-label">The Concept</span>
+    <h2>Reality is massively multi-variable.<br>The mind pretends it isn't.</h2>
+    <p>At any given moment, reality is the result of a billion interacting variables — most of which you unconsciously ignore, and only one of which is under your control: you.</p>
+    <p>But we take that one thing and make it everything. The mind simplifies reality into linear cause and effect because it needs something to control. It scans for the closest variable and crowns it the cause. But reality is not linear — it is massively multi-variable. Once you recognize that, the idea that any single event is "wrong" or "shouldn't be happening" becomes much harder to defend.</p>
+  </div>
+
+  <!-- FRAMEWORK CARDS -->
+  <div class="framework-grid">
+
+    <div class="framework-card">
+      <span class="card-label">When It Arises</span>
+      <h3>Triggers</h3>
+      <ul>
+        <li>Remorse over a decision</li>
+        <li>Frustration with an outcome</li>
+        <li>Feelings of injustice</li>
+        <li>The need to assign blame</li>
+        <li>The loop of "this shouldn't be happening"</li>
+      </ul>
+    </div>
+
+    <div class="framework-card">
+      <span class="card-label">The Move</span>
+      <h3>The Shift</span></h3>
+      <p>Zoom out. Radically. Instead of asking "why did this happen to me?" ask "what were the billion things that converged to produce this moment?" The mind will resist — it wants a culprit. Let it look. It will find many contributors, including you. That's the point.</p>
+    </div>
+
+    <div class="framework-card full-width dark">
+      <span class="card-label">Energy Reallocation</span>
+      <h3>From resistance to response</h3>
+      <p>The Billion Things Rule doesn't ask you to be passive. It asks you to stop spending energy on resistance, blame, and mental narration — and redirect it toward response, adaptation, and presence. Resistance argues with what already is. Response works with what is.</p>
+    </div>
+
+  </div>
+
+  <!-- SCRIPT -->
+  <div class="script-box">
+    <span class="script-label">When you feel the contraction — say this</span>
+    <div class="script-text">I am just one thing.</div>
+  </div>
+
+  <!-- IN PRACTICE -->
+  <div class="practice-section">
+    <span class="section-label">In Practice</span>
+    <h2>What it looks like in real life</h2>
+
+    <div class="practice-example">
+      <span class="example-label">The Decision You're Second-Guessing</span>
+      <p>You went left when maybe you should have gone right. But "should have gone right" assumes you had access to information you didn't have, in a moment shaped by factors you couldn't control. A billion things produced that decision. You were one of them — doing exactly what you could with what you had.</p>
+    </div>
+
+    <div class="practice-example">
+      <span class="example-label">The Person Who Let You Down</span>
+      <p>Their behavior toward you is the result of their history, their wiring, their day, their fears — a billion things that have nothing to do with you. You were the surface the wave broke on. You weren't the ocean.</p>
+    </div>
+
+    <div class="practice-example">
+      <span class="example-label">Read the Full Story</span>
+      <p>The Billion Things Rule was born from a moment at a rental car counter in California — a missed shuttle, a tightening chest, and the slow recognition that the attendant was just one variable among many. <a href="billion-things-rule.html" style="color:var(--clay);border-bottom:1px solid var(--sand);text-decoration:none;">Read the full story →</a></p>
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="reflection-box">
+    <span class="reflection-label">Sit With This</span>
+    <h3>What were the billion things that converged to produce this moment?</h3>
+    <p>The next time you feel the urge to assign blame — to a person, a decision, or yourself — pause and ask this question. List as many contributing factors as you can find. Notice how quickly the "cause" dissolves into a web of causes. Notice what happens to the contraction when it does.</p>
+  </div>
+
+  <!-- CONNECTIONS -->
+  <span class="section-label">Connections</span>
+  <div class="connections-grid">
+    <div class="connection-card">
+      <span class="connection-type">Historical Parallel</span>
+      <h4>The Butterfly Effect</h4>
+      <p>Edward Lorenz's discovery that small changes in initial conditions produce vastly different outcomes — a butterfly flapping its wings in Brazil affecting a tornado in Texas. Reality has always been massively multi-variable. We just forgot.</p>
+    </div>
+    <div class="connection-card">
+      <span class="connection-type">Pop Culture</span>
+      <h4>Sliding Doors</h4>
+      <p>The 1998 film that follows two parallel realities diverging from a single moment — catching or missing a train. A beautiful illustration of how a billion subsequent things flow from what appears to be one small variable.</p>
+    </div>
+    <div class="connection-card">
+      <span class="connection-type">Positive Psychology</span>
+      <h4>Explanatory Style</h4>
+      <p>Martin Seligman's research on how we explain bad events to ourselves. Personalizing negative events — "this is my fault, always, and affects everything" — is the cognitive pattern the Billion Things Rule directly interrupts.</p>
+    </div>
+  </div>
+
+  <!-- TANISM CTA -->
+  <div class="tanism-cta">
+    <div class="tanism-cta-text">
+      <span class="cta-label">Tan's Take on Timeless Truths</span>
+      <p>This is part of the Tanisms collection — ideas worth sitting with. Each one is a different handle on the same door.</p>
+    </div>
+    <div class="tanism-cta-links">
+      <a href="musings.html#tanisms" class="btn-tanism primary">Explore all Tanisms →</a>
+      <a href="billion-things-rule.html" class="btn-tanism secondary">Read the story →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span>™</div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="#" id="emailLinkBTRF" style="color:var(--sand);text-decoration:none;font-size:0.85rem;display:block;margin-bottom:0.5rem;">tan@awexpedition.com</a>
+    <a href="tel:9295001559">929-500-1559</a>
+    <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
+  </div>
+</footer>
+
+<script>
+  const el = document.getElementById('emailLinkBTRF');
+  if(el) { const u='tan'; const d='awexpedition.com'; el.href='mailto:'+u+'@'+d; }
+</script>
+
+</body>
+</html>

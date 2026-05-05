@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigger Happy — Framework — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(253,250,246,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); padding: 1.5rem 2rem; flex-direction: column; gap: 0; z-index: 99; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { display: block; text-decoration: none; color: var(--bark); font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--mist); opacity: 0.75; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu .mob-cta { background: var(--moss); color: var(--cream) !important; padding: 0.9rem 1.5rem !important; border-radius: 2px; opacity: 1 !important; margin-top: 0.5rem; text-align: center; border: none !important; }
+
+  .framework-hero { padding: 9rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .framework-hero::before { content: 'TH'; font-family: 'Cormorant Garamond', serif; font-size: 22vw; font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.03); pointer-events: none; white-space: nowrap; }
+  .framework-hero-inner { position: relative; max-width: 800px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb span { color: var(--sand); opacity: 0.4; font-size: 0.75rem; }
+  .framework-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .framework-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.5rem; }
+  .framework-hero h1 em { font-style: italic; color: var(--sand); }
+  .tagline { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: rgba(247,243,238,0.75); line-height: 1.6; max-width: 600px; border-left: 3px solid var(--clay); padding-left: 1.5rem; margin-top: 1rem; }
+
+  .framework-body { max-width: 900px; margin: 0 auto; padding: 5rem 6rem; }
+
+  .concept-section { margin-bottom: 4rem; }
+  .section-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1.2rem; display: block; }
+  .concept-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 1.5rem; line-height: 1.2; }
+  .concept-section p { font-size: 1.05rem; line-height: 1.95; opacity: 0.85; margin-bottom: 1.2rem; }
+
+  .framework-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--mist); margin: 4rem 0; }
+  .framework-card { background: var(--warm-white); padding: 2.5rem; }
+  .framework-card.full-width { grid-column: span 2; background: var(--cream); }
+  .framework-card.dark { background: var(--bark); color: var(--cream); }
+  .card-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+  .framework-card.dark .card-label { color: var(--sand); }
+  .framework-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.3; }
+  .framework-card p { font-size: 0.9rem; line-height: 1.8; opacity: 0.75; }
+  .framework-card.dark p { opacity: 0.7; }
+  .framework-card ul { list-style: none; margin-top: 0.5rem; }
+  .framework-card ul li { font-size: 0.9rem; padding: 0.4rem 0; padding-left: 1.2rem; position: relative; opacity: 0.75; line-height: 1.6; }
+  .framework-card ul li::before { content: '—'; position: absolute; left: 0; color: var(--clay); }
+  .framework-card.dark ul li::before { color: var(--sand); }
+
+  .script-box { background: var(--clay); padding: 2.5rem 3rem; margin: 4rem 0; text-align: center; position: relative; overflow: hidden; }
+  .script-box::before { content: '" "'; font-family: 'Cormorant Garamond', serif; font-size: 12rem; font-weight: 300; position: absolute; top: -2rem; left: 1rem; color: rgba(255,255,255,0.08); line-height: 1; pointer-events: none; }
+  .script-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(247,243,238,0.6); margin-bottom: 0.5rem; display: block; }
+  .script-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.4; position: relative; margin-bottom: 1.5rem; }
+  .script-note { font-size: 0.78rem; color: rgba(247,243,238,0.5); letter-spacing: 0.08em; position: relative; }
+
+  .practice-section { margin: 4rem 0; }
+  .practice-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 2rem; }
+  .practice-example { border-left: 3px solid var(--mist); padding: 1.2rem 2rem; margin-bottom: 1.5rem; transition: border-color 0.2s; }
+  .practice-example:hover { border-left-color: var(--clay); }
+  .practice-example .example-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; display: block; }
+  .practice-example p { font-size: 0.95rem; line-height: 1.8; opacity: 0.8; }
+
+  .reflection-box { background: var(--cream); border: 1px solid var(--mist); padding: 2.5rem 3rem; margin: 4rem 0; }
+  .reflection-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.3; }
+  .reflection-box p { font-size: 0.9rem; line-height: 1.8; opacity: 0.7; }
+
+  .connections-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mist); margin: 4rem 0; }
+  .connection-card { background: var(--warm-white); padding: 2rem 1.8rem; }
+  .connection-type { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; display: block; }
+  .connection-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .connection-card p { font-size: 0.82rem; opacity: 0.65; line-height: 1.7; }
+
+  .tanism-cta { background: var(--bark); padding: 3rem; margin: 4rem 0; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .tanism-cta-text .cta-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 0.8rem; display: block; }
+  .tanism-cta-text p { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--cream); line-height: 1.5; }
+  .tanism-cta-links { display: flex; flex-direction: column; gap: 0.8rem; flex-shrink: 0; }
+  .btn-tanism { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.8rem 1.8rem; white-space: nowrap; transition: all 0.2s; }
+  .btn-tanism.primary { background: var(--clay); color: var(--cream); }
+  .btn-tanism.primary:hover { background: var(--moss); }
+  .btn-tanism.secondary { border: 1px solid rgba(212,184,150,0.4); color: var(--sand); }
+  .btn-tanism.secondary:hover { border-color: var(--sand); color: var(--cream); }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .framework-hero { padding: 8rem 1.5rem 4rem; }
+    .framework-body { padding: 3rem 1.5rem; }
+    .framework-grid { grid-template-columns: 1fr; }
+    .framework-card.full-width { grid-column: span 1; }
+    .connections-grid { grid-template-columns: 1fr; }
+    .tanism-cta { flex-direction: column; }
+    .tanism-cta-links { flex-direction: row; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#pillars">The AWE Method</a>
+  <a href="index.html#about">About Tan</a>
+  <a href="index.html#services">Services</a>
+  <a href="musings.html">Musings & More</a>
+  <a href="https://calendly.com/awexpedition/30min" class="mob-cta">Book a Free Call</a>
+</div>
+
+<section class="framework-hero">
+  <div class="framework-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>/</span>
+      <a href="musings.html#tanisms">Tan's Take on Timeless Truths</a>
+    </div>
+    <span class="framework-tag">Tanism™ · Framework</span>
+    <h1>Trigger<br><em>Happy</em></h1>
+    <p class="tagline">Triggers are not the problem. They are the practice.</p>
+  </div>
+</section>
+
+<div class="framework-body">
+
+  <div class="concept-section">
+    <span class="section-label">The Concept</span>
+    <h2>What if being triggered<br>was a gift?</h2>
+    <p>A trigger is not an obstacle on the path to inner peace. It is the path. Every time something external activates a reaction inside of us — the tightening, the narrative, the need to assign blame — we are being shown exactly where the work is.</p>
+    <p>The only way to get good at something is to practice. The only way to get good at handling triggers is to be triggered. Not to avoid them, manage them, or eliminate the people and situations that cause them. To meet them, again and again, until the reaction loses its grip.</p>
+    <p>Being Trigger Happy means welcoming the trigger — not because it feels good, but because it is the only teacher that shows up when you actually need the lesson.</p>
+  </div>
+
+  <div class="framework-grid">
+    <div class="framework-card">
+      <span class="card-label">When It Arises</span>
+      <h3>Triggers</h3>
+      <ul>
+        <li>Someone says something that lands wrong</li>
+        <li>Plans change without your input</li>
+        <li>You feel dismissed, overlooked, or disrespected</li>
+        <li>A familiar situation produces an outsized reaction</li>
+        <li>You find yourself replaying an event long after it ended</li>
+      </ul>
+    </div>
+    <div class="framework-card">
+      <span class="card-label">The Reframe</span>
+      <h3>The trigger as teacher</h3>
+      <p>The trigger did not create what you are feeling. It revealed what was already there. Something was stored — an old hurt, a habituated pattern, a place where the heart closed to protect itself. The trigger found it. That is not a problem. That is information.</p>
+    </div>
+    <div class="framework-card full-width dark">
+      <span class="card-label">The Shift</span>
+      <h3>From reaction to curiosity</h3>
+      <p>Instead of asking "why did they do that?" ask "what is this showing me?" Instead of spending energy on the trigger, spend it on the contraction. What is happening in the body? Where did this come from? What has been stored here that wants to move? The trigger is not the story. The trigger is the doorway.</p>
+    </div>
+  </div>
+
+  <div class="script-box">
+    <span class="script-label">In the moment of contraction — ask this</span>
+    <div class="script-text">What is this trigger showing me?</div>
+    <div class="script-note">Not: why did they do that. Not: how do I make this stop. What is this showing me.</div>
+  </div>
+
+  <div class="practice-section">
+    <span class="section-label">In Practice</span>
+    <h2>What it looks like in real life</h2>
+    <div class="practice-example">
+      <span class="example-label">The Deliberate Practice — Jia Jiang</span>
+      <p>In 2012, entrepreneur Jia Jiang spent 100 consecutive days deliberately seeking rejection — asking strangers for outrageous things he was certain they would refuse. By day thirty, the fear had softened. By day one hundred, it was essentially gone. Not because rejection had stopped happening. Because he had practiced receiving it until it lost its power. He discovered that discomfort has a ceiling — but only if you keep meeting it.</p>
+    </div>
+    <div class="practice-example">
+      <span class="example-label">The Accidental Practice — The Rejection Letters</span>
+      <p>Coming out of law school, the rejection letters arrived regularly. Form letters — not even personal enough to explain why. The first few stung. Around the tenth, something had shifted. By the time a couple of acceptances arrived alongside another dozen rejections, the rejections had become almost unremarkable. The nervous system had simply run out of new things to say about them. The practice had happened without being designed.</p>
+    </div>
+    <div class="practice-example">
+      <span class="example-label">The Everyday Trigger</span>
+      <p>Someone interrupts you in a meeting. A friend cancels plans at the last minute. A comment lands in a way that stings. The habituated self immediately begins building a case. The observing self pauses and asks: what is this showing me? Where is this coming from? What has been stored here that is being surfaced right now? The trigger is real. The suffering around it is optional.</p>
+    </div>
+  </div>
+
+  <div class="reflection-box">
+    <span class="section-label">Sit With This</span>
+    <h3>What trigger keeps finding you?</h3>
+    <p>The triggers that return most reliably are the ones with the most to teach. Think of the situation, person, or type of event that consistently activates a reaction in you. Instead of asking how to avoid it — ask what it has been trying to show you. Then consider: what would it look like to practice meeting this trigger with curiosity instead of contraction?</p>
+  </div>
+
+  <span class="section-label">Connections</span>
+  <div class="connections-grid">
+    <div class="connection-card">
+      <span class="connection-type">Pop Culture</span>
+      <h4>Inside Out</h4>
+      <p>Pixar's masterwork on emotional intelligence depicts each emotion — including anger and fear — as a character doing a specific job. The insight: uncomfortable emotions exist for a reason. They are not malfunctions. They are information. Being Trigger Happy is the practice of learning to hear what they are saying.</p>
+    </div>
+    <div class="connection-card">
+      <span class="connection-type">Real World</span>
+      <h4>Jia Jiang — 100 Days of Rejection</h4>
+      <p>Jiang's deliberate rejection practice — documented in his book <em>Rejection Proof</em> — is one of the most elegant real-world demonstrations of the Trigger Happy principle. Discomfort practiced becomes discomfort dissolved. His most famous moment: asking a Krispy Kreme employee to make Olympic ring donuts. She said yes.</p>
+    </div>
+    <div class="connection-card">
+      <span class="connection-type">Positive Psychology</span>
+      <h4>Post-Traumatic Growth</h4>
+      <p>Research by Tedeschi and Calhoun on post-traumatic growth found that struggle and adversity — when met with reflection rather than avoidance — are among the strongest predictors of psychological growth. The trigger, met with awareness, becomes the catalyst. This is not resilience. It is transformation.</p>
+    </div>
+  </div>
+
+  <div class="tanism-cta">
+    <div class="tanism-cta-text">
+      <span class="cta-label">Tan's Take on Timeless Truths</span>
+      <p>This is part of the Tanisms™ collection — ideas worth sitting with. Each one is a different handle on the same door.</p>
+    </div>
+    <div class="tanism-cta-links">
+      <a href="musings.html#tanisms" class="btn-tanism primary">Explore all Tanisms™ →</a>
+      <a href="trigger-happy.html" class="btn-tanism secondary">Read the story →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span>™</div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:tan@awexpedition.com" style="display:block;color:var(--sand);text-decoration:none;font-size:0.85rem;margin-bottom:0.5rem;">tan@awexpedition.com</a>
+    <a href="tel:9295001559">929-500-1559</a>
+    <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>

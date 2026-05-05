@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meditation — A Journey from No Way to Okay! — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017; --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(253,250,246,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); padding: 1.5rem 2rem; flex-direction: column; gap: 0; z-index: 99; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { display: block; text-decoration: none; color: var(--bark); font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--mist); opacity: 0.75; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu .mob-cta { background: var(--moss); color: var(--cream) !important; padding: 0.9rem 1.5rem !important; border-radius: 2px; opacity: 1 !important; margin-top: 0.5rem; text-align: center; border: none !important; }
+  .article-hero { padding: 9rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .article-hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,92,62,0.2) 0%, transparent 60%); }
+  .article-hero-inner { position: relative; max-width: 760px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb span { color: var(--sand); opacity: 0.4; font-size: 0.75rem; }
+  .article-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .article-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.2rem; }
+  .article-hero h1 em { font-style: italic; color: var(--sand); }
+  .article-subtitle { font-size: 1.05rem; color: rgba(247,243,238,0.65); max-width: 560px; line-height: 1.8; }
+  .article-body { display: grid; grid-template-columns: 1fr 300px; gap: 5rem; max-width: 1100px; margin: 0 auto; padding: 5rem 6rem; }
+  .article-content p { font-size: 1rem; line-height: 2; opacity: 0.85; margin-bottom: 1.8rem; }
+  .article-content p:first-child::first-letter { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; float: left; line-height: 0.85; margin: 0.1rem 0.15rem 0 0; color: var(--clay); }
+  .pull-quote { border-left: 3px solid var(--clay); padding: 1.2rem 2rem; margin: 2.5rem 0; }
+  .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; font-weight: 300; line-height: 1.5; color: var(--bark); opacity: 1 !important; margin-bottom: 0 !important; }
+  .snap-box { background: var(--cream); border: 1px solid var(--mist); border-left: 4px solid var(--clay); padding: 2rem 2.5rem; margin: 2.5rem 0; }
+  .snap-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--clay); margin-bottom: 1rem; }
+  .snap-box p { font-size: 0.92rem; line-height: 1.8; opacity: 0.8; margin-bottom: 0.8rem; }
+  .snap-box p:last-child { margin-bottom: 0; }
+  .article-sidebar { padding-top: 0.5rem; }
+  .sidebar-section { margin-bottom: 2.5rem; }
+  .sidebar-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.8rem; border-bottom: 1px solid var(--mist); padding-bottom: 0.5rem; }
+  .sidebar-section p { font-size: 0.85rem; line-height: 1.8; opacity: 0.65; }
+  .sidebar-divider { border: none; border-top: 1px solid var(--mist); margin: 2rem 0; }
+  .cta-box { background: var(--bark); padding: 1.8rem; margin-top: 2rem; }
+  .cta-box p { font-size: 0.85rem; line-height: 1.7; color: rgba(247,243,238,0.7); margin-bottom: 1rem !important; opacity: 1 !important; }
+  .cta-box a { display: inline-block; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sand); border-bottom: 1px solid rgba(212,184,150,0.4); padding-bottom: 2px; }
+  .next-piece { background: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; border-top: 1px solid var(--mist); }
+  .next-piece-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.5rem; }
+  .next-piece h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; }
+  .next-piece p { font-size: 0.88rem; opacity: 0.65; line-height: 1.7; max-width: 500px; }
+  .btn-read { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; margin-top: 1rem; }
+  .next-piece-back { text-align: right; }
+  .next-piece-back a { text-decoration: none; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bark); opacity: 0.45; }
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .footer-contact a:hover { color: var(--cream); }
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .hamburger { display: flex; }
+    .article-hero { padding: 8rem 1.5rem 4rem; }
+    .article-body { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; }
+    .article-sidebar { display: none; }
+    .next-piece { grid-template-columns: 1fr; padding: 3rem 1.5rem; } .next-piece-back { text-align: left; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; } .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#pillars">The AWE Method</a>
+  <a href="index.html#about">About Tan</a>
+  <a href="index.html#services">Services</a>
+  <a href="musings.html">Musings & More</a>
+  <a href="https://calendly.com/awexpedition/30min" class="mob-cta">Book a Free Call</a>
+</div>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>›</span>
+      <a href="musings.html#perspectives">Perspectives</a>
+    </div>
+    <span class="article-tag">Perspectives · CT Lawyer · Sep/Oct 2022</span>
+    <h1>Meditation — A Journey from<br><em>No Way to Okay! (To Yes!)</em></h1>
+    <p class="article-subtitle">From meditation skeptic to daily practitioner — including the breathing tricks, the apps, and the twitching eye that proved it was working.</p>
+  </div>
+</section>
+
+<div class="article-body">
+  <div class="article-content">
+    <p>Meditation was one of those elusive skills that I never believed I could master. I heard about the great benefits of meditation: how it relieved stress, controlled anxiety, sharpened attention, increased productivity, improved sleep, managed pain, staved off illness, enhanced self-awareness, reduced memory loss, decreased inflammation, and on and on. Meditation had even been shown to decrease blood pressure and cholesterol. It sounded great, but meditation always seemed pointless to me. I would sit and try to "empty my mind," but my mind was overflowing with a million thoughts — the document I needed to review, taxes to file, annual physical appointment I needed to make, dinner, and on and on. I would feel frustrated with meditation and myself. Meditation wasn't making me feel better; in fact, trying to meditate was making me feel worse! I silently cursed meditation and shoved it far out of sight.</p>
+
+    <p>Over time, the sting of being an abject failure at meditation wore off and my interest in well-being led me back to meditation. Older and wiser, I approached meditation with greater curiosity, less self-judgment, and zero expectations. I downloaded the Headspace app (free for 30 days and only requires three minutes). I thought to myself, how hard could three minutes of meditating be? Answer: Um, hard. A minute might as well have been a hundred.</p>
+
+    <p>But I vowed to stick to it — "just three little minutes," I told myself. Even if it didn't work, it was such a small amount of effort. I liked "Andy's" (my guide on Headspace) voice. I made a "game" of meditation. I started by paying attention to my breath. I noticed when I inhaled, I was sucking in my belly (contracting) and when I exhaled, I was pushing it out (expanding). This is known as paradoxical breathing. To do diaphragmatic breathing (expanding chest and belly on the inhale and contracting on the exhale), I needed to pay attention. I would count to 20, but if I caught myself paradoxically breathing or if my mind wandered and I lost count, I would start at one again. After I finished a set of 20, I would count only my in-breaths for a count of 20 and then only my out-breaths for a count of 20. The three minutes flew by and there were days I never even completed my count of 60.</p>
+
+    <p>Over time, my body got trained to breathe diaphragmatically and I built a foundation of mindfulness through focused breath work. Next, Andy asked me to become more aware of my body. No longer needing to focus on breathing diaphragmatically, I could shift my focus. Andy asked me to notice how my body felt and "scan" down my body, starting at the top of my head. Unsure what that meant, I decided I would ask each part of my body "how it was feeling." — "Forehead, how are you today?" Forehead would reply, "Good." "Eyes, how are you today?" Eyes responded, "All good here." Down my body I would go. Every day, I would visit my body in this manner and each day, my body would respond the same. Until one day, when I asked my eyes how they were, my left eye was twitching.</p>
+
+    <p>I discovered that my mind had become "trained" over the last few weeks. It didn't allow me to sit and ponder this new revelation. Instead of focusing on the twitching eye, I moved on down my body as I had done each day. At the end of the body scan, I felt great — and my left eye had stopped twitching.</p>
+
+    <p>I hadn't noticed a difference over the weeks of practice, but this encounter opened my eyes to how meditation was affecting me. I saw that when I train my mind to do something, it became habituated. When I started my body scan, my mind naturally moved through the steps, even when new revelations or a twitching eye popped up. Even though I hadn't thought meditation was doing anything, it was. I unknowingly trained my mind to focus. Little by little, day by day. I was fortunate that evidence of meditation's impact found me, for I might have been tempted to stop.</p>
+
+    <p>Today I do a daily practice of 20 minutes (usually guided, sometimes with just music or a simple body scan). The practice continues to surprise me, and I have had several instances where I tangibly saw the power of meditation in my everyday life.</p>
+
+    <div class="pull-quote">
+      <p>Meditation is not about clearing the mind — it is about focusing the mind on what we choose to focus on.</p>
+    </div>
+
+    <p>So how did I get here? Here are my tips:</p>
+
+    <div class="snap-box">
+      <h3>1. Understand</h3>
+      <p>Meditation is not about clearing the mind, it is about focusing the mind on what we choose to focus on. It allows us to train our wandering mind and bring our attention back to where we want it. Like a gardener tending to its flowers (meditation), when butterflies (our thoughts) come fluttering by, we allow ourselves to notice butterflies but then bring ourselves back to our flowers (our breath, joy, compassion, whatever it is we choose to think about). We learn not to chase the butterflies nor be annoyed by them. Butterflies will come and go; we cannot control them, but we can choose to focus on our flowers.</p>
+    </div>
+
+    <div class="snap-box">
+      <h3>2. Experiment</h3>
+      <p>There are many different types of meditation (guided, transcendental, visualization, yoga meditation, sound healing meditation, and more) and many different apps (Headspace, Insight Timer, Calm, Waking Up, and more) — take your time and find the one that works for you. Give yourself a little time with each to see if it resonates with you. Remember it is something new and may take a little bit to get used to. I recommend sticking with a particular method for at least three weeks.</p>
+      <p>One word of caution: meditation is powerful and by quieting our mind, thoughts that we buried may rise to the surface. If these thoughts are causing anxiety or causing you to re-experience trauma, you may want to contact a therapist and stop meditation until you have worked through those traumas.</p>
+    </div>
+
+    <div class="snap-box">
+      <h3>3. SNAP — Start Strong, No Excuses, Always Act, Practice</h3>
+      <p><strong>Start Strong</strong> (or Start Simple): Starting off telling yourself you need to do 20 minutes a day is a sure-fire way to find excuses not to meditate. Start simply with three minutes or even one minute. Build on it week after week. One minute will turn into 20 minutes in 20 weeks!</p>
+      <p><strong>No Excuses</strong> — who doesn't have a minute or three? You will find that meditation will give you your time back in spades.</p>
+      <p><strong>Always Act</strong> — Even if you have gotten up to 20 minutes and you feel that today you don't have the time, go back to your three minutes (or one minute), keep training that muscle, and keep on track! Once we stop it is easy to lose the thread and have our new habit fall by the wayside.</p>
+      <p><strong>Practice</strong> — Meditation is a skill, just like all other skills, you need to practice it. Like learning an instrument, riding a bike, or driving a car, we need to practice, practice, practice until it becomes part of who we are.</p>
+    </div>
+
+    <p>I didn't believe meditation was "right" for me or that I would ever "get" it, but I now know, I simply needed to shift my perspective. Instead of trying to "achieve" (which is totally the opposite of meditation), I let myself experience the steps of meditation in the moment. I stopped expecting and started being. Most importantly, I came up with a SNAP plan. So start. Today. Take the first step on the journey and you will find yourself on a beautiful path.</p>
+
+    <p style="font-size:0.82rem;opacity:0.5;margin-top:2rem;font-style:italic;">Originally published in CT Lawyer Magazine, Sep/Oct 2022. Tanyee Cheung was at the time a debt finance partner at Finn Dixon &amp; Herling LLP and co-chair of the Connecticut Bar Association's Wellbeing Committee.</p>
+  </div>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">About This Series</span>
+      <p>Perspectives collects Tan's articles published in CT Lawyer magazine — wellbeing through the lens of the legal profession, written from inside a demanding career.</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Key Takeaway</span>
+      <p>Meditation isn't about emptying your mind. It's about training your attention. Start with three minutes. Use the SNAP framework. Let it surprise you.</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Related</span>
+      <p><a href="perspectives-irac-mindset.html" style="color:var(--clay);text-decoration:none;border-bottom:1px solid var(--sand);">Developing an IRAC Mindset →</a></p>
+      <p style="margin-top:0.8rem"><a href="perspectives-time-mastery.html" style="color:var(--clay);text-decoration:none;border-bottom:1px solid var(--sand);">Time Mastery &amp; Productivity →</a></p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="cta-box">
+      <p>Interested in building a meditation practice as part of your coaching journey?</p>
+      <a href="https://calendly.com/awexpedition/30min">Book a free conversation →</a>
+    </div>
+  </aside>
+</div>
+
+<div class="next-piece">
+  <div>
+    <span class="next-piece-label">Next in Perspectives</span>
+    <h3>Developing an IRAC Mindset</h3>
+    <p>The legal mind is trained to spot problems — which is great for clients, but hard on wellbeing. A reframe using the lawyer's own tool.</p>
+    <a href="perspectives-irac-mindset.html" class="btn-read">Read the article →</a>
+  </div>
+  <div class="next-piece-back">
+    <a href="musings.html#perspectives">← All Perspectives</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">AW<span>Expedition</span>™</div>
+    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
+    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:tan@awexpedition.com">tan@awexpedition.com</a>
+    <a href="tel:9295001559">929-500-1559</a>
+    <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+</script>
+</body>
+</html>
