@@ -661,23 +661,12 @@
   </form>
 </section>
 
-<footer>
-  <div>
-    <div class="footer-logo">AW<span>Expedition</span>™</div>
-    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
-    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
-  </div>
-  <div class="footer-contact">
-    <a href="mailto:tan@awexpedition.com">tan@awexpedition.com</a>
-    <a href="tel:9295001559">929-500-1559</a>
-    <a href="https://calendly.com/awexpedition/30min">Book a Free Call →</a>
-    <div style="margin-top:1rem;display:flex;gap:1.5rem;justify-content:flex-end;">
-      <a href="privacy.html" style="font-size:0.78rem;color:var(--sand);opacity:0.8;">Privacy Policy</a>
-      <a href="terms.html" style="font-size:0.78rem;color:var(--sand);opacity:0.8;">Terms of Use</a>
-        <a href="disclaimer.html" style="font-size:0.78rem;color:var(--sand);opacity:0.8;">Disclaimer</a>
-    </div>
-  </div>
-</footer>
+<div id="site-footer"></div>
+<script>
+  fetch('/footer.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('site-footer').innerHTML = html);
+</script>
 
 <script>
   const hamburger = document.getElementById('hamburger');
