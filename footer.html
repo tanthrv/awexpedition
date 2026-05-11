@@ -2,8 +2,8 @@
   #site-footer footer {
     background: var(--bark); color: var(--cream);
     padding: 3rem 6rem;
-    display: grid; grid-template-columns: 1fr auto;
-    align-items: start; gap: 2rem;
+    display: grid; grid-template-columns: 1fr auto auto;
+    align-items: start; gap: 3rem;
   }
   #site-footer .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
   #site-footer .footer-logo span { color: var(--sand); }
@@ -15,22 +15,13 @@
   #site-footer .footer-legal { margin-top: 1rem; display: flex; gap: 1.5rem; justify-content: flex-end; }
   #site-footer .footer-legal a { font-size: 0.78rem; color: var(--sand); opacity: 0.8; text-decoration: none; }
   #site-footer .footer-legal a:hover { opacity: 1; }
-  #site-footer .footer-bottom {
-    grid-column: 1 / -1;
-    border-top: 1px solid rgba(212,184,150,0.15);
-    padding-top: 1.5rem;
-    display: flex; align-items: center; justify-content: center;
-  }
-  #site-footer .suggestion-inner {
-    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-  }
+  #site-footer .suggestion-box { border-left: 1px solid rgba(212,184,150,0.2); padding-left: 2rem; }
   #site-footer .suggestion-label {
-    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--sand); opacity: 0.8; white-space: nowrap;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--sand); opacity: 0.8; display: block; margin-bottom: 0.8rem;
   }
-  #site-footer .suggestion-row { display: flex; gap: 0.6rem; align-items: stretch; }
   #site-footer .suggestion-input {
-    width: 260px; padding: 0.6rem 0.9rem;
+    display: block; width: 100%; padding: 0.6rem 0.9rem; margin-bottom: 0.6rem;
     border: 1px solid rgba(212,184,150,0.3);
     background: rgba(255,255,255,0.07); color: var(--cream);
     font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
@@ -38,19 +29,18 @@
   }
   #site-footer .suggestion-input::placeholder { color: rgba(212,184,150,0.4); }
   #site-footer .suggestion-btn {
-    padding: 0.6rem 1.2rem; background: var(--clay); color: var(--cream);
-    border: none; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-    border-radius: 2px; cursor: pointer; white-space: nowrap; transition: background 0.2s;
+    padding: 0.5rem 1.2rem; background: var(--clay); color: var(--cream);
+    border: none; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    border-radius: 2px; cursor: pointer; transition: background 0.2s;
   }
   #site-footer .suggestion-btn:hover { background: var(--gold, #C9943A); }
-  #site-footer .suggestion-thanks { display: none; font-size: 0.82rem; color: var(--sand); font-style: italic; }
+  #site-footer .suggestion-thanks { display: none; font-size: 0.82rem; color: var(--sand); font-style: italic; margin-top: 0.5rem; }
 
   @media (max-width: 900px) {
     #site-footer footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
     #site-footer .footer-contact { text-align: left; }
     #site-footer .footer-legal { justify-content: flex-start; }
-    #site-footer .suggestion-inner { flex-direction: column; align-items: flex-start; }
-    #site-footer .suggestion-input { width: 100%; }
+    #site-footer .suggestion-box { border-left: none; border-top: 1px solid rgba(212,184,150,0.2); padding-left: 0; padding-top: 1.5rem; }
   }
 </style>
 
@@ -71,19 +61,13 @@
       <a href="/disclaimer.html">Disclaimer</a>
     </div>
   </div>
-
-  <!-- SUGGESTION BOX — inline with footer -->
-  <div class="footer-bottom">
-    <div class="suggestion-inner">
-      <span class="suggestion-label">Broken Links? Suggestions? Drop them here.</span>
-      <form id="suggestionForm" action="https://formspree.io/f/xaqvapyd" method="POST">
-        <div class="suggestion-row">
-          <input class="suggestion-input" type="text" name="suggestion" placeholder="Type here..." required>
-          <button class="suggestion-btn" type="submit">Send</button>
-        </div>
-      </form>
-      <p class="suggestion-thanks" id="suggestionThanks">Thank you! Got it. ✓</p>
-    </div>
+  <div class="suggestion-box">
+    <span class="suggestion-label">Broken Links? Suggestions?<br>Drop them here.</span>
+    <form id="suggestionForm" action="https://formspree.io/f/xaqvapyd" method="POST">
+      <input class="suggestion-input" type="text" name="suggestion" placeholder="Type here..." required>
+      <button class="suggestion-btn" type="submit">Send</button>
+    </form>
+    <p class="suggestion-thanks" id="suggestionThanks">Thank you! Got it. ✓</p>
   </div>
 </footer>
 
