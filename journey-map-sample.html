@@ -445,12 +445,9 @@
 
 </div>
 
-<footer>
-  <div>
-    <div class="footer-logo">AW<span>Expedition</span>™</div>
-    <p>Guiding you toward Awareness, Wonder &amp; Embodiment.</p>
-    <p style="margin-top:1rem">© 2025–2026 AWExpedition™. All rights reserved.</p>
-  </div>
-  <div class="footer-contact">
-    <a href="/cdn-cgi/l/email-protection#46322728062731233e3623222f322f29286825292b"><span class="__cf_email__" data-cfemail="5125303f11302634292134353825383e3f7f323e3c">[email&#160;protected]</span></a>
-    <a href="tel:9295001
+<div id="site-footer"></div>
+<script>
+  fetch('/footer.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('site-footer').innerHTML = html);
+</script>
