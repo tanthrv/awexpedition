@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three Good Things — AWE in Action — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+
+  .page-hero { padding: 9rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .page-hero::before { content: 'GRATITUDE'; font-family: 'Cormorant Garamond', serif; font-size: 18vw; font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.03); pointer-events: none; white-space: nowrap; }
+  .page-hero-inner { position: relative; max-width: 800px; }
+  .page-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; }
+  .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.5rem; }
+  .page-hero h1 em { font-style: italic; color: var(--sand); }
+  .page-hero p { font-size: 0.95rem; color: rgba(247,243,238,0.65); max-width: 580px; line-height: 1.9; }
+
+  .article-band { background: var(--moss); padding: 1.2rem 6rem; display: flex; align-items: center; gap: 2rem; }
+  .article-band span { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(247,243,238,0.7); }
+  .article-band a { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sand); text-decoration: none; border-bottom: 1px solid rgba(212,184,150,0.3); padding-bottom: 1px; }
+  .article-band a:hover { color: var(--cream); }
+
+  .article-wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 6rem; display: grid; grid-template-columns: 1fr 320px; gap: 5rem; align-items: start; }
+
+  .article-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin: 2.5rem 0 1rem; color: var(--bark); line-height: 1.2; }
+  .article-body h2:first-child { margin-top: 0; }
+  .article-body p { font-size: 1.05rem; line-height: 1.95; opacity: 0.82; margin-bottom: 1.2rem; }
+  .article-body ul { margin: 1rem 0 1.5rem 0; list-style: none; }
+  .article-body ul li { font-size: 0.92rem; padding: 0.35rem 0 0.35rem 1.4rem; position: relative; opacity: 0.78; line-height: 1.7; }
+  .article-body ul li::before { content: '—'; position: absolute; left: 0; color: var(--clay); }
+
+  .article-body .drop-cap::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.5rem; font-weight: 300;
+    float: left; line-height: 0.8;
+    margin-right: 0.1em; margin-top: 0.12em;
+    color: var(--clay);
+  }
+
+  .intervention-label {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--bark); display: block; margin-bottom: 1rem;
+    padding-bottom: 0.6rem; border-bottom: 1px solid var(--mist);
+    font-weight: 500;
+  }
+
+  .pull-quote { border-left: 3px solid var(--clay); padding: 1.2rem 2rem; margin: 2.5rem 0; background: var(--cream); }
+  .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; line-height: 1.6; opacity: 0.85; margin: 0; }
+
+  .mechanism-block { margin: 1.5rem 0; padding: 1.5rem 2rem; border: 1px solid var(--mist); background: var(--warm-white); }
+  .mechanism-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: var(--clay); margin-bottom: 0.5rem; }
+  .mechanism-block p { font-size: 0.88rem; opacity: 0.75; line-height: 1.8; margin: 0; }
+
+  .article-sidebar { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 1.5rem; }
+  .sidebar-box { border: 1px solid var(--mist); padding: 2rem; background: var(--cream); }
+  .sidebar-box.featured { background: var(--bark); border-color: var(--bark); }
+  .sidebar-box.results { background: var(--moss); border-color: var(--moss); }
+  .sidebar-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--mist); }
+  .sidebar-box.featured .sidebar-label { color: var(--sand); border-color: rgba(212,184,150,0.2); }
+  .sidebar-box.results .sidebar-label { color: var(--sand); border-color: rgba(212,184,150,0.2); }
+  .sidebar-box p { font-size: 0.85rem; opacity: 0.8; line-height: 1.8; margin-bottom: 0.8rem; }
+  .sidebar-box.featured p { color: var(--cream); opacity: 0.75; }
+  .sidebar-box.results p { color: var(--cream); opacity: 0.75; margin-bottom: 0; }
+  .sidebar-box p:last-child { margin-bottom: 0; }
+  .sidebar-step { display: flex; gap: 0.8rem; margin-bottom: 0.8rem; align-items: flex-start; }
+  .sidebar-step-num { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--clay); flex-shrink: 0; line-height: 1.4; }
+  .sidebar-step p { margin: 0; font-size: 0.85rem; opacity: 0.8; line-height: 1.7; }
+  .sidebar-box.featured .sidebar-step-num { color: var(--sand); }
+  .sidebar-box.featured .sidebar-step p { color: var(--cream); opacity: 0.75; }
+  .sidebar-result { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.6rem; }
+  .sidebar-result::before { content: '↑'; color: var(--sand); font-size: 0.9rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .sidebar-result p { color: var(--cream); opacity: 0.85; margin: 0; font-size: 0.85rem; line-height: 1.6; }
+  .sidebar-play-item { margin-bottom: 1.2rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--mist); }
+  .sidebar-play-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .sidebar-play-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; color: var(--clay); margin-bottom: 0.3rem; }
+  .sidebar-play-item p { font-size: 0.82rem; opacity: 0.72; line-height: 1.7; margin: 0; }
+
+  .article-cta { background: var(--bark); padding: 3rem 2.5rem; text-align: center; margin-top: 4rem; }
+  .article-cta p { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--cream); line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.85; }
+  .article-cta a { display: inline-block; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 2.2rem; background: var(--clay); color: var(--cream); border-radius: 2px; transition: background 0.2s; }
+  .article-cta a:hover { background: var(--moss); }
+
+  .back-wrap { max-width: 1100px; margin: 0 auto; padding: 0 6rem 4rem; }
+  .go-back-btn { display: inline-block; padding: 0.6rem 1.5rem; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream); background: var(--clay); border-radius: 3px; text-decoration: none; transition: background 0.2s; }
+  .go-back-btn:hover { background: var(--bark); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero { padding: 7rem 1.5rem 3rem; }
+    .article-band { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 0.5rem; }
+    .article-wrap { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 3rem; }
+    .article-sidebar { position: static; }
+    .back-wrap { padding: 2rem 1.5rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-eyebrow">AWE in Action · Practice</span>
+    <h1>The Science &amp; Practice of<br><em>Three Good Things</em></h1>
+    <p>Training the mind to notice good. One of the simplest interventions in positive psychology — and one of the most researched.</p>
+  </div>
+</div>
+
+<div class="article-band">
+  <span>AWE in Action</span>
+  <span>·</span>
+  <a href="musings.html#awe-in-action">← Back to Musings &amp; More</a>
+</div>
+
+<div class="article-wrap">
+
+  <div class="article-body">
+
+    <p class="drop-cap">In positive psychology, one of the simplest interventions is also one of the most researched: List Three Good Things Daily. At first glance, the exercise almost sounds too basic to matter. At the end of the day, write down three things that went well and reflect on why they happened. That's it. Beneath this simple practice is a profound psychological shift: moving the mind from automatic threat detection toward balanced awareness.</p>
+
+    <h2>Why the Mind Defaults to the Negative</h2>
+    <p>Human beings are naturally wired to notice problems. From an evolutionary perspective, this makes sense. Watching the butterflies flitter across the plain while overlooking the lions can lead to disastrous results. Missing a pleasant moment often carries a lower cost than missing a threat. But over time, the brain became exceptionally skilled at scanning for what is wrong, uncertain, incomplete, or unsafe. And this itself becomes a threat.</p>
+    <p>In modern life, where we don't often encounter lions, this bias can create a distorted inner experience. Even during objectively good days, many people end the evening replaying awkward conversations, mistakes, anxieties, or unfinished tasks. The mind develops a habit of overlooking what is working.</p>
+
+    <div class="pull-quote">
+      <p>The Three Good Things intervention is not about denying difficulties or pretending life doesn't have challenges. It gently retrains awareness to include positive experiences that the brain may otherwise filter out.</p>
+    </div>
+
+    <span class="intervention-label">The Intervention</span>
+    <h2>How the Practice Works</h2>
+    <p>Each evening, write down three things that went well during the day — and why each thing happened. The "good things" do not need to be dramatic. In fact, small moments are often the most powerful:</p>
+    <ul>
+      <li>A meaningful conversation</li>
+      <li>Finishing a difficult task</li>
+      <li>A good cup of coffee</li>
+      <li>A moment of calm</li>
+      <li>Exercising despite resistance</li>
+      <li>Laughing with a child</li>
+      <li>Receiving help from a friend</li>
+    </ul>
+    <p>The second part — reflecting on <em>why</em> the event occurred — is especially important. Rather than experiencing positive moments as random accidents, the exercise encourages people to recognize causes, choices, strengths, relationships, effort, or circumstances that contributed to them.</p>
+    <p>For example: <em>"I had a productive meeting because I prepared ahead of time."</em> Or: <em>"I felt connected to my friend because I reached out first."</em></p>
+    <p>This subtle shift helps build a greater sense of agency, gratitude, and awareness of supportive factors already present in life.</p>
+
+    <h2>The Research Behind the Intervention</h2>
+    <p>The Three Good Things exercise became widely known through the work of Martin Seligman and colleagues in the early development of positive psychology interventions. In one influential study published in 2005, Seligman and his research team tested several positive psychology exercises to evaluate their impact on happiness and depressive symptoms.</p>
+    <p>The Three Good Things exercise produced surprisingly strong results. Participants who wrote down three things that went well each day and their causes for one week showed a reduction in depressive symptoms — and those depressive symptoms continued decreasing over time rather than disappearing immediately after the exercise stopped.</p>
+    <p>The intervention has since been studied in many populations, including students, healthcare workers, military populations, individuals experiencing burnout, and people managing stress and anxiety. Research has generally found improvements in well-being, optimism, sleep quality, and reductions in emotional distress.</p>
+
+    <div class="pull-quote">
+      <p>The goal is not to erase pain — it's to stop overlooking what is also true.</p>
+    </div>
+
+    <h2>Why It Works — Four Mechanisms</h2>
+
+    <div class="mechanism-block">
+      <h3>Attention Training</h3>
+      <p>What we repeatedly notice becomes mentally reinforced. If attention continually returns to problems, the brain strengthens pathways associated with stress, vigilance, and dissatisfaction. When people intentionally notice positive experiences, they begin building a broader attentional landscape — changing not only memory, but perception itself.</p>
+    </div>
+
+    <div class="mechanism-block">
+      <h3>Emotional Encoding</h3>
+      <p>Negative experiences often imprint more strongly than positive ones. Positive moments may occur throughout the day but pass through awareness too quickly to leave a meaningful emotional trace. Reflecting on positive events helps deepen emotional encoding — turning fleeting moments into psychologically integrated experiences.</p>
+    </div>
+
+    <div class="mechanism-block">
+      <h3>Increased Sense of Agency</h3>
+      <p>The "why did this happen?" component encourages people to recognize their own role in creating positive outcomes. This can counter feelings of helplessness or passivity that often accompany depression. Over time, people may begin to see themselves not merely as victims of circumstance, but as participants in shaping their experience.</p>
+    </div>
+
+    <div class="mechanism-block">
+      <h3>Gratitude and Connection</h3>
+      <p>Many "good things" involve relationships, support, kindness, or moments of connection. The practice naturally increases awareness of interdependence and gratitude — without forcing gratitude directly.</p>
+    </div>
+
+    <div class="article-cta">
+      <p>"The goal is not to reach a destination — it's to increase your AWE."</p>
+      <a href="https://calendly.com/awexpedition/30min">Start Your Journey — Free Consultation →</a>
+    </div>
+
+  </div>
+
+  <aside class="article-sidebar">
+
+    <div class="sidebar-box featured">
+      <span class="sidebar-label">The Practice</span>
+      <p>Tonight, before bed, take five minutes and write down three things that went well today.</p>
+      <p>For each one, answer:</p>
+      <div class="sidebar-step"><span class="sidebar-step-num">1.</span><p>Why did this happen?</p></div>
+      <div class="sidebar-step"><span class="sidebar-step-num">2.</span><p>What role did I play?</p></div>
+      <div class="sidebar-step"><span class="sidebar-step-num">3.</span><p>What helped create this moment?</p></div>
+      <p style="margin-top:0.8rem;">The events can be very small. Try doing this consistently for one week.</p>
+    </div>
+
+    <div class="sidebar-box results">
+      <span class="sidebar-label">Research Results</span>
+      <p>Practitioners of the Three Good Things Intervention showed:</p>
+      <div class="sidebar-result"><p>Increased happiness</p></div>
+      <div class="sidebar-result"><p>Reduced depressive symptoms</p></div>
+      <div class="sidebar-result"><p>Benefits that lasted for months after the intervention ended</p></div>
+    </div>
+
+    <div class="sidebar-box">
+      <span class="sidebar-label">Playing With the Practice</span>
+      <div class="sidebar-play-item">
+        <div class="sidebar-play-title">The One Meaningful Moment Version</div>
+        <p>Some people feel overwhelmed trying to identify three things. Instead, focus on one and go deep — add why it mattered and what it revealed about life, yourself, or others.</p>
+      </div>
+      <div class="sidebar-play-item">
+        <div class="sidebar-play-title">Add Savoring</div>
+        <p>After writing each good thing, pause for 15–20 seconds and mentally relive the experience. Notice what you felt, what you saw, what emotions were present.</p>
+      </div>
+      <div class="sidebar-play-item">
+        <div class="sidebar-play-title">Do It With Family or Children</div>
+        <p>At dinner or bedtime, ask: "What was one good thing from today?" This creates emotional reflection, connection, and positive attentional habits early in life — and helps children develop emotional vocabulary and balanced thinking patterns.</p>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+
+<div class="back-wrap">
+  <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='musings.html'; return false;" class="go-back-btn">← Go Back</a>
+</div>
+
+<div id="site-footer"></div>
+<script>
+  fetch('/footer.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('site-footer').innerHTML = html);
+</script>
+
+</body>
+</html>
