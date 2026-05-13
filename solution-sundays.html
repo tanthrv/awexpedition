@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solution Sundays — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--warm-white); color: var(--bark);
+    font-family: 'DM Sans', Georgia, serif;
+    font-weight: 300; line-height: 1.7; overflow-x: hidden;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(253,250,246,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mist);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+
+  .article-hero {
+    padding: 9rem 6rem 5rem;
+    background: var(--bark); position: relative; overflow: hidden;
+  }
+  .article-hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(74,92,62,0.2) 0%, transparent 60%);
+  }
+  .article-hero-inner { position: relative; max-width: 760px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb span { color: var(--sand); opacity: 0.4; font-size: 0.75rem; }
+  .article-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .article-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.5rem;
+  }
+  .article-hero h1 em { font-style: italic; color: var(--sand); }
+  .article-subtitle {
+    font-size: 1.1rem; color: rgba(247,243,238,0.65);
+    line-height: 1.8; max-width: 600px; font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .go-back {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    margin-top: 2rem; text-decoration: none;
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--sand); opacity: 0.7;
+    border-bottom: 1px solid rgba(212,184,150,0.3); padding-bottom: 2px;
+    transition: opacity 0.2s, border-color 0.2s;
+  }
+  .go-back:hover { opacity: 1; border-color: var(--sand); }
+
+  .article-body {
+    display: grid; grid-template-columns: 1fr 280px;
+    gap: 6rem; max-width: 1100px; margin: 0 auto; padding: 5rem 6rem;
+  }
+  .article-content p {
+    font-size: 1.05rem; line-height: 1.95; margin-bottom: 1.8rem; color: var(--bark);
+  }
+  .article-content p:first-child::first-letter {
+    font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; font-weight: 300;
+    float: left; line-height: 0.8; margin-right: 0.1em; margin-top: 0.12em; color: var(--clay);
+  }
+  .pull-quote {
+    border-left: 3px solid var(--clay); padding: 1.5rem 2rem; margin: 2.5rem 0; background: var(--cream);
+  }
+  .pull-quote p {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem !important; font-style: italic;
+    font-weight: 300; line-height: 1.5 !important; color: var(--bark) !important; margin: 0 !important;
+  }
+
+  .article-sidebar { padding-top: 0.5rem; }
+  .sidebar-section { margin-bottom: 3rem; }
+  .sidebar-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+  .sidebar-section p { font-size: 0.85rem; opacity: 0.7; line-height: 1.7; }
+  .sidebar-divider { border: none; border-top: 1px solid var(--mist); margin: 2rem 0; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.8rem; border: 1px solid var(--mist); color: var(--bark); opacity: 0.6; }
+  .cta-box { background: var(--bark); padding: 2rem; margin-top: 3rem; }
+  .cta-box p { font-size: 0.88rem; color: rgba(247,243,238,0.75); line-height: 1.7; margin-bottom: 1.2rem; }
+  .cta-box a {
+    display: block; text-align: center; background: var(--clay); color: var(--cream);
+    text-decoration: none; padding: 0.8rem 1.5rem; font-size: 0.78rem;
+    letter-spacing: 0.12em; text-transform: uppercase; transition: background 0.2s;
+  }
+  .cta-box a:hover { background: var(--moss); }
+
+  .next-piece {
+    background: var(--cream); border-top: 1px solid var(--mist);
+    padding: 4rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .next-piece-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; display: block; }
+  .next-piece h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.8rem; }
+  .next-piece p { font-size: 0.88rem; opacity: 0.65; line-height: 1.8; margin-bottom: 1.2rem; }
+  .btn-read { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; transition: border-color 0.2s; }
+  .btn-read:hover { border-color: var(--clay); }
+  .next-piece-back { text-align: right; }
+  .next-piece-back a { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bark); opacity: 0.6; border-bottom: 1px solid var(--mist); padding-bottom: 2px; transition: opacity 0.2s; }
+  .next-piece-back a:hover { opacity: 1; }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .article-hero { padding: 8rem 1.5rem 4rem; }
+    .article-body { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; }
+    .article-sidebar { display: none; }
+    .next-piece { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .next-piece-back { text-align: left; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>/</span>
+      <a href="musings.html#tanisms">Tanisms</a>
+    </div>
+    <span class="article-tag">Tanisms · Musing</span>
+    <h1>Solution<br><em>Sundays</em></h1>
+    <p class="article-subtitle">On dishes, defensiveness, and the 400 minutes I spent not solving a problem.</p>
+    <a href="musings.html" class="go-back">← Back to Musings & More</a>
+  </div>
+</section>
+
+<div class="article-body">
+  <article class="article-content">
+
+    <p>I did the math once, and I wish I hadn't.</p>
+
+    <p>Over the years, I estimate I spent somewhere north of 400 minutes — that's nearly seven hours — frustrated, ranting, and thoroughly wound up about dishes in the sink. Not washed dishes sitting in the drying rack. Not dishes that required scrubbing. Dishes that simply needed to travel approximately eighteen inches from the counter into the open dishwasher that was right there.</p>
+
+    <p>Seven hours. Of my life. On dishes.</p>
+
+    <p>Here's what made it worse: not once — not a single time — did the ranting result in the dishes being put away by anyone other than me.</p>
+
+    <p>I would come home from work. I would change out of my work clothes. I would walk into the kitchen ready to cook, and there they would be. The dishes. Sitting in the sink like they had always lived there, like the dishwasher was a suggestion, like loading it required a skill set my kids had simply not yet acquired.</p>
+
+    <p>The annoyance would rise immediately — and it was not small. I would call them in. They would appear in that particular way teenagers appear when they know what's coming: shoulders slightly raised, eyes slightly averted, already in some mixture of guilty and defensive before I'd said a word. I would say the words anyway. They would offer to take care of it. By then, I was already moving toward the sink. I would do it myself, still talking, and then I would keep talking for another twenty minutes about respect and consideration and being treated like a servant and how this house does not run itself.</p>
+
+    <p>They would stand there. Or they would disappear. Either way, the dishes would eventually be put away — by me — and nothing would have changed. The next time I came home, the dishes would be in the sink.</p>
+
+    <div class="pull-quote">
+      <p>All that heat in the kitchen, and none of it was coming from the stove.</p>
+    </div>
+
+    <p>I knew, even then, that the dishes were not really about the dishes. They were a placeholder. When I saw them sitting there, something else surfaced — something about feeling unseen, about pouring out effort and having it go unacknowledged, about spending all day in a demanding professional environment and coming home to find more demands waiting. The dishes were the physical evidence of something I couldn't quite name but could absolutely feel.</p>
+
+    <p>Yogis call accumulated emotional residue <em>samskaras</em> — stored impressions that color how we perceive the present moment. Every time I walked into that kitchen, I wasn't just seeing dishes. I was seeing every previous time I had seen dishes, plus every feeling those previous times had layered in. I was generating enough emotional energy to cook a five-course meal — and spending it entirely on not cooking.</p>
+
+    <p>But — and this is important — the dishes were also genuinely a problem. Not the symbolic problem. The practical one. I was trying to cook. The sink was full. That was real.</p>
+
+    <p>The breakthrough came when I separated the two.</p>
+
+    <p>I asked myself: what is the <em>actual</em> problem? Not the imaginary one — the one about respect and love and whether my children appreciated me. That problem was real, but it was not a dishes problem. It was a different conversation entirely, and it deserved its own examination.</p>
+
+    <p>The actual problem was this: when I came home and was ready to cook, the sink was full and I couldn't use it comfortably. That problem had a solution. And it wasn't complicated. The dishes needed to be cleared before I started cooking — which meant before I got home, changed, and walked into the kitchen.</p>
+
+    <p>Once I could see the actual problem clearly, I could also see why I had never been able to solve it. In the moment I discovered the dishes, I was already flooded. The samskaras were running. I wasn't seeing a solvable problem — I was experiencing an emotional event. And you cannot think your way to solutions from inside an emotional event.</p>
+
+    <div class="pull-quote">
+      <p>The problem was never the obstacle. The heat was.</p>
+    </div>
+
+    <p>Solution Sundays came out of that recognition. The idea was simple: when an issue arose, we would note it but not attempt to solve it in the moment. The person with the issue would name it clearly and specifically — no discussion, no defense required. We'd sit with it and reconvene on Sunday, when everyone was cooler, less hungry, and not standing in the kitchen. The other party would come with a proposed solution. Their solution. Something they had ownership of.</p>
+
+    <p>The solution had to actually address the problem. Not the symbolic one — the practical one. And they had three weeks to make it stick, not perfectly, but with a visible trend in the right direction. If their solution didn't hold, I would propose one. And that one would not be up for negotiation.</p>
+
+    <p>That Sunday, the boys proposed that they would clear the sink before I got home. It was a good solution. It addressed the actual problem. It gave them agency and a clear window of responsibility. I said yes, let's try it.</p>
+
+    <p>For the first three weeks, it happened sometimes. Not consistently. The trend was not moving in a positive direction. So after three weeks, I proposed my solution: when I get home, I will ask them to clear the dishes immediately — wherever they are, whatever they're doing.</p>
+
+    <p>They were usually gaming. They did not love being interrupted. But we had agreed to the structure, and the structure said this was now my call.</p>
+
+    <p>For a couple of weeks, I interrupted the gaming. They paused mid-session, came to the kitchen, cleared the dishes, went back.</p>
+
+    <p>And then — without announcement, without drama — they started putting the dishes away before I got home.</p>
+
+    <p>Not because I yelled. Not because I explained, again, what respect means. But because the interruption to the gaming was a natural consequence of their solution not holding, and the natural consequence was considerably more motivating than anything I had said in seven hours of ranting.</p>
+
+    <p>The thing I lost in those 400 minutes wasn't just time. It was the solution itself. Every minute spent reacting was a minute not spent asking what the actual problem was — and what it would actually take to fix it.</p>
+
+    <p>One minute. That's how long it would have taken to say "put the dishes away." Four hundred minutes of ranting, and the actual ask was sixty seconds. Do that math a few times and it changes how you approach a lot of things.</p>
+
+    <div style="background:var(--cream);border:1px solid var(--mist);border-left:4px solid var(--clay);padding:2rem 2.5rem;margin-top:3rem;">
+      <span style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--clay);display:block;margin-bottom:0.8rem;">Tan's Take on Timeless Truths</span>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;line-height:1.5;margin-bottom:1rem;opacity:1;">This piece is part of the Tanisms™ collection — original frameworks for the examined life. Ideas worth sitting with.</p>
+      <a href="solution-sundays-framework.html" style="display:inline-block;text-decoration:none;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);border-bottom:1px solid var(--sand);padding-bottom:2px;margin-right:1.5rem;">Explore the framework →</a>
+      <a href="musings.html#tanisms" style="display:inline-block;text-decoration:none;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bark);opacity:0.6;border-bottom:1px solid var(--mist);padding-bottom:2px;">All Tanisms™ →</a>
+    </div>
+
+    <div style="margin-top:2.5rem;">
+      <a href="musings.html" style="display:inline-flex;align-items:center;gap:0.5rem;text-decoration:none;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bark);opacity:0.5;border-bottom:1px solid var(--mist);padding-bottom:2px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">← Back to Musings & More</a>
+    </div>
+
+  </article>
+
+  <aside class="article-sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">About this piece</span>
+      <p>Solution Sundays is one of Tan's original frameworks — part of the Tanisms™ collection and a practice developed in her own home, kitchen-tested and kid-approved.</p>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Connected ideas</span>
+      <div class="tag-list">
+        <span class="tag">Reactivity</span>
+        <span class="tag">Conflict</span>
+        <span class="tag">Awareness</span>
+        <span class="tag">Relationships</span>
+        <span class="tag">Samskaras</span>
+      </div>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Related reading</span>
+      <p>The Four Agreements by Don Miguel Ruiz · Nonviolent Communication by Marshall Rosenberg · Why Won't You Apologize? by Harriet Lerner</p>
+    </div>
+    <div class="cta-box">
+      <p>If this piece resonated, Awareness & Alignment Coaching™ goes deeper into the patterns that keep us reactive — and the practices that create space between trigger and response.</p>
+      <a href="https://calendly.com/awexpedition/30min">Book a Free Call</a>
+    </div>
+  </aside>
+</div>
+
+<div class="next-piece">
+  <div>
+    <span class="next-piece-label">Read next</span>
+    <h3>The Billion Things Rule</h3>
+    <p>In any given moment, a billion factors converge to produce what is. We see one — and mistake it for the cause. A story about a rental car, a missed shuttle, and what surrender actually looks like.</p>
+    <a href="billion-things-rule.html" class="btn-read">Read the piece →</a>
+  </div>
+  <div class="next-piece-back">
+    <a href="musings.html">← Back to Musings & More</a>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script>
+  fetch('/footer.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('site-footer').innerHTML = html);
+</script>
+
+</body>
+</html>
