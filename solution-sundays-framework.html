@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solution Sundays — Framework — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+
+  .framework-hero { padding: 9rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .framework-hero::before { content: 'SS'; font-family: 'Cormorant Garamond', serif; font-size: 22vw; font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.03); pointer-events: none; white-space: nowrap; }
+  .framework-hero-inner { position: relative; max-width: 800px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb span { color: var(--sand); opacity: 0.4; font-size: 0.75rem; }
+  .framework-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .framework-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.5rem; }
+  .framework-hero h1 em { font-style: italic; color: var(--sand); }
+  .tagline { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: rgba(247,243,238,0.75); line-height: 1.6; max-width: 600px; border-left: 3px solid var(--clay); padding-left: 1.5rem; margin-top: 1rem; }
+  .go-back { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 2rem; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sand); opacity: 0.7; border-bottom: 1px solid rgba(212,184,150,0.3); padding-bottom: 2px; transition: opacity 0.2s, border-color 0.2s; }
+  .go-back:hover { opacity: 1; border-color: var(--sand); }
+
+  .framework-body { max-width: 900px; margin: 0 auto; padding: 5rem 6rem; }
+
+  .concept-section { margin-bottom: 4rem; }
+  .section-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1.2rem; display: block; }
+  .concept-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 1.5rem; line-height: 1.2; }
+  .concept-section p { font-size: 1.05rem; line-height: 1.95; opacity: 0.85; margin-bottom: 1.2rem; }
+
+  .framework-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--mist); margin: 4rem 0; }
+  .framework-card { background: var(--warm-white); padding: 2.5rem; }
+  .framework-card.full-width { grid-column: span 2; background: var(--cream); }
+  .framework-card.dark { background: var(--bark); color: var(--cream); }
+  .framework-card.alert { grid-column: span 2; background: var(--cream); border-left: 4px solid var(--clay); }
+  .card-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+  .framework-card.dark .card-label { color: var(--sand); }
+  .framework-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.3; }
+  .framework-card p { font-size: 0.9rem; line-height: 1.8; opacity: 0.75; }
+  .framework-card.dark p { opacity: 0.7; }
+  .framework-card ul { list-style: none; margin-top: 0.5rem; }
+  .framework-card ul li { font-size: 0.9rem; padding: 0.4rem 0; padding-left: 1.2rem; position: relative; opacity: 0.75; line-height: 1.6; }
+  .framework-card ul li::before { content: '—'; position: absolute; left: 0; color: var(--clay); }
+  .framework-card.dark ul li::before { color: var(--sand); }
+
+  .day-picker { background: var(--bark); padding: 2.5rem 3rem; margin: 4rem 0; }
+  .day-picker-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1.5rem; display: block; opacity: 0.8; }
+  .day-picker h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; color: var(--cream); margin-bottom: 1.5rem; line-height: 1.4; }
+  .day-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(212,184,150,0.15); margin-bottom: 1.2rem; }
+  .day-item { background: rgba(44,32,23,0.8); padding: 1rem 1.2rem; }
+  .day-name { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sand); opacity: 0.7; display: block; margin-bottom: 0.2rem; }
+  .day-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--cream); opacity: 0.9; }
+  .day-picker p { font-size: 0.82rem; color: rgba(247,243,238,0.55); line-height: 1.7; }
+
+  .script-box { background: var(--clay); padding: 2.5rem 3rem; margin: 4rem 0; text-align: center; position: relative; overflow: hidden; }
+  .script-box::before { content: '" "'; font-family: 'Cormorant Garamond', serif; font-size: 12rem; font-weight: 300; position: absolute; top: -2rem; left: 1rem; color: rgba(255,255,255,0.08); line-height: 1; pointer-events: none; }
+  .script-box .script-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(247,243,238,0.6); margin-bottom: 1rem; display: block; }
+  .script-box .script-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.3; position: relative; }
+
+  .practice-section { margin: 4rem 0; }
+  .practice-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 2rem; }
+  .practice-example { border-left: 3px solid var(--mist); padding: 1.2rem 2rem; margin-bottom: 1.5rem; transition: border-color 0.2s; }
+  .practice-example:hover { border-left-color: var(--clay); }
+  .practice-example .example-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; display: block; }
+  .practice-example p { font-size: 0.95rem; line-height: 1.8; opacity: 0.8; }
+
+  .reflection-box { background: var(--cream); border: 1px solid var(--mist); padding: 2.5rem 3rem; margin: 4rem 0; }
+  .reflection-box .reflection-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1.2rem; display: block; }
+  .reflection-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.3; }
+  .reflection-box p { font-size: 0.9rem; line-height: 1.8; opacity: 0.7; }
+
+  .connections-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mist); margin: 4rem 0; }
+  .connection-card { background: var(--warm-white); padding: 2rem 1.8rem; }
+  .connection-type { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; display: block; }
+  .connection-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .connection-card p { font-size: 0.82rem; opacity: 0.65; line-height: 1.7; }
+
+  .tanism-cta { background: var(--bark); padding: 3rem; margin: 4rem 0; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .tanism-cta-text .cta-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 0.8rem; display: block; }
+  .tanism-cta-text p { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--cream); line-height: 1.5; }
+  .tanism-cta-links { display: flex; flex-direction: column; gap: 0.8rem; flex-shrink: 0; }
+  .btn-tanism { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.8rem 1.8rem; white-space: nowrap; transition: all 0.2s; }
+  .btn-tanism.primary { background: var(--clay); color: var(--cream); }
+  .btn-tanism.primary:hover { background: var(--moss); }
+  .btn-tanism.secondary { border: 1px solid rgba(212,184,150,0.4); color: var(--sand); }
+  .btn-tanism.secondary:hover { border-color: var(--sand); color: var(--cream); }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .framework-hero { padding: 8rem 1.5rem 4rem; }
+    .framework-body { padding: 3rem 1.5rem; }
+    .framework-grid { grid-template-columns: 1fr; }
+    .framework-card.full-width,
+    .framework-card.alert { grid-column: span 1; }
+    .connections-grid { grid-template-columns: 1fr; }
+    .tanism-cta { flex-direction: column; }
+    .tanism-cta-links { flex-direction: row; }
+    .day-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<section class="framework-hero">
+  <div class="framework-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>/</span>
+      <a href="musings.html#tanisms">Tan's Take on Timeless Truths</a>
+    </div>
+    <span class="framework-tag">Tanism · Framework</span>
+    <h1>Solution<br><em>Sundays</em></h1>
+    <p class="tagline">Most problems don't get solved. They get defended.</p>
+    <a href="musings.html" class="go-back">← Back to Musings & More</a>
+  </div>
+</section>
+
+<div class="framework-body">
+
+  <div class="concept-section">
+    <span class="section-label">The Concept</span>
+    <h2>The problem was never the obstacle.<br>The reaction was.</h2>
+    <p>When something goes wrong between people, the mind doesn't move toward the problem. It moves toward position. Someone raises an issue. The other person defends. The issue escalates. The original problem — the actual, solvable problem — gets buried under the weight of the exchange. Twenty minutes later, nothing has changed except the temperature in the room.</p>
+    <p>This is not a character flaw. It is a design feature. The mind under threat protects first and solves second. But protection and solution are not the same move — and confusing them is extraordinarily expensive.</p>
+    <p>Solution Sundays is a framework for separating the heat from the work.</p>
+  </div>
+
+  <div class="framework-grid">
+
+    <div class="framework-card">
+      <span class="card-label">When It Arises</span>
+      <h3>Triggers</h3>
+      <ul>
+        <li>A recurring irritation that never actually gets resolved</li>
+        <li>Conversations that start about one thing and end about everything</li>
+        <li>Feeling like you're raising the same issue for the hundredth time</li>
+        <li>The urge to defend before fully hearing</li>
+        <li>Solutions that get proposed but never implemented</li>
+      </ul>
+    </div>
+
+    <div class="framework-card">
+      <span class="card-label">The Energy Audit</span>
+      <h3>From reaction to resolution</h3>
+      <p>How much time has already been spent on this issue — in frustration, in venting, in replaying the conversation? Now estimate how long the actual solution would take to implement. In almost every case, the solution is a fraction of the reaction. Before raising something in the heat of the moment, do the math.</p>
+    </div>
+
+    <div class="framework-card full-width dark">
+      <span class="card-label">The Move</span>
+      <h3>Note it. Don't solve it. Not yet.</h3>
+      <p>When an issue arises, the person with the issue names it — clearly, specifically, briefly. That's it. No discussion. No defense. The other party acknowledges it and has until the next designated day to sit with it and propose a solution. Their solution must actually address the tangible problem. Then they have three weeks to implement it — not perfectly, but with a visible and consistent trend in the right direction. If their solution doesn't hold, the other party proposes one. That solution is not up for negotiation. It was earned by the failure of the first.</p>
+    </div>
+
+    <div class="framework-card alert">
+      <span class="card-label">Important Distinction</span>
+      <h3>The issue must be tangible and addressable</h3>
+      <p>Solution Sundays only works on real, solvable problems — the kind you can point to, describe specifically, and measure progress on. <em>The dishes aren't cleared before I start cooking</em> is a Solution Sunday problem. <em>You don't care about me</em> and <em>We always have to do it your way</em> are not — not because they aren't real, but because no proposed action can reliably resolve a feeling that hasn't been examined yet.</p>
+      <p style="margin-top:0.8rem;">If the issue isn't tangible, Solution Sundays isn't the right tool. What you're likely looking at is a values misalignment — a gap in what each party considers important or reasonable — and that needs its own honest examination before any solution process can begin. When in doubt, ask: <em>could someone propose a specific, observable action that would resolve this?</em> If the answer is no, start there instead.</p>
+    </div>
+
+  </div>
+
+  <div class="day-picker">
+    <span class="day-picker-label">Pick Your Day</span>
+    <h3>The default is Sunday. But the day is yours to choose.</h3>
+    <div class="day-grid">
+      <div class="day-item">
+        <span class="day-name">Sunday</span>
+        <span class="day-title">Solution Sundays</span>
+      </div>
+      <div class="day-item">
+        <span class="day-name">Tuesday</span>
+        <span class="day-title">Talk Tuesdays</span>
+      </div>
+      <div class="day-item">
+        <span class="day-name">Wednesday</span>
+        <span class="day-title">Work-It Wednesdays</span>
+      </div>
+      <div class="day-item">
+        <span class="day-name">Friday</span>
+        <span class="day-title">Fix-It Fridays</span>
+      </div>
+    </div>
+    <p>The name matters less than the principle. The minimum window is at least three days — a problem surfacing Saturday night doesn't get solved Sunday morning over coffee. It rolls to the following week. The gap isn't avoidance. It's architecture.</p>
+  </div>
+
+  <div class="script-box">
+    <span class="script-label">In the moment of irritation — ask this</span>
+    <div class="script-text">Is this the moment to solve it,<br>or the moment to name it?</div>
+  </div>
+
+  <div class="practice-section">
+    <span class="section-label">In Practice</span>
+    <h2>What it looks like in real life</h2>
+
+    <div class="practice-example">
+      <span class="example-label">The Recurring Issue</span>
+      <p>Something keeps happening. You've mentioned it before — maybe more than once, maybe with more intensity each time. With Solution Sundays, you name it once, clearly and specifically, and step back. The other person isn't put on the spot to defend or fix in real time. They're given the dignity of time and the responsibility of ownership.</p>
+    </div>
+
+    <div class="practice-example">
+      <span class="example-label">The Proposed Solution</span>
+      <p>The person who receives the issue gets to solve it first. This matters. It respects their agency and their understanding of their own life. It also raises the stakes — if their solution doesn't work, the next one isn't theirs to design.</p>
+    </div>
+
+    <div class="practice-example">
+      <span class="example-label">The Implementation Window</span>
+      <p>Three weeks is not arbitrary. It's long enough to build a pattern, short enough to stay accountable. The measure isn't perfection — it's trajectory. Is it moving in the right direction? That's the question.</p>
+    </div>
+
+    <div class="practice-example">
+      <span class="example-label">Read the Full Story</span>
+      <p>Solution Sundays was born in a kitchen, over dishes that weren't in the dishwasher — and the slow recognition that 400 minutes of frustration had solved exactly nothing. <a href="solution-sundays.html" style="color:var(--clay);border-bottom:1px solid var(--sand);text-decoration:none;">Read the full story →</a></p>
+    </div>
+  </div>
+
+  <div class="reflection-box">
+    <span class="reflection-label">Sit With This</span>
+    <h3>What recurring issue in your life has never actually been solved — only reacted to?</h3>
+    <p>Think of the thing that keeps coming up. Estimate how much time and energy you have spent in friction around it. Now ask: what would an actual solution look like? Who would propose it? What would implementation require? Notice the gap between how much you've spent reacting and how little it might take to resolve.</p>
+  </div>
+
+  <span class="section-label">Connections</span>
+  <div class="connections-grid">
+    <div class="connection-card">
+      <span class="connection-type">Positive Psychology</span>
+      <h4>Gottman's Four Horsemen</h4>
+      <p>John Gottman's research on relationship conflict identifies defensiveness as one of the primary predictors of relationship breakdown. Solution Sundays structurally removes the conditions that trigger defensiveness — the hot moment, the pressure to respond immediately — before they can do their damage.</p>
+    </div>
+    <div class="connection-card">
+      <span class="connection-type">Philosophy</span>
+      <h4>The Space Between Stimulus and Response</h4>
+      <p>Viktor Frankl observed that between stimulus and response, there is a space — and in that space lies our freedom. Solution Sundays is a deliberate expansion of that space. The issue is the stimulus. The framework ensures the response comes later, cooler, and with something to show for it.</p>
+    </div>
+    <div class="connection-card">
+      <span class="connection-type">Systems Thinking</span>
+      <h4>Root Cause vs. Presenting Problem</h4>
+      <p>In systems thinking, the presenting problem is rarely the root cause. Solution Sundays slows the process down enough to ask: what is the actual problem here? Not the temperature. Not the history. The specific, addressable, solvable problem.</p>
+    </div>
+  </div>
+
+  <div class="tanism-cta">
+    <div class="tanism-cta-text">
+      <span class="cta-label">Tan's Take on Timeless Truths</span>
+      <p>This is part of the Tanisms™ collection — ideas worth sitting with. Each one is a different handle on the same door.</p>
+    </div>
+    <div class="tanism-cta-links">
+      <a href="musings.html#tanisms" class="btn-tanism primary">Explore all Tanisms™ →</a>
+      <a href="solution-sundays.html" class="btn-tanism secondary">Read the story →</a>
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;">
+    <a href="musings.html" style="display:inline-flex;align-items:center;gap:0.5rem;text-decoration:none;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bark);opacity:0.5;border-bottom:1px solid var(--mist);padding-bottom:2px;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">← Back to Musings & More</a>
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+<script>
+  fetch('/footer.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('site-footer').innerHTML = html);
+</script>
+
+</body>
+</html>
