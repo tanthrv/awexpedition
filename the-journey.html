@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Journey — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+    --gold: #C9943A;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(253,250,246,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); padding: 1.5rem 2rem; flex-direction: column; gap: 0; z-index: 99; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { display: block; text-decoration: none; color: var(--bark); font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--mist); opacity: 0.75; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu .mob-cta { background: var(--moss); color: var(--cream) !important; padding: 0.9rem 1.5rem !important; border-radius: 2px; opacity: 1 !important; margin-top: 0.5rem; text-align: center; border: none !important; }
+
+  .page-hero { padding: 10rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .page-hero::before { content: 'JOURNEY'; font-family: 'Cormorant Garamond', serif; font-size: 18vw; font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.03); pointer-events: none; white-space: nowrap; }
+  .page-hero-inner { position: relative; max-width: 800px; }
+  .page-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; }
+  .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.5rem; }
+  .page-hero h1 em { font-style: italic; color: var(--sand); }
+  .page-hero p { font-size: 1rem; color: rgba(247,243,238,0.7); max-width: 620px; line-height: 1.9; }
+
+  /* SECTION STYLES */
+  .journey-section { padding: 7rem 6rem; }
+  .journey-section:nth-child(even) { background: var(--cream); }
+  .section-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
+  .section-title em { font-style: italic; color: var(--clay); }
+  .section-intro { font-size: 0.95rem; line-height: 1.9; opacity: 0.75; max-width: 680px; margin-bottom: 4rem; }
+
+  /* PROCESS STEPS */
+  .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--mist); }
+  .step { background: var(--warm-white); padding: 2.5rem 2rem; }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: var(--clay); letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
+  .step h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.8rem; }
+  .step p { font-size: 0.85rem; opacity: 0.65; line-height: 1.7; }
+  .step-link { font-size: 0.78rem; color: var(--clay); text-decoration: none; display: inline-block; margin-top: 0.8rem; border-bottom: 1px solid var(--sand); }
+  .step-link:hover { color: var(--bark); border-color: var(--bark); }
+
+  /* AWE DIFFERENCE */
+  .difference-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--mist); }
+  .difference-card { background: var(--warm-white); padding: 3rem 2.5rem; }
+  .difference-card.dark { background: var(--bark); color: var(--cream); }
+  .difference-card.full { grid-column: span 2; background: var(--cream); }
+  .diff-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 1rem; }
+  .difference-card.dark .diff-label { color: var(--sand); }
+  .difference-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.25; }
+  .difference-card p { font-size: 0.9rem; line-height: 1.85; opacity: 0.75; }
+  .difference-card.dark p { opacity: 0.7; }
+
+  /* ALIGNED SECTION */
+  .aligned-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .aligned-card { padding: 2.5rem; border: 1px solid var(--mist); background: var(--warm-white); }
+  .aligned-card.flourish { border-color: var(--clay); background: var(--cream); }
+  .aligned-card.alt { background: var(--bark); border-color: var(--bark); color: var(--cream); }
+  .aligned-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 1rem; }
+  .aligned-card.alt .aligned-label { color: var(--sand); }
+  .aligned-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 1.2rem; }
+  .aligned-card ul { list-style: none; }
+  .aligned-card ul li { font-size: 0.88rem; padding: 0.5rem 0 0.5rem 1.2rem; position: relative; opacity: 0.8; line-height: 1.7; border-bottom: 1px solid var(--mist); }
+  .aligned-card ul li:last-child { border-bottom: none; }
+  .aligned-card ul li::before { content: '—'; position: absolute; left: 0; color: var(--clay); }
+  .aligned-card.alt ul li { border-bottom-color: rgba(255,255,255,0.1); }
+  .aligned-card.alt ul li::before { color: var(--sand); }
+
+  /* CTA */
+  .journey-cta { padding: 7rem 6rem; background: var(--clay); text-align: center; position: relative; overflow: hidden; }
+  .journey-cta::before { content: 'AWE'; font-family: 'Cormorant Garamond', serif; font-size: 20vw; font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: rgba(255,255,255,0.06); pointer-events: none; }
+  .journey-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; color: var(--cream); margin-bottom: 1rem; position: relative; }
+  .journey-cta h2 em { font-style: italic; }
+  .journey-cta p { color: rgba(247,243,238,0.75); max-width: 480px; margin: 0 auto 2rem; position: relative; }
+  .btn-primary { display: inline-block; background: var(--cream); color: var(--clay); padding: 0.9rem 2.2rem; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 2px; transition: all 0.2s; position: relative; }
+  .btn-primary:hover { background: var(--bark); color: var(--cream); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .page-hero { padding: 8rem 1.5rem 4rem; }
+    .journey-section { padding: 4rem 1.5rem; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .difference-grid { grid-template-columns: 1fr; }
+    .difference-card.full { grid-column: span 1; }
+    .aligned-grid { grid-template-columns: 1fr; }
+    .journey-cta { padding: 5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="musings.html">Musings & More</a></li>
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="musings.html">Musings & More</a>
+  <a href="index.html#pillars">The AWE Method</a>
+  <a href="index.html#about">About Tan</a>
+  <a href="index.html#services">Services</a>
+  <a href="https://calendly.com/awexpedition/30min" class="mob-cta">Book a Free Call</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="page-eyebrow">Awareness & Alignment Coaching™</span>
+    <h1>The<br><em>Journey</em></h1>
+    <p>Everything you need to know about how this work unfolds — the process, what makes it different, and whether it might be right for you.</p>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="journey-section" id="process">
+  <span class="section-eyebrow">Step by Step</span>
+  <h2 class="section-title">Awareness &amp; Alignment<br><em>Process</em></h2>
+  <p class="section-intro">The Awareness &amp; Alignment™ Model is a thought-provoking, creative partnership to bring greater awareness of habituated programs and patterns that inhibit you from living the most joyful and liberated life possible. The starting place is a goal — but the goal is not simply to achieve it. It's to bring awareness to the motives and meanings around it. Throughout the journey you will be supported with honesty, care, non-judgment and deep respect for the expert you are in you.</p>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>Free Consultation</h4>
+      <p>We meet to explore what's brought you here and whether the Awareness &amp; Alignment™ Model is a good fit — or whether another modality might be more aligned at this point in your journey.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>Alignment</h4>
+      <p>If the AWE Method and the Awareness &amp; Alignment™ Model is in alignment with your needs, we begin with a one-hour session to clarify your target goal(s) and possible challenges.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>Personalized Journey Map</h4>
+      <p>After each session your AWExApp™ will be updated with session notes, reflection questions, experiments and wins so you can continue journeying between our sessions. Collectively, these become your Journey Map.</p>
+      <a href="journey-map-sample.html" class="step-link">View a sample journey →</a>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h4>Perspective &amp; Practice</h4>
+      <p>During our sessions, you will likely gain new perspective or insights. With this Awareness, we will use Wonder to co-create practices that help you break old patterns and create new, healthier habits.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <h4>Continuing Your Journey</h4>
+      <p>My goal is to hone skills and practices for you to continue your journey — with or without a guide. Within ten sessions, most clients have what they need to fly. You are the master of your travels.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AWE DIFFERENCE -->
+<section class="journey-section" id="difference">
+  <span class="section-eyebrow">What Sets Us Apart</span>
+  <h2 class="section-title">The AWE<br><em>Difference</em></h2>
+  <div class="difference-grid">
+
+    <div class="difference-card full">
+      <span class="diff-label">Awareness &amp; Alignment Focus</span>
+      <h3>Achievement without awareness just keeps you running in circles.</h3>
+      <p>Most coaching drives straight toward the goal. AWExpedition starts with what's underneath it. Because achieving without awareness just keeps you running in circles — chasing outcomes that never quite bring the stillness and peace you thought reaching them would. By focusing on developing greater awareness of the patterns, beliefs, emotions, and conditioned responses shaping your experience, you can learn to move through life with more clarity, alignment, and intention. When you're no longer driven by what you think you should want, you don't just achieve — you achieve what actually matters to you.</p>
+    </div>
+
+    <div class="difference-card">
+      <span class="diff-label">Efficient by Design</span>
+      <h3>Your time (and money) matters.</h3>
+      <p>We begin with a one-hour session to lay the foundation. After that, 40 minutes is all we need — enough time to surface real insight without the filler. With the AWExApp™, you drop in your focus before each session so we dig in from minute one.</p>
+    </div>
+
+    <div class="difference-card dark">
+      <span class="diff-label">Transformation Between Sessions</span>
+      <h3>A 40-minute session can crack something open.</h3>
+      <p>What you do with it the rest of the week is where the real shift happens. The AWExApp™ keeps your momentum going — with session notes, reflection questions, experiments, guided prompts, and wins to help you stay engaged in the process and bring awareness into everyday life.</p>
+    </div>
+
+    <div class="difference-card">
+      <span class="diff-label">Resources Specific to Your Journey</span>
+      <h3>Tools that travel with you.</h3>
+      <p>Through AWExpedition.com and the AWExApp™, you'll be guided toward frameworks, articles, musings, and practices that align with the specific patterns and challenges arising in your own life. You leave with a journey map that captures your growth and tools you can return to long after our work together ends.</p>
+    </div>
+
+    <div class="difference-card dark">
+      <span class="diff-label">A Map, Not a Dependency</span>
+      <h3>Standing on your own is always the point.</h3>
+      <p>Within 10 sessions, the goal is for you to know how to navigate life — to recognize your patterns, trust your knowing, and move through any terrain with or without a guide. Continued coaching is always available, but standing on your own is always the point.</p>
+    </div>
+
+    <div class="difference-card full">
+      <span class="diff-label">You Are the Expert</span>
+      <h3>We arrive with deep humility.</h3>
+      <p>You are the authority on you — your experiences, your wisdom, what's true for you, what works for you. My role is to ask the right questions, hold the space, and get out of the way of what's already in you trying to emerge.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ALIGNED, ADDITION OR ALTERNATIVE -->
+<section class="journey-section" id="aligned">
+  <span class="section-eyebrow">Is This Right for You?</span>
+  <h2 class="section-title">Aligned, Addition,<br><em>or Alternative</em></h2>
+  <p class="section-intro">AWExpedition isn't for everyone — and that's okay. The most important thing is that you find the right support for where you are right now. Here's an honest look at where this work tends to flourish — and where something else might serve you better.</p>
+
+  <div class="aligned-grid">
+
+    <div class="aligned-card flourish">
+      <span class="aligned-label">This work tends to flourish when:</span>
+      <h3>You might be a great fit</h3>
+      <ul>
+        <li>You sense something underneath the surface but can't quite name it</li>
+        <li>You're tired of chasing outcomes that don't bring what you thought they would</li>
+        <li>You're at a crossroads — in career, identity, relationships, or simply your relationship with yourself</li>
+        <li>You're curious and reflective, willing to sit with what comes up and explore it during the week</li>
+        <li>You're ready to loosen your grip on control and open to where the path might lead. The door doesn't have to be wide open. Just not welded shut.</li>
+      </ul>
+    </div>
+
+    <div class="aligned-card">
+      <span class="aligned-label">A&amp;A Coaching pairs well with:</span>
+      <h3>A natural addition</h3>
+      <ul>
+        <li>Therapy or counseling — we're forward-focused and strengths-based, a natural complement to deeper clinical work</li>
+        <li>Energy work or other holistic practices</li>
+        <li>Executive or career coaching where the inner landscape matters as much as the outer goal</li>
+      </ul>
+    </div>
+
+    <div class="aligned-card alt">
+      <span class="aligned-label">This might not be the right fit right now if:</span>
+      <h3>An alternative may serve better</h3>
+      <ul>
+        <li>Life feels so heavy that what you need most is space to be heard and held — a therapist or counselor may be the better anchor</li>
+        <li>The between-session work feels out of reach — if the timing isn't right, the AWExApp™ is central to how change happens, and we want you to get the most from this journey</li>
+        <li>You're looking for a more directive experience — someone to assess, prescribe, and hand you a plan. That's a legitimate need, just a different kind of guide.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:3rem;padding:2.5rem;background:var(--warm-white);border:1px solid var(--mist);">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--bark);margin-bottom:1.2rem;opacity:0.85;">Not sure where you land? Let's find out together.</p>
+    <a href="https://calendly.com/awexpedition/30min" style="display:inline-block;text-decoration:none;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.9rem 2.2rem;background:var(--clay);color:var(--cream);border-radius:2px;transition:background 0.2s;">Book a Complimentary Exploratory Session</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="journey-cta">
+  <h2>Ready to begin<br><em>your expedition?</em></h2>
+  <p>Take the first step toward transformative growth with a free 40-minute consultation — no commitment required.</p>
+  <a href="https://calendly.com/awexpedition/30min" class="btn-primary">Schedule Your Free Call</a>
+</section>
+
+<div id="site-footer"></div>
+<script>
+  fetch('/footer.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('site-footer').innerHTML = html);
+</script>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>
