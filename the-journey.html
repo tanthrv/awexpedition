@@ -12,7 +12,6 @@
   :root {
     --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
     --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
-    --gold: #C9943A;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -45,42 +44,29 @@
   .page-hero h1 em { font-style: italic; color: var(--sand); }
   .page-hero p { font-size: 1rem; color: rgba(247,243,238,0.7); max-width: 620px; line-height: 1.9; }
 
-  /* SECTION STYLES */
   .journey-section { padding: 7rem 6rem; }
-  .journey-section:nth-child(even) { background: var(--cream); }
+  .journey-section.alt { background: var(--cream); }
   .section-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
   .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
   .section-title em { font-style: italic; color: var(--clay); }
-  .section-intro { font-size: 0.95rem; line-height: 1.9; opacity: 0.75; max-width: 680px; margin-bottom: 4rem; }
+  .section-intro { font-size: 0.95rem; line-height: 1.9; opacity: 0.75; max-width: 720px; margin-bottom: 4rem; }
 
-  /* PROCESS STEPS */
-  .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--mist); }
+  /* PROCESS & DIFFERENCE STEPS */
+  .steps-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--mist); }
   .step { background: var(--warm-white); padding: 2.5rem 2rem; }
-  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: var(--clay); letter-spacing: 0.1em; margin-bottom: 1rem; display: block; }
   .step h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.8rem; }
   .step p { font-size: 0.85rem; opacity: 0.65; line-height: 1.7; }
   .step-link { font-size: 0.78rem; color: var(--clay); text-decoration: none; display: inline-block; margin-top: 0.8rem; border-bottom: 1px solid var(--sand); }
   .step-link:hover { color: var(--bark); border-color: var(--bark); }
-
-  /* AWE DIFFERENCE */
-  .difference-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--mist); }
-  .difference-card { background: var(--warm-white); padding: 3rem 2.5rem; }
-  .difference-card.dark { background: var(--bark); color: var(--cream); }
-  .difference-card.full { grid-column: span 2; background: var(--cream); }
-  .diff-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 1rem; }
-  .difference-card.dark .diff-label { color: var(--sand); }
-  .difference-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.25; }
-  .difference-card p { font-size: 0.9rem; line-height: 1.85; opacity: 0.75; }
-  .difference-card.dark p { opacity: 0.7; }
 
   /* ALIGNED SECTION */
   .aligned-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
   .aligned-card { padding: 2.5rem; border: 1px solid var(--mist); background: var(--warm-white); }
   .aligned-card.flourish { border-color: var(--clay); background: var(--cream); }
   .aligned-card.alt { background: var(--bark); border-color: var(--bark); color: var(--cream); }
-  .aligned-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 1rem; }
+  .aligned-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 0.5rem; line-height: 1.2; }
+  .aligned-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 1.2rem; }
   .aligned-card.alt .aligned-label { color: var(--sand); }
-  .aligned-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 1.2rem; }
   .aligned-card ul { list-style: none; }
   .aligned-card ul li { font-size: 0.88rem; padding: 0.5rem 0 0.5rem 1.2rem; position: relative; opacity: 0.8; line-height: 1.7; border-bottom: 1px solid var(--mist); }
   .aligned-card ul li:last-child { border-bottom: none; }
@@ -93,7 +79,7 @@
   .journey-cta::before { content: 'AWE'; font-family: 'Cormorant Garamond', serif; font-size: 20vw; font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: rgba(255,255,255,0.06); pointer-events: none; }
   .journey-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; color: var(--cream); margin-bottom: 1rem; position: relative; }
   .journey-cta h2 em { font-style: italic; }
-  .journey-cta p { color: rgba(247,243,238,0.75); max-width: 480px; margin: 0 auto 2rem; position: relative; }
+  .journey-cta p { color: rgba(247,243,238,0.75); max-width: 480px; margin: 0 auto 2rem; position: relative; font-size: 0.95rem; }
   .btn-primary { display: inline-block; background: var(--cream); color: var(--clay); padding: 0.9rem 2.2rem; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 2px; transition: all 0.2s; position: relative; }
   .btn-primary:hover { background: var(--bark); color: var(--cream); }
 
@@ -103,9 +89,7 @@
     .hamburger { display: flex; }
     .page-hero { padding: 8rem 1.5rem 4rem; }
     .journey-section { padding: 4rem 1.5rem; }
-    .process-steps { grid-template-columns: 1fr 1fr; }
-    .difference-grid { grid-template-columns: 1fr; }
-    .difference-card.full { grid-column: span 1; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
     .aligned-grid { grid-template-columns: 1fr; }
     .journey-cta { padding: 5rem 1.5rem; }
   }
@@ -149,30 +133,25 @@
   <span class="section-eyebrow">Step by Step</span>
   <h2 class="section-title">Awareness &amp; Alignment<br><em>Process</em></h2>
   <p class="section-intro">The Awareness &amp; Alignment™ Model is a thought-provoking, creative partnership to bring greater awareness of habituated programs and patterns that inhibit you from living the most joyful and liberated life possible. The starting place is a goal — but the goal is not simply to achieve it. It's to bring awareness to the motives and meanings around it. Throughout the journey you will be supported with honesty, care, non-judgment and deep respect for the expert you are in you.</p>
-  <div class="process-steps">
+  <div class="steps-grid">
     <div class="step">
-      <div class="step-num">01</div>
       <h4>Free Consultation</h4>
       <p>We meet to explore what's brought you here and whether the Awareness &amp; Alignment™ Model is a good fit — or whether another modality might be more aligned at this point in your journey.</p>
     </div>
     <div class="step">
-      <div class="step-num">02</div>
       <h4>Alignment</h4>
       <p>If the AWE Method and the Awareness &amp; Alignment™ Model is in alignment with your needs, we begin with a one-hour session to clarify your target goal(s) and possible challenges.</p>
     </div>
     <div class="step">
-      <div class="step-num">03</div>
       <h4>Personalized Journey Map</h4>
       <p>After each session your AWExApp™ will be updated with session notes, reflection questions, experiments and wins so you can continue journeying between our sessions. Collectively, these become your Journey Map.</p>
       <a href="journey-map-sample.html" class="step-link">View a sample journey →</a>
     </div>
     <div class="step">
-      <div class="step-num">04</div>
       <h4>Perspective &amp; Practice</h4>
       <p>During our sessions, you will likely gain new perspective or insights. With this Awareness, we will use Wonder to co-create practices that help you break old patterns and create new, healthier habits.</p>
     </div>
     <div class="step">
-      <div class="step-num">05</div>
       <h4>Continuing Your Journey</h4>
       <p>My goal is to hone skills and practices for you to continue your journey — with or without a guide. Within ten sessions, most clients have what they need to fly. You are the master of your travels.</p>
     </div>
@@ -180,47 +159,31 @@
 </section>
 
 <!-- AWE DIFFERENCE -->
-<section class="journey-section" id="difference">
+<section class="journey-section alt" id="difference">
   <span class="section-eyebrow">What Sets Us Apart</span>
   <h2 class="section-title">The AWE<br><em>Difference</em></h2>
-  <div class="difference-grid">
-
-    <div class="difference-card full">
-      <span class="diff-label">Awareness &amp; Alignment Focus</span>
-      <h3>Achievement without awareness just keeps you running in circles.</h3>
-      <p>Most coaching drives straight toward the goal. AWExpedition starts with what's underneath it. Because achieving without awareness just keeps you running in circles — chasing outcomes that never quite bring the stillness and peace you thought reaching them would. By focusing on developing greater awareness of the patterns, beliefs, emotions, and conditioned responses shaping your experience, you can learn to move through life with more clarity, alignment, and intention. When you're no longer driven by what you think you should want, you don't just achieve — you achieve what actually matters to you.</p>
+  <p class="section-intro">Most coaching drives straight toward the goal. AWExpedition starts with what's underneath it. Because achieving without awareness just keeps you running in circles — chasing outcomes that never quite bring the stillness and peace you thought reaching them would. By focusing on developing greater awareness of the patterns, beliefs, emotions, and conditioned responses shaping your experience, you can learn to move through life with more clarity, alignment, and intention. When you're no longer driven by what you think you should want, you don't just achieve — you achieve what actually matters to you.</p>
+  <div class="steps-grid">
+    <div class="step">
+      <h4>Efficient by Design</h4>
+      <p>Your time (and money) matters. We begin with a one-hour session to lay the foundation. After that, 40 minutes is all we need — enough time to surface real insight without the filler. With the AWExApp™, you drop in your focus before each session so we dig in from minute one.</p>
     </div>
-
-    <div class="difference-card">
-      <span class="diff-label">Efficient by Design</span>
-      <h3>Your time (and money) matters.</h3>
-      <p>We begin with a one-hour session to lay the foundation. After that, 40 minutes is all we need — enough time to surface real insight without the filler. With the AWExApp™, you drop in your focus before each session so we dig in from minute one.</p>
+    <div class="step">
+      <h4>Transformation Between Sessions</h4>
+      <p>A 40-minute session can crack something open. What you do with it the rest of the week is where the real shift happens. The AWExApp™ keeps your momentum going — with session notes, reflection questions, experiments, guided prompts, and wins to help you stay engaged and bring awareness into everyday life.</p>
     </div>
-
-    <div class="difference-card dark">
-      <span class="diff-label">Transformation Between Sessions</span>
-      <h3>A 40-minute session can crack something open.</h3>
-      <p>What you do with it the rest of the week is where the real shift happens. The AWExApp™ keeps your momentum going — with session notes, reflection questions, experiments, guided prompts, and wins to help you stay engaged in the process and bring awareness into everyday life.</p>
+    <div class="step">
+      <h4>Resources Specific to Your Journey</h4>
+      <p>Through AWExpedition.com and the AWExApp™, you'll be guided toward frameworks, articles, musings, and practices that align with the specific patterns and challenges arising in your own life. You leave with a journey map that captures your growth.</p>
     </div>
-
-    <div class="difference-card">
-      <span class="diff-label">Resources Specific to Your Journey</span>
-      <h3>Tools that travel with you.</h3>
-      <p>Through AWExpedition.com and the AWExApp™, you'll be guided toward frameworks, articles, musings, and practices that align with the specific patterns and challenges arising in your own life. You leave with a journey map that captures your growth and tools you can return to long after our work together ends.</p>
-    </div>
-
-    <div class="difference-card dark">
-      <span class="diff-label">A Map, Not a Dependency</span>
-      <h3>Standing on your own is always the point.</h3>
+    <div class="step">
+      <h4>A Map, Not a Dependency</h4>
       <p>Within 10 sessions, the goal is for you to know how to navigate life — to recognize your patterns, trust your knowing, and move through any terrain with or without a guide. Continued coaching is always available, but standing on your own is always the point.</p>
     </div>
-
-    <div class="difference-card full">
-      <span class="diff-label">You Are the Expert</span>
-      <h3>We arrive with deep humility.</h3>
-      <p>You are the authority on you — your experiences, your wisdom, what's true for you, what works for you. My role is to ask the right questions, hold the space, and get out of the way of what's already in you trying to emerge.</p>
+    <div class="step">
+      <h4>You Are the Expert</h4>
+      <p>We arrive with deep humility. You are the authority on you — your experiences, your wisdom, what's true for you. My role is to ask the right questions, hold the space, and get out of the way of what's already in you trying to emerge.</p>
     </div>
-
   </div>
 </section>
 
@@ -233,8 +196,8 @@
   <div class="aligned-grid">
 
     <div class="aligned-card flourish">
-      <span class="aligned-label">This work tends to flourish when:</span>
       <h3>You might be a great fit</h3>
+      <span class="aligned-label">This work tends to flourish when:</span>
       <ul>
         <li>You sense something underneath the surface but can't quite name it</li>
         <li>You're tired of chasing outcomes that don't bring what you thought they would</li>
@@ -245,8 +208,8 @@
     </div>
 
     <div class="aligned-card">
-      <span class="aligned-label">A&amp;A Coaching pairs well with:</span>
       <h3>A natural addition</h3>
+      <span class="aligned-label">A&amp;A Coaching pairs well with:</span>
       <ul>
         <li>Therapy or counseling — we're forward-focused and strengths-based, a natural complement to deeper clinical work</li>
         <li>Energy work or other holistic practices</li>
@@ -255,8 +218,8 @@
     </div>
 
     <div class="aligned-card alt">
-      <span class="aligned-label">This might not be the right fit right now if:</span>
       <h3>An alternative may serve better</h3>
+      <span class="aligned-label">This might not be the right fit right now if:</span>
       <ul>
         <li>Life feels so heavy that what you need most is space to be heard and held — a therapist or counselor may be the better anchor</li>
         <li>The between-session work feels out of reach — if the timing isn't right, the AWExApp™ is central to how change happens, and we want you to get the most from this journey</li>
@@ -265,19 +228,19 @@
     </div>
 
   </div>
-
-  <div style="text-align:center;margin-top:3rem;padding:2.5rem;background:var(--warm-white);border:1px solid var(--mist);">
-    <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--bark);margin-bottom:1.2rem;opacity:0.85;">Not sure where you land? Let's find out together.</p>
-    <a href="https://calendly.com/awexpedition/30min" style="display:inline-block;text-decoration:none;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.9rem 2.2rem;background:var(--clay);color:var(--cream);border-radius:2px;transition:background 0.2s;">Book a Complimentary Exploratory Session</a>
-  </div>
 </section>
 
 <!-- CTA -->
 <section class="journey-cta">
   <h2>Ready to begin<br><em>your expedition?</em></h2>
-  <p>Take the first step toward transformative growth with a free 40-minute consultation — no commitment required.</p>
-  <a href="https://calendly.com/awexpedition/30min" class="btn-primary">Schedule Your Free Call</a>
+  <p>Not sure where you land? Book a complimentary 40-minute exploratory session and let's find out together.</p>
+  <a href="https://calendly.com/awexpedition/30min" class="btn-primary">Book Your Free Call</a>
 </section>
+
+<!-- GO BACK -->
+<div style="text-align:center;padding:3rem 6rem;background:var(--warm-white);">
+  <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='index.html'; return false;" style="display:inline-block;padding:0.7rem 2rem;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cream);background:var(--clay);border-radius:2px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='var(--bark)'" onmouseout="this.style.background='var(--clay)'">← Go Back</a>
+</div>
 
 <div id="site-footer"></div>
 <script>
