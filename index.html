@@ -336,8 +336,8 @@
     #services { padding: 4rem 1.5rem; }
     .services-grid { grid-template-columns: 1fr; }
     .style-strip { grid-template-columns: 1fr 1fr; }
-    #process { padding: 4rem 1.5rem; }
-    .process-steps { grid-template-columns: 1fr 1fr; }
+    #process { padding: 4rem 1.5rem !important; }
+    #process > div:last-child { grid-template-columns: 1fr !important; }
     #cta { padding: 5rem 1.5rem; }
     footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
     .footer-contact { text-align: left; }
@@ -577,39 +577,36 @@
 </div>
 
 <!-- HOW IT WORKS -->
-<section id="process">
+<section id="process" style="padding:7rem 6rem;background:var(--warm-white);">
   <div class="process-header">
     <span class="section-eyebrow">How It Works</span>
-    <h2 class="section-title" style="color:var(--bark)">Awareness &amp; Alignment<br><em>Process</em></h2>
+    <h2 class="section-title" style="color:var(--bark)">The <em>AWExpedition</em><br>Experience</h2>
+    <p style="max-width:600px;margin:1.5rem auto 0;font-size:0.95rem;opacity:0.7;line-height:1.9;text-align:center;">A coaching model built around awareness, alignment, and the belief that change happens between sessions — not just during them.</p>
   </div>
-  <p class="process-description">The Awareness &amp; Alignment™ Model is a thought-provoking, creative partnership to bring greater awareness of habituated programs and patterns that inhibit you from living the most joyful and liberated life possible. The starting place is a goal — but the goal is not simply to achieve it. It's to bring awareness to the motives and meanings around it. In doing so, you will likely discover what is holding you back. We will co-creatively explore ways to overcome those blockers — or you may find goals that better align with your true self. Throughout the journey you will be supported with honesty, care, non-judgment and deep respect for the expert you are in you.</p>
-  <div class="process-steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <h4>Free Consultation</h4>
-      <p>We meet to explore what's brought you here and whether the Awareness &amp; Alignment™ Model is a good fit — or whether another modality might be more aligned at this point in your journey.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <h4>Alignment</h4>
-      <p>If the AWE Method and the Awareness &amp; Alignment™ Model is in alignment with your needs, we begin with a one-hour session to clarify your target goal(s) and possible challenges.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <h4>Personalized Journey Map</h4>
-      <p>After each session your AWExApp will be updated with session notes, reflection questions, experiments and wins so you can continue journeying in-betweeen our sessions. Collectively, these will become your Journey Map.</p>
-      <a href="journey-map-sample.html" class="step-link">View a sample journey →</a>
-    </div>
-    <div class="step">
-      <div class="step-num">04</div>
-      <h4>Perspective &amp; Practice</h4>
-      <p>During our sessions, you will likely gain new perspective or insights. With this Awareness, we will use Wonder to co-create practices that help you break old patterns and create new, healthier habits.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">05</div>
-      <h4>Continuing Your Journey</h4>
-      <p>My goal is to hone skills and practices for you to continue your journey — with or without a guide. Within ten sessions, most clients have what they need to fly…but the journey is yours. We can continue toward a new goal, check in occasionally, or you can simply fly. You are the master of your travels.</p>
-    </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem;">
+
+    <a href="the-journey.html#process" style="text-decoration:none;display:block;background:var(--cream);border:1px solid var(--mist);padding:3rem 2.5rem;transition:transform 0.3s,box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(44,32,23,0.1)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+      <span style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--clay);display:block;margin-bottom:1.2rem;">The Process</span>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--bark);margin-bottom:1rem;line-height:1.2;">Awareness &amp; Alignment<br><em style="font-style:italic;color:var(--clay);">Process</em></h3>
+      <p style="font-size:0.88rem;opacity:0.65;line-height:1.8;color:var(--bark);margin-bottom:1.5rem;">From free consultation to your personalized journey map — a step-by-step look at how the coaching process unfolds.</p>
+      <span style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);border-bottom:1px solid var(--sand);padding-bottom:2px;">See the full process →</span>
+    </a>
+
+    <a href="the-journey.html#difference" style="text-decoration:none;display:block;background:var(--bark);border:1px solid var(--bark);padding:3rem 2.5rem;transition:transform 0.3s,box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(44,32,23,0.2)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+      <span style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sand);display:block;margin-bottom:1.2rem;">What Sets Us Apart</span>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--cream);margin-bottom:1rem;line-height:1.2;">The AWE<br><em style="font-style:italic;color:var(--sand);">Difference</em></h3>
+      <p style="font-size:0.88rem;opacity:0.65;line-height:1.8;color:var(--cream);margin-bottom:1.5rem;">Efficient sessions. An app that keeps momentum going. A map not a dependency. Here's what makes this coaching different.</p>
+      <span style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sand);border-bottom:1px solid rgba(212,184,150,0.4);padding-bottom:2px;">Explore the difference →</span>
+    </a>
+
+    <a href="the-journey.html#aligned" style="text-decoration:none;display:block;background:var(--cream);border:1px solid var(--mist);padding:3rem 2.5rem;transition:transform 0.3s,box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(44,32,23,0.1)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='none'">
+      <span style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--clay);display:block;margin-bottom:1.2rem;">Is This Right for You?</span>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--bark);margin-bottom:1rem;line-height:1.2;">Aligned, Addition<br><em style="font-style:italic;color:var(--clay);">or Alternative</em></h3>
+      <p style="font-size:0.88rem;opacity:0.65;line-height:1.8;color:var(--bark);margin-bottom:1.5rem;">AWExpedition isn't for everyone — and that's okay. An honest look at where this work flourishes and where something else might serve you better.</p>
+      <span style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);border-bottom:1px solid var(--sand);padding-bottom:2px;">Find out if it's a fit →</span>
+    </a>
+
   </div>
 </section>
 
