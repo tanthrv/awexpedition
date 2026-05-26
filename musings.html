@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,16 +90,21 @@
   .post-card.featured .read-more:hover { border-color: var(--sand); }
   .shelf-category-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.8rem; }
 
+  /* Soft gate card */
+  .soft-gate-card { border: 1px solid var(--sand); background: var(--cream); padding: 2.5rem; display: flex; flex-direction: column; justify-content: flex-start; }
+  .soft-gate-card .post-tag { color: var(--moss); }
+  .soft-gate-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; line-height: 1.25; margin-bottom: 0.8rem; color: var(--bark); }
+  .soft-gate-card p { font-size: 0.88rem; opacity: 0.7; line-height: 1.8; margin-bottom: 1.2rem; }
+  .soft-gate-label { font-size: 0.75rem; letter-spacing: 0.08em; color: var(--moss); font-style: italic; margin-bottom: 1rem; display: block; }
+
   .share-story-bar { background: var(--cream); border: 1px solid var(--mist); padding: 1.5rem 2.5rem; margin-top: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
   .share-story-bar p { font-size: 0.88rem; opacity: 0.7; line-height: 1.6; }
   .share-story-bar a { display: inline-block; text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 1px; white-space: nowrap; }
 
-  .substack-section { padding: 6rem; background: var(--moss); text-align: center; }
-  .substack-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; color: var(--cream); margin-bottom: 0.8rem; }
-  .substack-section h2 em { font-style: italic; color: var(--sand); }
-  .substack-section p { color: rgba(247,243,238,0.7); max-width: 480px; margin: 0 auto 2rem; font-size: 0.95rem; line-height: 1.8; }
-  .substack-btn { display: inline-block; text-decoration: none; font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 1rem 2.5rem; background: var(--clay); color: var(--cream); border-radius: 2px; transition: background 0.2s; }
-  .substack-btn:hover { background: var(--bark); }
+  .kit-section { padding: 6rem; background: var(--moss); text-align: center; }
+  .kit-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; color: var(--cream); margin-bottom: 0.8rem; }
+  .kit-section h2 em { font-style: italic; color: var(--sand); }
+  .kit-section p { color: rgba(247,243,238,0.7); max-width: 480px; margin: 0 auto 2rem; font-size: 0.95rem; line-height: 1.8; }
 
   footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
   .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
@@ -122,7 +128,7 @@
     .shelf-headliner { grid-row: unset; }
     .shelf-more-card { grid-row: unset; }
     .post-card.featured { grid-column: span 1; }
-    .substack-section { padding: 4rem 1.5rem; }
+    .kit-section { padding: 4rem 1.5rem; }
     footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
     .footer-contact { text-align: left; }
     .share-story-bar { flex-direction: column; align-items: flex-start; }
@@ -202,17 +208,20 @@
       <p>I spent over 400 minutes ranting about dishes in the sink. Not once did it result in the dishes being put away by anyone other than me. A story about heat, samskaras, and the framework that finally solved the problem.</p>
       <a href="solution-sundays.html" class="read-more">Read the full piece →</a>
     </div>
-    <div class="post-card">
+    <!-- SOFT GATE: Pros and Pros -->
+    <div class="soft-gate-card">
       <span class="post-tag">Musings</span>
       <h3>Pros and Pros</h3>
       <p>Most of us were trained to weigh pros and cons. What if every outcome — the promotion and the rejection, the smooth plan and the fallen-apart one — contained equal usefulness?</p>
-      <span class="post-meta">Coming Soon</span>
+      <span class="soft-gate-label">For full access to all Musings, join my email list.</span>
+      <script async data-uid="2816166cf3" src="https://awexpedition.kit.com/2816166cf3/index.js"></script>
     </div>
+    <!-- FROM THE DESK OF TAN — Kit link -->
     <div class="post-card" style="border:1px solid var(--sand);background:var(--cream);">
       <span class="post-tag">From the Desk of Tan</span>
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;">From the Desk of Tan</h3>
       <p>Musings, excerpts, and reflections — including previews from the forthcoming <em>Left Brain Spirituality</em>. New pieces publish weekly.</p>
-      <a href="https://awexpedition.substack.com" target="_blank" class="read-more">👉 Subscribe on Substack →</a>
+      <a href="https://moremusings.awexpedition.com" target="_blank" class="read-more">👉 Join my email list →</a>
     </div>
   </div>
 </section>
@@ -247,17 +256,21 @@
       <p>Most problems don't get solved. They get defended. Solution Sundays is a framework for separating the heat from the work — and finally closing the gap between a recurring irritation and an actual solution.</p>
       <a href="solution-sundays-framework.html" class="read-more">Explore the framework →</a>
     </div>
-    <div class="post-card">
+    <!-- SOFT GATE: Pros and Pros -->
+    <div class="soft-gate-card">
       <span class="post-tag">Tanisms™ · Framework</span>
       <h3>Pros and Pros</h3>
       <p>A reframe of the classic pros and cons decision model. When non-attachment enters the equation, every outcome reveals its own form of usefulness — and the fear of the wrong choice begins to dissolve.</p>
-      <span class="post-meta">Coming Soon</span>
+      <span class="soft-gate-label">For full access to all Tanisms, join my email list.</span>
+      <script async data-uid="2816166cf3" src="https://awexpedition.kit.com/2816166cf3/index.js"></script>
     </div>
-    <div class="post-card" style="background:var(--bark);color:var(--cream);border-color:var(--bark);display:flex;flex-direction:column;justify-content:center;">
-      <span class="post-tag" style="color:var(--sand);">Psst.</span>
-      <h3 style="font-family:'Cormorant Garamond',serif;color:var(--cream);font-size:1.4rem;margin-bottom:1rem;">There's a whole trail ahead.</h3>
-      <p style="color:rgba(247,243,238,0.7);margin-bottom:1.5rem;">Take a peek at what's coming in Tanisms.</p>
-      <a href="the-rabbit-hole.html" style="display:inline-block;text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sand);border-bottom:1px solid rgba(212,184,150,0.4);padding-bottom:2px;">Fall down the rabbit hole →</a>
+    <!-- SOFT GATE: Rabbit Hole -->
+    <div class="soft-gate-card">
+      <span class="post-tag">Tanisms™ · What's Coming</span>
+      <h3>There's a whole trail ahead.</h3>
+      <p>Take a peek at what's coming in Tanisms — ideas worth sitting with, frameworks in progress, handles on the same door.</p>
+      <span class="soft-gate-label">For full access to all Tanisms, join my email list.</span>
+      <script async data-uid="2816166cf3" src="https://awexpedition.kit.com/2816166cf3/index.js"></script>
     </div>
   </div>
   <div class="share-story-bar">
@@ -285,14 +298,18 @@
       <p>"The mouse frees the lion. The small key opens the large door. Size was never the measure of anything that mattered."</p>
       <a href="tz-last-night-of-a-jockey.html" class="read-more">Read the full piece →</a>
     </div>
-    <div class="coming-soon-card" style="min-height:280px">
-      <span>More episodes coming</span>
-      <p>The Twilight Zone as spiritual teacher — one episode, one lesson, one piece at a time</p>
+    <!-- SOFT GATE: More episodes coming -->
+    <div class="soft-gate-card">
+      <span class="post-tag">Twilight Zone Files · Coming Soon</span>
+      <h3>More episodes coming.</h3>
+      <p>The Twilight Zone as spiritual teacher — one episode, one lesson, one piece at a time.</p>
+      <span class="soft-gate-label">For full access to all Twilight Zone Files, join my email list.</span>
+      <script async data-uid="2816166cf3" src="https://awexpedition.kit.com/2816166cf3/index.js"></script>
     </div>
     <div class="coming-soon-card" style="min-height:280px">
       <span>Have an episode in mind?</span>
-      <p><a href="mailto:tan@awexpedition.com" style="color:var(--clay);text-decoration:none;border-bottom:1px solid var(--sand);">Send your suggestion →</a>
-      <p style="font-size:0.75rem;color:var(--sand);opacity:0.45;margin-top:0.4rem;font-style:italic;">Email not opening? Reach us at tan@awexpedition.com</p>
+      <p><a href="mailto:tan@awexpedition.com" style="color:var(--clay);text-decoration:none;border-bottom:1px solid var(--sand);">Send your suggestion →</a></p>
+      <p style="font-size:0.75rem;color:var(--bark);opacity:0.7;margin-top:0.4rem;font-style:italic;">Email not opening? Reach us at tan@awexpedition.com</p>
     </div>
   </div>
 </section>
@@ -327,9 +344,13 @@
       <span>Meditation Practice</span>
       <p>A beginner's guide to building a meditation practice — coming soon</p>
     </div>
-    <div class="coming-soon-card" style="min-height:240px;opacity:0.8;">
-      <span>More practices coming</span>
-      <a href="https://awexpedition.substack.com" target="_blank" style="display:inline-block;margin-top:1rem;text-decoration:none;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.6rem 1.4rem;background:var(--clay);color:var(--cream);border-radius:2px;">Subscribe here →</a>
+    <!-- SOFT GATE: More practices coming -->
+    <div class="soft-gate-card" style="min-height:240px;">
+      <span class="post-tag">AWE in Action · Coming Soon</span>
+      <h3>More practices coming.</h3>
+      <p>Tools, exercises, and experiments that turn insight into lived experience.</p>
+      <span class="soft-gate-label">For full access to all AWE in Action practices, join my email list.</span>
+      <script async data-uid="2816166cf3" src="https://awexpedition.kit.com/2816166cf3/index.js"></script>
     </div>
   </div>
 </section>
@@ -425,13 +446,13 @@
       <span class="post-meta">Apple TV+</span>
     </div>
 
-    <!-- R2: More cards — bark background, gold text -->
+    <!-- R2: More cards -->
     <div class="post-card shelf-more shelf-more-card" style="grid-column:1;background:var(--bark);border-color:var(--bark);flex-direction:column;gap:0.8rem;">
       <span class="shelf-category-label" style="color:var(--sand);"><span style="background:#F7F3EE;border-radius:20px;padding:0.4rem 0.7rem;margin-right:0.4rem;">📚</span>Books</span>
       <a href="on-the-shelf.html#books" style="display:inline-block;text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sand);border-bottom:1px solid rgba(212,184,150,0.4);padding-bottom:2px;">More Books →</a>
     </div>
     <div class="post-card shelf-more shelf-more-card" style="grid-column:2;background:var(--bark);border-color:var(--bark);flex-direction:column;gap:0.8rem;">
-      <span class="shelf-category-label" style="color:var(--sand);"><span style="background:#F7F3EE;border-radius:20px;padding:0.4rem 0.7rem;margin-right:0.4rem;">🎵</span>Music</span> 
+      <span class="shelf-category-label" style="color:var(--sand);"><span style="background:#F7F3EE;border-radius:20px;padding:0.4rem 0.7rem;margin-right:0.4rem;">🎵</span>Music</span>
       <a href="on-the-shelf.html#music" style="display:inline-block;text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sand);border-bottom:1px solid rgba(212,184,150,0.4);padding-bottom:2px;">More Music →</a>
     </div>
     <div class="post-card shelf-more shelf-more-card" style="grid-column:3;background:var(--bark);border-color:var(--bark);flex-direction:column;gap:0.8rem;">
@@ -439,7 +460,7 @@
       <a href="on-the-shelf.html#podcasts" style="display:inline-block;text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sand);border-bottom:1px solid rgba(212,184,150,0.4);padding-bottom:2px;">More Podcasts →</a>
     </div>
     <div class="post-card shelf-more shelf-more-card" style="grid-column:4;background:var(--bark);border-color:var(--bark);flex-direction:column;gap:0.8rem;">
-      <span class="shelf-category-label" style="color:var(--sand);"><span style="background:#F7F3EE;border-radius:20px;padding:0.4rem 0.7rem;margin-right:0.4rem;">🎬</span>TV & Film </span>
+      <span class="shelf-category-label" style="color:var(--sand);"><span style="background:#F7F3EE;border-radius:20px;padding:0.4rem 0.7rem;margin-right:0.4rem;">🎬</span>TV & Film</span>
       <a href="on-the-shelf.html#tv-film" style="display:inline-block;text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--sand);border-bottom:1px solid rgba(212,184,150,0.4);padding-bottom:2px;">More TV & Film →</a>
     </div>
 
@@ -481,19 +502,22 @@
       <p>ACT therapy, psychological flexibility research, and the teachings of Michael Singer all arrive at the same destination: surrender is not defeat. It is the condition for everything else. Acceptance is not the last law — it is the one that makes all the others possible.</p>
       <a href="notify.html" class="read-more">Coming soon →</a>
     </div>
-    <div class="post-card" style="background:var(--cream);border:1px solid var(--sand);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:200px;">
+    <!-- SOFT GATE: Explore the A Laws -->
+    <div class="soft-gate-card">
       <span class="post-tag">The "A" Laws · More</span>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:1rem;">See what other "A" Laws are hidden in the Law of Attraction</h3>
-      <a href="the-a-laws.html" class="read-more">Explore the A Laws →</a>
+      <h3>See what other "A" Laws are hidden in the Law of Attraction.</h3>
+      <p>More laws. More science. More of what manifestation actually is — and isn't.</p>
+      <span class="soft-gate-label">For full access to all A Laws content, join my email list.</span>
+      <script async data-uid="2816166cf3" src="https://awexpedition.kit.com/2816166cf3/index.js"></script>
     </div>
   </div>
 </section>
 
-<!-- SUBSTACK -->
-<section class="substack-section">
+<!-- KIT SECTION -->
+<section class="kit-section">
   <h2>Stay on the<br><em>journey</em></h2>
-  <p>New musings, Tanisms™, and tools — published weekly on Substack.</p>
-  <a href="https://awexpedition.substack.com" target="_blank" class="substack-btn">Subscribe on Substack →</a>
+  <p>New musings, Tanisms™, and tools — published weekly.</p>
+  <script async data-uid="2816166cf3" src="https://awexpedition.kit.com/2816166cf3/index.js"></script>
 </section>
 
 <div id="site-footer"></div>
