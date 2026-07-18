@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pros and Pros — Framework — AWExpedition</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+
+  .article-hero { padding: 9rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .article-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(181,113,74,0.25) 0%, transparent 60%); }
+  .article-hero-inner { position: relative; max-width: 760px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: rgba(247,243,238,0.7); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; transition: opacity 0.2s; }
+  .breadcrumb a:hover { color: var(--cream); }
+  .breadcrumb span { color: rgba(247,243,238,0.4); font-size: 0.75rem; }
+  .article-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; }
+  .article-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.5rem; }
+  .article-hero h1 em { font-style: italic; color: var(--sand); }
+  .article-subtitle { font-size: 1.1rem; color: rgba(247,243,238,0.7); line-height: 1.8; max-width: 600px; font-style: italic; font-family: 'Cormorant Garamond', serif; }
+
+  .framework-body { max-width: 760px; margin: 0 auto; padding: 5rem 6rem; }
+  .framework-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: var(--bark); margin-bottom: 1.2rem; }
+  .framework-body h2 em { font-style: italic; color: var(--clay); }
+  .framework-body p { font-size: 1.02rem; line-height: 1.9; margin-bottom: 1.6rem; color: var(--bark); }
+  .framework-section { margin-bottom: 3.5rem; }
+  .section-divider { border: none; border-top: 1px solid var(--mist); margin: 3rem 0; }
+
+  .trigger-list { list-style: none; margin: 1.5rem 0 0; }
+  .trigger-list li { position: relative; padding-left: 1.4rem; margin-bottom: 0.9rem; font-size: 1.02rem; line-height: 1.7; opacity: 0.9; }
+  .trigger-list li::before { content: '—'; position: absolute; left: 0; color: var(--clay); }
+
+  .move-block { margin-bottom: 2rem; }
+  .move-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--clay); margin-bottom: 0.6rem; }
+
+  .callout { background: var(--bark); padding: 2.5rem 3rem; margin: 3rem 0; text-align: center; }
+  .callout p { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem !important; font-style: italic; font-weight: 300; color: var(--cream) !important; line-height: 1.6 !important; margin: 0 !important; }
+
+  .practice-entry { margin-bottom: 2.2rem; padding-bottom: 2.2rem; border-bottom: 1px solid var(--mist); }
+  .practice-entry:last-child { border-bottom: none; }
+  .practice-entry h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; margin-bottom: 0.7rem; color: var(--bark); }
+  .practice-entry a { color: var(--clay); text-decoration: none; border-bottom: 1px solid var(--sand); }
+  .practice-entry a:hover { border-color: var(--clay); }
+
+  .sit-with-prompt { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: var(--clay); margin-bottom: 1.2rem; }
+
+  .connection-entry { margin-bottom: 1.8rem; }
+  .connection-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 0.3rem; }
+  .connection-entry h3 { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.15rem; font-weight: 400; margin-bottom: 0.6rem; color: var(--bark); }
+  .connection-entry p { font-size: 0.95rem; opacity: 0.85; }
+
+  .next-piece { background: var(--cream); border-top: 1px solid var(--mist); padding: 4rem 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .next-piece-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; display: block; }
+  .next-piece h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.8rem; }
+  .next-piece p { font-size: 0.88rem; opacity: 0.65; line-height: 1.8; margin-bottom: 1.2rem; }
+  .btn-read { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; }
+  .btn-read:hover { border-color: var(--clay); }
+  .next-piece-back { text-align: right; }
+  .next-piece-back a { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bark); opacity: 0.6; border-bottom: 1px solid var(--mist); padding-bottom: 2px; }
+  .next-piece-back a:hover { opacity: 1; }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .article-hero { padding: 8rem 1.5rem 4rem; }
+    .framework-body { padding: 3rem 1.5rem; }
+    .callout { padding: 2rem 1.5rem; }
+    .next-piece { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    .next-piece-back { text-align: left; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>/</span>
+      <a href="musings.html#tanisms">Tan's Take on Timeless Truths</a>
+    </div>
+    <span class="article-tag">Tanism™ · Framework</span>
+    <h1>Pros and<br><em>Pros</em></h1>
+    <p class="article-subtitle">Every outcome contains benefits. The real risk is forgetting that.</p>
+  </div>
+</section>
+
+<div class="framework-body">
+
+  <div class="framework-section">
+    <h2>The Concept</h2>
+    <p>What if we stopped focusing on the cons?</p>
+    <p>Most of us were trained to consider the pros and cons. The traditional pros-and-cons list assumes your happiness depends on choosing the objectively better option. Pros and Pros begins from a different assumption: every path contains gifts and every path contains challenges. Since challenges exist regardless of what you choose, compare the opportunities each path offers rather than obsessing over what each one might cost.</p>
+    <p>Instead of pros and cons, you can view decisions and events with a Pros and Pros™ mindset. We usually compare each option against itself. Option A's benefits minus Option A's costs. Option B's benefits minus Option B's costs. But negativity bias often means we are looking at the cons. It's not really a comparison between two futures — it's a comparison between imagined disappointments and fear of missing out. Pros and Pros asks a different question: if every path will contain challenges anyway, which opportunities genuinely excite me?</p>
+    <p>Try this instead: take only the pros of Option A and the pros of Option B, and put them side by side, nothing subtracted from either. No ledger closes against itself. What's left is a comparison between two genuinely good things — not a referendum on which one might be worse.</p>
+    <p>If, after honestly exploring the possibilities, both options still feel equally rich with opportunity, that isn't indecision. It's evidence that you're fortunate enough to be choosing between two equally good choices. A Pros and Pros™ mindset serves two purposes. Before a decision, it reminds you that multiple futures all have benefits. After an outcome, it reminds you that every reality contains something worth discovering.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="framework-section">
+    <h2>When It Arises — Triggers</h2>
+    <ul class="trigger-list">
+      <li>Agonizing over decisions</li>
+      <li>Fear of missing out on the option not chosen</li>
+      <li>A decision you've already made, but keep re-litigating</li>
+      <li>Waiting on an uncertain outcome — a sale, a result, a response</li>
+      <li>When things don't go as expected</li>
+      <li>A setback that feels like proof you chose wrong</li>
+    </ul>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="framework-section">
+    <h2>The Move</h2>
+    <p>Instead of asking "what do I stand to lose," ask: <em>what is useful about this outcome — and what is useful about its opposite?</em> This isn't about ignoring real challenges. If a genuine problem rules one option out, focus the exercise on the pros of the choice you've actually decided to make.</p>
+    <div class="move-block">
+      <h3>Energy Reallocation</h3>
+      <p>Right now, most of that energy is going toward defending a choice before it's even made, or rehearsing a disaster that hasn't happened. Redirect it toward something more durable: the capacity to meet whatever arises — sale or silence, promotion or redirection — with the same steadiness. That capacity, unlike any single outcome, never has to be defended.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>Regardless of the choice, the experience brings its own rewards.</p>
+  </div>
+
+  <div class="framework-section">
+    <h2>In Practice</h2>
+    <div class="practice-entry">
+      <h3>The Cancelled Dinner</h3>
+      <p>A friend cancels plans an hour before you're set to meet. The automatic move is disappointment, maybe a quiet story about being deprioritized. Try viewing the pro of the situation instead: what does the cancelled dinner open up — a task you can now get ahead of, or an evening of self-care? Both directions carry something real.</p>
+    </div>
+    <div class="practice-entry">
+      <h3>The Clerkship Decision</h3>
+      <p>A two-year offer arrives where a
