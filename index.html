@@ -95,9 +95,10 @@
     display: grid; grid-template-columns: 1fr 1fr;
     padding-top: 80px;
   }
-  .hero-text {
+ .hero-text {
     display: flex; flex-direction: column; justify-content: center;
     padding: 5rem 4rem 5rem 6rem;
+    position: relative;
   }
   .hero-eyebrow {
     font-size: 1rem;
@@ -107,10 +108,22 @@
     margin-bottom: 1.5rem;
     font-weight: 400;
   }
+  .hero-slides { position: relative; min-height: 260px; }
+  .hero-slide {
+    position: absolute; top: 0; left: 0; right: 0;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+  .hero-slide.active {
+    opacity: 1; visibility: visible;
+    pointer-events: auto;
+    position: relative;
+  }
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 5vw, 5.5rem);
-    font-weight: 300; line-height: 1.08;
+    font-size: clamp(2.6rem, 4.6vw, 5rem);
+    font-weight: 300; line-height: 1.12;
     letter-spacing: -0.01em; color: var(--bark);
     margin-bottom: 1.8rem;
   }
@@ -120,6 +133,13 @@
     max-width: 440px; margin-bottom: 1.5rem;
   }
   .hero-sub strong { opacity: 0.5; }
+  .hero-dots { display: flex; gap: 0.6rem; margin: 0.5rem 0 1.5rem; }
+  .hero-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--sand); opacity: 0.5; border: none;
+    cursor: pointer; padding: 0; transition: opacity 0.2s, background 0.2s;
+  }
+  .hero-dot.active { background: var(--clay); opacity: 1; }
   .btn-group { display: flex; flex-direction: column; gap: 0.8rem; align-items: flex-start; margin-top: 1rem; }
   .btn-primary {
     background: var(--clay); color: var(--cream);
@@ -315,7 +335,8 @@
     .nav-links { display: none; }
     .hamburger { display: flex; }
     #hero { grid-template-columns: 1fr; }
-    .hero-text { padding: 3rem 1.5rem 2rem; }
+   .hero-text { padding: 3rem 1.5rem 2rem; }
+    .hero-slides { min-height: 220px; }
     .hero-image { min-height: 350px; }
     #pillars { padding: 4rem 1.5rem; }
     .pillars-grid { grid-template-columns: 1fr; gap: 2px; }
@@ -342,6 +363,7 @@
   <ul class="nav-links">
     <li><a href="musings.html">Musings & More</a></li>
     <li><a href="#pillars">The AWE Method</a></li>
+    <li><a href="#process">How It Works</a></li>
     <li><a href="#about">About Tan</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
@@ -355,6 +377,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="musings.html">Musings & More</a>
   <a href="#pillars" onclick="closeMobile()">The AWE Method</a>
+  <a href="#process" onclick="closeMobile()">How It Works</a>
   <a href="#about" onclick="closeMobile()">About Tan</a>
   <a href="#services" onclick="closeMobile()">Services</a>
   <a href="https://calendly.com/awexpedition/30min" class="mob-cta">Book a Free Call</a>
@@ -365,8 +388,28 @@
 <section id="hero">
   <div class="hero-text">
     <span class="hero-eyebrow">Awareness &amp; Alignment™ Coaching</span>
-    <h1 class="hero-title">Most coaching ends<br>when the session ends.<br><em>AWExpedition</em> doesn't.</h1>
-    <p class="hero-sub">Lasting change doesn't come from more advice. It comes from awareness, lived experience, and the evidence you gather about yourself.</p>
+
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide active" data-slide="0">
+        <h1 class="hero-title">Most coaching ends<br>when the session ends.<br><em>AWExpedition</em> doesn't.</h1>
+        <p class="hero-sub">Lasting change doesn't come from more advice. It comes from awareness, lived experience, and the evidence you gather about yourself.</p>
+      </div>
+      <div class="hero-slide" data-slide="1">
+        <h1 class="hero-title">Most coaching begins<br>with goals. <em>AWExpedition</em><br>begins with discovery.</h1>
+        <p class="hero-sub">We explore what truly matters to you—not what family expected, society rewarded, or someone else's formula promised. Your goals stop being borrowed. They become yours.</p>
+      </div>
+      <div class="hero-slide" data-slide="2">
+        <h1 class="hero-title">Most people chase peace<br>by achieving more.<br><em>AWExpedition</em> asks what<br>that truly means.</h1>
+        <p class="hero-sub">Real alignment doesn't come from the next win. It comes from understanding what "peace" and "more" mean to you.</p>
+      </div>
+    </div>
+
+    <div class="hero-dots" id="heroDots">
+      <button class="hero-dot active" data-goto="0" aria-label="Slide 1"></button>
+      <button class="hero-dot" data-goto="1" aria-label="Slide 2"></button>
+      <button class="hero-dot" data-goto="2" aria-label="Slide 3"></button>
+    </div>
+
     <p style="font-size:1rem;font-weight:500;color:var(--clay);margin-bottom:0.5rem;">Begin your AWExpedition.</p>
     <div class="btn-group">
       <a href="https://calendly.com/awexpedition/30min" class="btn-primary">Book a Free Call</a>
@@ -630,6 +673,53 @@
   document.getElementById('financialModal').addEventListener('click', function(e) {
     if (e.target === this) this.style.display = 'none';
   });
+</script>
+  <script>
+  /* HERO ROTATION: auto-rotate + manual dots + pause on hover */
+  (function() {
+    const slides = Array.from(document.querySelectorAll('.hero-slide'));
+    const dots = Array.from(document.querySelectorAll('.hero-dot'));
+    const heroText = document.querySelector('.hero-text');
+    let current = 0;
+    let intervalId = null;
+    const ROTATE_MS = 6000;
+
+    function goTo(index) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = index;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function next() {
+      goTo((current + 1) % slides.length);
+    }
+
+    function startAuto() {
+      stopAuto();
+      intervalId = setInterval(next, ROTATE_MS);
+    }
+    function stopAuto() {
+      if (intervalId) clearInterval(intervalId);
+      intervalId = null;
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.getAttribute('data-goto'), 10);
+        goTo(idx);
+        startAuto();
+      });
+    });
+
+    if (heroText) {
+      heroText.addEventListener('mouseenter', stopAuto);
+      heroText.addEventListener('mouseleave', startAuto);
+    }
+
+    startAuto();
+  })();
 </script>
 </body>
 </html>
