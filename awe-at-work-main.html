@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWE at Work — For Organizations — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--bark); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(253,250,246,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); padding: 1.5rem 2rem; flex-direction: column; gap: 0; z-index: 99; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { display: block; text-decoration: none; color: var(--bark); font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.9rem 0; border-bottom: 1px solid var(--mist); opacity: 0.75; transition: opacity 0.2s; }
+  .mobile-menu a:hover { opacity: 1; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu .mob-cta { background: var(--moss); color: var(--cream) !important; padding: 0.9rem 1.5rem !important; border-radius: 2px; opacity: 1 !important; margin-top: 0.5rem; text-align: center; border: none !important; }
+
+  /* HERO - split layout, rotating text panel */
+  #hero { min-height: 90vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 80px; }
+  .hero-text { display: flex; flex-direction: column; justify-content: center; padding: 4rem 4rem 4rem 6rem; background: var(--warm-white); position: relative; }
+  .page-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1.5rem; display: block; }
+  .hero-slides { position: relative; }
+  .hero-slide { position: absolute; top: 0; left: 0; right: 0; opacity: 0; transition: opacity 0.35s ease; pointer-events: none; }
+  .hero-slide.active { opacity: 1; pointer-events: auto; transition: opacity 0.35s ease 0.35s; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 300; line-height: 1.18; color: var(--bark); margin-bottom: 1.5rem; }
+  .hero-title em { font-style: italic; color: var(--clay); }
+  .hero-sub { font-size: 1rem; color: var(--bark); opacity: 0.75; max-width: 500px; line-height: 1.9; margin-bottom: 1.5rem; }
+  .hero-dots { display: flex; gap: 0.6rem; margin: 0.5rem 0 1.5rem; }
+  .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sand); opacity: 0.5; border: none; cursor: pointer; padding: 0; transition: opacity 0.2s, background 0.2s; }
+  .hero-dot.active { background: var(--clay); opacity: 1; }
+  .btn-primary { background: var(--clay); color: var(--cream); padding: 0.9rem 2.2rem; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 2px; display: inline-block; transition: background 0.2s, transform 0.2s; }
+  .btn-primary:hover { background: var(--bark); transform: translateY(-2px); }
+  .hero-image { position: relative; overflow: hidden; }
+  .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-image::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,92,62,0.15) 0%, transparent 60%); z-index: 1; }
+
+  /* PROBLEM STRIP */
+  .problem-strip { padding: 4rem 6rem; background: var(--cream); text-align: center; }
+  .problem-strip p { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; max-width: 720px; margin: 0 auto; line-height: 1.6; color: var(--bark); opacity: 0.85; }
+  .topic-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; margin-top: 2.5rem; max-width: 780px; margin-left: auto; margin-right: auto; }
+  .topic-chip { background: var(--warm-white); border: 1px solid var(--sand); color: var(--bark); font-size: 0.8rem; padding: 0.55rem 1.1rem; border-radius: 20px; opacity: 0.85; }
+
+  /* AWE METHOD */
+  #pillars { padding: 7rem 6rem; background: var(--bark); color: var(--cream); }
+  .pillars-header { text-align: center; margin-bottom: 5rem; }
+  .section-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 300; line-height: 1.15; }
+  .section-title em { font-style: italic; color: var(--sand); }
+  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+  .pillar { background: rgba(255,255,255,0.04); padding: 3rem 2.5rem; border: 1px solid rgba(212,184,150,0.1); transition: background 0.3s; }
+  .pillar:hover { background: rgba(255,255,255,0.08); }
+  .pillar-letter { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; line-height: 1; color: var(--sand); opacity: 0.4; margin-bottom: 1rem; display: block; }
+  .pillar h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; color: var(--cream); }
+  .pillar p { font-size: 0.9rem; opacity: 0.7; line-height: 1.8; }
+
+  /* WHAT'S OFFERED */
+  .offerings { padding: 6rem; background: var(--warm-white); }
+  .section-header { text-align: center; margin-bottom: 4rem; }
+  .offerings .section-eyebrow { color: var(--clay); }
+  .offerings .section-title { color: var(--bark); }
+  .offerings .section-title em { color: var(--clay); }
+  .offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .offer-card { background: var(--cream); border: 1px solid var(--mist); padding: 2.8rem 2.2rem; }
+  .offer-card.featured { background: var(--moss); color: var(--cream); border-color: var(--moss); }
+  .offer-tag { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+  .offer-card.featured .offer-tag { color: var(--sand); }
+  .offer-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 0.8rem; }
+  .offer-card p { font-size: 0.88rem; opacity: 0.75; line-height: 1.8; }
+  .offer-card.featured p { opacity: 0.7; }
+
+  /* CREDIBILITY */
+  .credibility { padding: 6rem; background: var(--bark); color: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .credibility h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 300; line-height: 1.25; margin-bottom: 1.2rem; }
+  .credibility h2 em { font-style: italic; color: var(--sand); }
+  .credibility p { font-size: 0.92rem; opacity: 0.7; line-height: 1.9; margin-bottom: 1rem; }
+  .credibility-list { list-style: none; }
+  .credibility-list li { font-size: 0.85rem; opacity: 0.75; padding: 0.6rem 0; border-bottom: 1px solid rgba(212,184,150,0.15); }
+  .credibility-list li:first-child { border-top: 1px solid rgba(212,184,150,0.15); }
+  .credibility-list .highlight { color: var(--sand); }
+  .credibility-list a { color: var(--sand); text-decoration: none; border-bottom: 1px solid rgba(212,184,150,0.4); padding-bottom: 1px; }
+  .credibility-list a:hover { color: var(--cream); }
+
+  /* HOW IT WORKS - three cards */
+  .how-strip { padding: 6rem; background: var(--cream); }
+  .how-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .how-card { display: block; text-decoration: none; background: var(--warm-white); border: 1px solid var(--mist); padding: 2.8rem 2.2rem; transition: transform 0.3s, box-shadow 0.3s; }
+  .how-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(44,32,23,0.1); }
+  .how-card.dark { background: var(--bark); border-color: var(--bark); color: var(--cream); }
+  .how-card-tag { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); display: block; margin-bottom: 1.2rem; }
+  .how-card.dark .how-card-tag { color: var(--sand); }
+  .how-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: var(--bark); margin-bottom: 1rem; line-height: 1.2; }
+  .how-card.dark h3 { color: var(--cream); }
+  .how-card h3 em { font-style: italic; color: var(--clay); }
+  .how-card.dark h3 em { color: var(--sand); }
+  .how-card p { font-size: 0.88rem; opacity: 0.7; line-height: 1.8; color: var(--bark); margin-bottom: 0; }
+  .how-card.dark p { color: var(--cream); opacity: 0.7; }
+
+  /* CTA / INQUIRY */
+  .cta-section { padding: 6rem; background: var(--clay); text-align: center; position: relative; overflow: hidden; }
+  .cta-section::before { content: 'AWE'; font-family: 'Cormorant Garamond', serif; font-size: 16vw; font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: rgba(255,255,255,0.06); pointer-events: none; }
+  .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.4vw, 3rem); font-weight: 300; color: var(--cream); margin-bottom: 1rem; position: relative; }
+  .cta-section h2 em { font-style: italic; }
+  .cta-section p { color: rgba(247,243,238,0.8); font-size: 0.95rem; max-width: 480px; margin: 0 auto 2rem; position: relative; }
+  .cta-section .btn-primary { background: var(--cream); color: var(--clay); position: relative; }
+  .cta-section .btn-primary:hover { background: var(--bark); color: var(--cream); }
+  .cta-form-note { position: relative; background: rgba(253,250,246,0.12); border: 1px dashed rgba(253,250,246,0.4); padding: 2rem; max-width: 480px; margin: 2rem auto 0; font-size: 0.85rem; color: var(--cream); opacity: 0.85; }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .footer-contact a:hover { color: var(--cream); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-text { padding: 3rem 1.5rem 2.5rem; }
+    .hero-image { min-height: 320px; }
+    .problem-strip, .offerings, .credibility, .how-strip, .cta-section, #pillars { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .pillars-grid { grid-template-columns: 1fr; gap: 2px; }
+    .offer-grid, .how-cards-grid { grid-template-columns: 1fr; }
+    .credibility { grid-template-columns: 1fr; gap: 2rem; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="#pillars">The AWE Method</a></li>
+    <li><a href="#founder">About Our Founder</a></li>
+    <li><a href="#offerings">Our Offerings</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="index.html">Individual Coaching</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#pillars" onclick="closeMobile()">The AWE Method</a>
+  <a href="#founder" onclick="closeMobile()">About Our Founder</a>
+  <a href="#offerings" onclick="closeMobile()">Our Offerings</a>
+  <a href="#how-it-works" onclick="closeMobile()">How It Works</a>
+  <a href="index.html" onclick="closeMobile()">Individual Coaching</a>
+  <a href="https://calendly.com/awexpedition/30min" class="mob-cta">Book a Free Call</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <span class="page-eyebrow">AWE at Work · For Organizations</span>
+
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide active" data-slide="0">
+        <h1 class="hero-title">Wellbeing and productivity<br>go <em>hand in hand.</em></h1>
+        <p class="hero-sub">AWE at Work helps your organization and the professionals in it grow intentionally — building the skills and awareness that make high performance sustainable, not depleting.</p>
+      </div>
+      <div class="hero-slide" data-slide="1">
+        <h1 class="hero-title">Learning doesn't change<br>people or organizations.<br><em>Practice does.</em></h1>
+        <p class="hero-sub">We go beyond inspiration. We provide practices and skills to help new habits take root long after the session ends.</p>
+      </div>
+      <div class="hero-slide" data-slide="2">
+        <h1 class="hero-title">Every organization is different.<br>Your solution should<br><em>be too.</em></h1>
+        <p class="hero-sub">Whether you're looking for a keynote, leadership development, executive coaching, team workshops, or a multi-month learning journey, every engagement is tailored to your people, your culture, and your goals.</p>
+      </div>
+    </div>
+
+    <div class="hero-dots" id="heroDots">
+      <button class="hero-dot active" data-goto="0" aria-label="Slide 1"></button>
+      <button class="hero-dot" data-goto="1" aria-label="Slide 2"></button>
+      <button class="hero-dot" data-goto="2" aria-label="Slide 3"></button>
+    </div>
+
+    <a href="#" class="btn-primary">Connect With Us</a>
+  </div>
+  <div class="hero-image">
+    <img src="image/AWE-at-work-pic.png" alt="Team looking out over a mountain view in a conference room" />
+  </div>
+</section>
+
+<!-- PROBLEM / WHY THIS MATTERS -->
+<section class="problem-strip">
+  <p>Whether it's leadership and executive presence, managing stress and burnout, or building client relationships — growth happens on purpose, not by accident.</p>
+  <div class="topic-chips">
+    <span class="topic-chip">Leadership &amp; Executive Presence</span>
+    <span class="topic-chip">Managing Stress &amp; Burnout</span>
+    <span class="topic-chip">Communication &amp; Productivity Skills</span>
+    <span class="topic-chip">Managing Change</span>
+    <span class="topic-chip">Living an Aligned Life</span>
+    <span class="topic-chip">High-Performance Without High Anxiety</span>
+    <span class="topic-chip">Decision Making</span>
+    <span class="topic-chip">Client Relationships &amp; Business Development</span>
+  </div>
+</section>
+
+<!-- AWE METHOD (workplace version) -->
+<section id="pillars">
+  <div class="pillars-header">
+    <span class="section-eyebrow">The AWE Method at Work</span>
+    <h2 class="section-title">The Pillars of<br><em>Sustainable Performance</em></h2>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar">
+      <span class="pillar-letter">A</span>
+      <h3><span style="color:var(--sand)">A</span>wareness</h3>
+      <p>Most professionals operate on auto-pilot — reacting to pressure rather than navigating it. We help teams and individuals recognize the patterns driving stress, decisions, and communication, building the self-awareness that clarity and good leadership require.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-letter">W</span>
+      <h3><span style="color:var(--sand)">W</span>onder</h3>
+      <p>Once aware, professionals can approach challenges with curiosity instead of defensiveness. We help teams experiment with new approaches to communication, decision-making, and change — shifting from rigid habits to adaptable, healthy ways of working.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-letter">E</span>
+      <h3><span style="color:var(--sand)">E</span>mbodiment</h3>
+      <p>Insight only matters if it changes behavior. We help individuals and teams practice new tools and habits until they become how they naturally lead, communicate, and perform — creating lasting change, not just a good workshop day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERINGS -->
+<section class="offerings" id="offerings">
+  <div class="section-header">
+    <span class="section-eyebrow">Our Offerings</span>
+    <h2 class="section-title">Ways to bring <em>AWE</em> in</h2>
+  </div>
+  <div class="offer-grid">
+    <div class="offer-card featured">
+      <span class="offer-tag">Community Connections</span>
+      <h3>Group Connections</h3>
+      <p>Gratitude and perspective practices, coffee chatter, and shared moments that build real connection. We help your organization build a community, not just a place to work.</p>
+    </div>
+    <div class="offer-card">
+      <span class="offer-tag">Workshops</span>
+      <h3>[Workshop / Seminar name]</h3>
+      <p>1-hour to half-day workshops, in person or via webinar, on everything from productivity to meditation.</p>
+    </div>
+    <div class="offer-card">
+      <span class="offer-tag">A Perk That Transforms</span>
+      <h3>Individual Coaching</h3>
+      <p>Give your people the incredible gift of 1:1 coaching — helping them grow both professionally and personally.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CREDIBILITY -->
+<section class="credibility" id="founder">
+  <div>
+    <span class="section-eyebrow">About Our Founder</span>
+    <h2>Founded by someone <em>still in it</em></h2>
+    <p>AWE at Work was founded by Tan Cheung, a 30+ year veteran corporate attorney who is still practicing law. Tan knows the pressure most professionals face — and helps individuals develop the skills needed to live a more aligned, productive, and joyful life.</p>
+  </div>
+  <ul class="credibility-list">
+    <li>30+ years practicing corporate law — public sector, Big Law, in-house Fortune 50, and still practicing today</li>
+    <li class="highlight">2023 Ladder Award — CT Bar Association</li>
+    <li>MAPP, University of Pennsylvania</li>
+    <li><a href="past-work-articles.html">Read Tan's articles on professional wellbeing →</a></li>
+    <li>Certified Positive Psychology Coach</li>
+  </ul>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-strip" id="how-it-works">
+  <div class="section-header">
+    <span class="section-eyebrow" style="color:var(--clay);">How It Works</span>
+    <h2 class="section-title" style="color:var(--bark)">The <em>AWE at Work</em><br>Experience</h2>
+  </div>
+  <div class="how-cards-grid">
+
+    <a href="#" class="how-card">
+      <span class="how-card-tag">The Process</span>
+      <h3>Co-Creating <em>Your Program</em></h3>
+      <p>Every organization is different. We work with you to design an experience aligned with your people, your culture, and your goals. Schedule a conversation.</p>
+    </a>
+
+    <a href="#" class="how-card dark">
+      <span class="how-card-tag">What Sets Us Apart</span>
+      <h3>Practice, <em>Not Just a Speaking Event</em></h3>
+      <p>Using proprietary tools like the AWExApp and Community Connect, your organization and its people are getting practice, not just a speaking event. Awareness is just the beginning. Whether you engage us for 1:1 coaching for your professionals or a productivity workshop, AWExpedition will guide your organization and the professionals in it toward behavior change.</p>
+    </a>
+
+    <a href="#" class="how-card">
+      <span class="how-card-tag">Is This Right for You?</span>
+      <h3>Right for <em>Your Organization</em></h3>
+      <p>Our work is designed for organizations that recognize that lasting performance begins with people. Whether you're developing leaders, navigating change, strengthening culture, or supporting employee wellbeing, we partner with you to design an experience that meets your organization's unique goals — not a pre-packaged program.</p>
+    </a>
+
+  </div>
+</section>
+
+<!-- CTA / INQUIRY -->
+<section class="cta-section">
+  <h2>Bring AWE to<br><em>your organization</em></h2>
+  <p>[Placeholder CTA copy]</p>
+  <a href="#" class="btn-primary">Connect With Us</a>
+  <div class="cta-form-note">
+    [Inquiry form placeholder — fields TBD: name, firm, role, engagement type, audience size, timeline]
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script>
+  fetch('/footer.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('site-footer').innerHTML = html);
+</script>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  /* HERO ROTATION: auto-rotate + manual dots + pause on hover */
+  (function() {
+    const slides = Array.from(document.querySelectorAll('.hero-slide'));
+    const dots = Array.from(document.querySelectorAll('.hero-dot'));
+    const heroText = document.querySelector('.hero-text');
+    let current = 0;
+    let intervalId = null;
+    const ROTATE_MS = 6000;
+
+    function goTo(index) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = index;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function next() {
+      goTo((current + 1) % slides.length);
+    }
+
+    function startAuto() {
+      stopAuto();
+      intervalId = setInterval(next, ROTATE_MS);
+    }
+    function stopAuto() {
+      if (intervalId) clearInterval(intervalId);
+      intervalId = null;
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.getAttribute('data-goto'), 10);
+        goTo(idx);
+        startAuto();
+      });
+    });
+
+    if (heroText) {
+      heroText.addEventListener('mouseenter', stopAuto);
+      heroText.addEventListener('mouseleave', startAuto);
+    }
+
+    function setContainerHeight() {
+      let maxHeight = 0;
+      slides.forEach(slide => {
+        const wasActive = slide.classList.contains('active');
+        slide.style.position = 'relative';
+        slide.style.visibility = 'hidden';
+        slide.classList.add('active');
+        maxHeight = Math.max(maxHeight, slide.offsetHeight);
+        slide.classList.toggle('active', wasActive);
+        slide.style.position = '';
+        slide.style.visibility = '';
+      });
+      document.getElementById('heroSlides').style.height = maxHeight + 'px';
+    }
+
+    setContainerHeight();
+    window.addEventListener('resize', setContainerHeight);
+
+    startAuto();
+  })();
+</script>
+</body>
+</html>
