@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Past Musings and Frameworks — AWExpedition™</title>
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="icon" href="favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -51,6 +51,12 @@
        so newest retirements appear at the top of the page.
     3. Update the title, subtitle, card text, and the two href links.
 
+    PATHS: this file lives in /musings/. Musing pages that live in
+    this same /musings/ folder need no "../" prefix. Framework pages
+    live in the sibling /frameworks/ folder, so those links need
+    "../frameworks/" instead. Older pieces still sitting at the site
+    root need a plain "../" prefix.
+
     ROWS: ".archive-grid" is a 2-column grid by default (musing +
     framework side by side). This is fixed at 2 columns because
     every Tanism only ever has exactly 2 halves (story + framework),
@@ -94,12 +100,12 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <a href="../index.html" class="nav-logo">AW<span>Expedition</span>™</a>
   <ul class="nav-links">
-    <li><a href="index.html#pillars">The AWE Method</a></li>
-    <li><a href="index.html#about">About Tan</a></li>
-    <li><a href="index.html#services">Services</a></li>
-    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="../index.html#pillars">The AWE Method</a></li>
+    <li><a href="../index.html#about">About Tan</a></li>
+    <li><a href="../index.html#services">Services</a></li>
+    <li><a href="../musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
     <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
   </ul>
 </nav>
@@ -107,7 +113,7 @@
 <section class="page-hero">
   <div class="page-hero-inner">
     <div class="breadcrumb">
-      <a href="musings.html">Musings & More</a>
+      <a href="../musings.html">Musings & More</a>
     </div>
     <span class="page-eyebrow">The Archive</span>
     <h1>Past Musings<br>and <em>Frameworks</em></h1>
@@ -125,13 +131,13 @@
         <span class="archive-tag">Musing</span>
         <h3>Trigger Happy — The Story</h3>
         <p>A story about rejection letters, a YouTube experiment, and the unexpected gift of being triggered.</p>
-        <a href="trigger-happy.html" class="read-more">Read the full piece →</a>
+        <a href="../trigger-happy.html" class="read-more">Read the full piece →</a>
       </div>
       <div class="archive-card">
         <span class="archive-tag">Tanisms™ · Framework</span>
         <h3>Trigger Happy — The Framework</h3>
         <p>What if you could look at triggers through a different lens? What if you could become Trigger Happy?</p>
-        <a href="trigger-happy-framework.html" class="read-more">Explore the framework →</a>
+        <a href="../trigger-happy-framework.html" class="read-more">Explore the framework →</a>
       </div>
     </div>
   </div>
