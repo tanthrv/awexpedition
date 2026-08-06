@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Let Go — Framework — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+
+  .framework-hero { padding: 9rem 6rem 5rem; background: var(--bark); position: relative; overflow: hidden; }
+  .framework-hero::before {
+    content: 'LG'; font-family: 'Cormorant Garamond', serif; font-size: 22vw; font-weight: 600;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    color: rgba(255,255,255,0.03); pointer-events: none; white-space: nowrap;
+  }
+  .framework-hero-inner { position: relative; max-width: 800px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb span { color: var(--sand); opacity: 0.4; font-size: 0.75rem; }
+  .framework-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; opacity: 0.8; }
+  .framework-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.5rem; }
+  .framework-hero h1 em { font-style: italic; color: var(--sand); }
+  .tagline { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: rgba(247,243,238,0.75); line-height: 1.6; max-width: 600px; border-left: 3px solid var(--clay); padding-left: 1.5rem; margin-top: 1rem; }
+
+  .framework-body { max-width: 900px; margin: 0 auto; padding: 5rem 6rem; }
+
+  .concept-section { margin-bottom: 4rem; }
+  .section-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1.2rem; display: block; }
+  .concept-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 1.5rem; line-height: 1.2; }
+  .concept-section p { font-size: 1.05rem; line-height: 1.95; opacity: 0.85; margin-bottom: 1.2rem; }
+
+  .framework-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--mist); margin: 4rem 0; }
+  .framework-card { background: var(--warm-white); padding: 2.5rem; }
+  .framework-card.full-width { grid-column: span 2; background: var(--cream); }
+  .framework-card.dark { background: var(--bark); color: var(--cream); }
+  .card-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+  .framework-card.dark .card-label { color: var(--sand); }
+  .framework-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 1rem; line-height: 1.3; }
+  .framework-card p { font-size: 0.9rem; line-height: 1.8; opacity: 0.75; }
+  .framework-card.dark p { opacity: 0.7; }
+  .framework-card ul { list-style: none; margin-top: 0.5rem; }
+  .framework-card ul li { font-size: 0.9rem; padding: 0.4rem 0; padding-left: 1.2rem; position: relative; opacity: 0.75; line-height: 1.6; }
+  .framework-card ul li::before { content: '—'; position: absolute; left: 0; color: var(--clay); }
+  .framework-card.dark ul li::before { color: var(--sand); }
+
+  .letgo-intro { margin: 4rem 0 1.5rem; }
+  .letgo-intro h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 1rem; }
+  .letgo-intro p { font-size: 1.02rem; line-height: 1.9; opacity: 0.85; }
+  .letgo-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--mist); margin: 2.5rem 0 4rem; }
+  .letgo-card { background: var(--warm-white); padding: 2rem 1.4rem; display: flex; flex-direction: column; align-items: flex-start; }
+  .letgo-letter { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600; color: var(--clay); line-height: 1; margin-bottom: 1rem; }
+  .letgo-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.8rem; line-height: 1.3; }
+  .letgo-card p { font-size: 0.82rem; line-height: 1.7; opacity: 0.75; }
+
+  .script-box { background: var(--clay); padding: 2.5rem 3rem; margin: 4rem 0; text-align: center; position: relative; overflow: hidden; }
+  .script-box::before { content: '" "'; font-family: 'Cormorant Garamond', serif; font-size: 12rem; font-weight: 300; position: absolute; top: -2rem; left: 1rem; color: rgba(255,255,255,0.08); line-height: 1; pointer-events: none; }
+  .script-box .script-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(247,243,238,0.6); margin-bottom: 1rem; display: block; }
+  .script-box .script-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.3; position: relative; }
+
+  .practice-section { margin: 4rem 0; }
+  .practice-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 2rem; }
+  .practice-example { border-left: 3px solid var(--mist); padding: 1.2rem 2rem; margin-bottom: 1.5rem; transition: border-color 0.2s; }
+  .practice-example:hover { border-left-color: var(--clay); }
+  .practice-example .example-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; display: block; }
+  .practice-example p { font-size: 0.95rem; line-height: 1.8; opacity: 0.8; }
+  .practice-example a { color: var(--clay); border-bottom: 1px solid var(--sand); text-decoration: none; }
+  .practice-example a:hover { border-color: var(--clay); }
+
+  .reflection-box { background: var(--cream); border: 1px solid var(--mist); padding: 2.5rem 3rem; margin: 4rem 0; }
+  .reflection-box .reflection-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1.2rem; display: block; }
+  .reflection-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.3; }
+  .reflection-box p { font-size: 0.9rem; line-height: 1.8; opacity: 0.7; }
+
+  .connections-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mist); margin: 4rem 0; }
+  .connection-card { background: var(--warm-white); padding: 2rem 1.8rem; }
+  .connection-type { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; display: block; }
+  .connection-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .connection-card p { font-size: 0.82rem; opacity: 0.65; line-height: 1.7; }
+
+  .tanism-cta { background: var(--bark); padding: 3rem; margin: 4rem 0; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .tanism-cta-text .cta-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 0.8rem; display: block; }
+  .tanism-cta-text p { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--cream); line-height: 1.5; }
+  .tanism-cta-links { display: flex; flex-direction: column; gap: 0.8rem; flex-shrink: 0; }
+  .btn-tanism { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.8rem 1.8rem; white-space: nowrap; transition: all 0.2s; }
+  .btn-tanism.primary { background: var(--clay); color: var(--cream); }
+  .btn-tanism.primary:hover { background: var(--moss); }
+  .btn-tanism.secondary { border: 1px solid rgba(212,184,150,0.4); color: var(--sand); }
+  .btn-tanism.secondary:hover { border-color: var(--sand); color: var(--cream); }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .framework-hero { padding: 8rem 1.5rem 4rem; }
+    .framework-body { padding: 3rem 1.5rem; }
+    .framework-grid { grid-template-columns: 1fr; }
+    .framework-card.full-width { grid-column: span 1; }
+    .letgo-grid { grid-template-columns: 1fr; }
+    .connections-grid { grid-template-columns: 1fr; }
+    .tanism-cta { flex-direction: column; }
+    .tanism-cta-links { flex-direction: row; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<section class="framework-hero">
+  <div class="framework-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+      <span>/</span>
+      <a href="musings.html#tanisms">Tan's Take on Timeless Truths</a>
+    </div>
+    <span class="framework-tag">Tanism™ · Framework</span>
+    <h1>Let<br><em>Go</em></h1>
+    <p class="tagline">You can't get to the big stuff until you practice on the small stuff.</p>
+  </div>
+</section>
+
+<div class="framework-body">
+
+  <div class="concept-section">
+    <span class="section-label">The Concept</span>
+    <h2>The energy is not in the event.<br>It's in what you do with it.</h2>
+    <p>Something happens. A driver cuts you off. A plan falls apart. A deal goes sideways. In the space between that moment and your next move, something else happens — quieter, faster, and far more costly than the event itself. The internal escalation begins. The narrative spins up. The energy flows, not toward a solution, but toward resistance.</p>
+    <p>LET GO is not about defeat, apathy, lowering your standards, avoiding accountability, or pretending things don't matter. It is about recognizing that the reaction you are carrying is costing you something — and that you get to decide whether it's worth it.</p>
+    <p>Start small. The driver in front of you who can't hear you yelling is a perfect place to begin. If you can't let go of that, how do you ever expect to let go of the things that actually matter?</p>
+  </div>
+
+  <div class="framework-grid">
+    <div class="framework-card">
+      <span class="card-label">When It Arises</span>
+      <h3>Triggers</h3>
+      <ul>
+        <li>Stuck behind a slow driver, frustration rising</li>
+        <li>A plan changes without your input</li>
+        <li>Someone says something that lands wrong</li>
+        <li>An outcome you worked toward doesn't materialize</li>
+        <li>Replaying a conversation long after it ended</li>
+        <li>Carrying something from hours, days, or weeks ago</li>
+      </ul>
+    </div>
+    <div class="framework-card">
+      <span class="card-label">The Energy Audit</span>
+      <h3>Is this worth what you're spending on it?</h3>
+      <p>Think about the last time you were stuck in traffic, cut off, or delayed for reasons entirely outside your control. How long did the frustration linger after the moment passed? How much mental energy went into the replay?</p>
+    </div>
+    <div class="framework-card full-width dark">
+      <span class="card-label">The Extreme Version</span>
+      <h3>Road rage, and what it actually accomplishes</h3>
+      <p>The person gripping the wheel, yelling at a driver who cannot hear them, blood pressure rising, ruining the next hour of their own day. What did it change? What did it solve? The other driver moved on. The only person still in the reaction is the one who couldn't let go. This is where the practice begins — not with the big things. With the driver.</p>
+    </div>
+  </div>
+
+  <div class="letgo-intro">
+    <span class="section-label">The Move</span>
+    <h2>A five-step pause between stimulus and response</h2>
+    <p>The LET GO framework is not a personality overhaul. It is a brief, repeatable process — five steps that interrupt the automatic escalation and redirect energy toward what actually matters.</p>
+  </div>
+
+  <div class="letgo-grid">
+    <div class="letgo-card">
+      <span class="letgo-letter">L</span>
+      <h3>Look & Label</h3>
+      <p>Notice you are reacting. Name what you feel — frustration, irritation, urgency, disappointment. Naming creates distance. You are the one observing the reaction. You are not the reaction.</p>
+    </div>
+    <div class="letgo-card">
+      <span class="letgo-letter">E</span>
+      <h3>Examine the Facts</h3>
+      <p>Strip away the narrative. What is objectively true? The closing was delayed. The driver is slow. The filing had an error. Facts require action. Stories require energy. Know which one you're dealing with.</p>
+    </div>
+    <div class="letgo-card">
+      <span class="letgo-letter">T</span>
+      <h3>Test the Narrative</h3>
+      <p>Ask the one question that cuts through almost everything: does holding onto this thought change the outcome? If the answer is no — and it almost always is — the narrative has no utility. Set it down.</p>
+    </div>
+    <div class="letgo-card">
+      <span class="letgo-letter">G</span>
+      <h3>Ground in Reality</h3>
+      <p>What happened, happened. It will not un-happen. This is not resignation. It is the most precise move available: accepting the facts as fixed, and building your next step from there.</p>
+    </div>
+    <div class="letgo-card">
+      <span class="letgo-letter">O</span>
+      <h3>Operate with Clarity</h3>
+      <p>Now act. From this grounded, clear-eyed place — address the issue directly, communicate precisely, and move forward without the residue of reaction.</p>
+    </div>
+  </div>
+
+  <div class="script-box">
+    <span class="script-label">In the moment of escalation — ask this</span>
+    <div class="script-text">Does holding onto this thought change the outcome?</div>
+  </div>
+
+  <div class="practice-section">
+    <span class="section-label">In Practice</span>
+    <h2>What it looks like in real life</h2>
+    <div class="practice-example">
+      <span class="example-label">The Driver Who Can't Hear You</span>
+      <p>You are running late. The car in front of you is moving too slowly, changing lanes without signaling, doing everything wrong. The frustration is real. But the driver cannot hear you. They are entirely unaffected by your reaction. The only person being impacted is you. This is where the practice begins — not because it is high stakes, but because it is low stakes. Master the small releases first. They build the muscle for the ones that matter.</p>
+    </div>
+    <div class="practice-example">
+      <span class="example-label">The Lawyer Who Applied It</span>
+      <p>LET GO was originally written for attorneys — a profession built on control, precision, and high-stakes outcomes. The same internal friction that costs a lawyer a negotiation can cost you a conversation, a relationship, a good night's sleep. <a href="articles/CT%20Lawyer%20Letting%20Go%20to%20Level%20Up%20in%20Performance%20and%20Wellness.pdf" target="_blank" rel="noopener">Read the original CT Lawyer piece →</a></p>
+    </div>
+    <div class="practice-example">
+      <span class="example-label">Read the Full Story</span>
+      <p>LET GO was born from a driver, a highway, and a two-hour shutdown on I-95. <a href="let-go.html">Read the full story →</a></p>
+    </div>
+  </div>
+
+  <div class="reflection-box">
+    <span class="reflection-label">Sit With This</span>
+    <h3>What small thing are you still carrying that you could set down right now?</h3>
+    <p>Think of something recent — minor, mundane, not worth a second thought in hindsight (by now you might have given it a third and fourth thought). Notice that you are still thinking about it. That is the practice. Not the dramatic release of a life-defining burden. The quiet decision, in an ordinary moment, to stop spending energy on someone who can't hear you or something that won't change. Start there. The bigger things will follow.</p>
+  </div>
+
+  <span class="section-label">Connections</span>
+  <div class="connections-grid">
+    <div class="connection-card">
+      <span class="connection-type">Philosophy</span>
+      <h4>Viktor Frankl — The Space Between</h4>
+      <p>Frankl observed that between stimulus and response there is a space — and in that space lies our freedom. LET GO is a deliberate expansion of that space. The framework doesn't eliminate the stimulus. It gives you something to do with the space.</p>
+    </div>
+    <div class="connection-card">
+      <span class="connection-type">Positive Psychology</span>
+      <h4>Psychological Flexibility — ACT</h4>
+      <p>Developed by Dr. Steven Hayes through Acceptance and Commitment Therapy, psychological flexibility is the ability to stay present and take values-driven action even when difficult thoughts and emotions arise. Unlike personality, it is trainable. LET GO is psychological flexibility made practical.</p>
+    </div>
+    <div class="connection-card">
+      <span class="connection-type">Real World</span>
+      <h4>The Road Rage Research</h4>
+      <p>Studies on driving behavior consistently show that aggressive responses to traffic frustration — honking, tailgating, verbal outbursts — have no effect on traffic flow and measurable negative effects on the driver's own cardiovascular system and mood. The reaction costs the reactor; the other drivers are already gone.</p>
+    </div>
+  </div>
+
+  <div style="background:var(--bark);padding:2.5rem 6rem;display:flex;flex-direction:column;align-items:center;gap:1.2rem;text-align:center;">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--cream);opacity:0.85;margin:0;">Enjoyed this piece?</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+      <div style="max-width:100%;overflow:hidden;"><script src="https://f.convertkit.com/ckjs/ck.5.js"></script><form action="https://app.kit.com/forms/9489376/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="9489376" data-uid="49f2196786" data-format="inline" data-version="5" min-width="400 500 600 700 800"><div data-style="clean"><ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul><div data-element="fields" data-stacked="false" class="seva-fields formkit-fields"><div class="formkit-field"><input class="formkit-input" name="email_address" aria-label="Email Address" placeholder="Email Address" required="" type="email" style="color: rgb(0, 0, 0); border-color: rgb(227, 227, 227); border-radius: 4px; font-weight: 400;"></div><button data-element="submit" class="formkit-submit formkit-submit" style="color: rgb(44, 32, 23); background-color: rgb(201, 168, 76); border-radius: 4px; font-weight: 400;"><div class="formkit-spinner"><div></div><div></div><div></div></div><span class="">Join Me Please</span></button></div></div></form></div>
+      <a href="https://calendly.com/awexpedition/30min" style="display:inline-block;text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.8rem 1.8rem;background:var(--clay);color:var(--cream);border-radius:2px;">Book a Free Call →</a>
+    </div>
+  </div>
+
+  <div class="tanism-cta">
+    <div class="tanism-cta-text">
+      <span class="cta-label">Tan's Take on Timeless Truths</span>
+      <p>This is part of the Tanisms™ collection — ideas worth sitting with. Each one is a different handle on the same door.</p>
+    </div>
+    <div class="tanism-cta-links">
+      <a href="musings.html#tanisms" class="btn-tanism primary">Explore all Tanisms™ →</a>
+      <a href="let-go.html" class="btn-tanism secondary">Read the story →</a>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:3rem 0 1rem;">
+    <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='musings.html'; return false;" style="display:inline-block;padding:0.7rem 2rem;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cream);background:var(--clay);border-radius:2px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='var(--bark)'" onmouseout="this.style.background='var(--clay)'">← Go Back</a>
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+<script>
+  fetch('/footer.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('site-footer').innerHTML = html);
+</script>
+
+</body>
+</html>
