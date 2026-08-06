@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Past Musings and Frameworks — AWExpedition™</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE; --warm-white: #FDFAF6; --bark: #2C2017;
+    --moss: #4A5C3E; --clay: #B5714A; --sand: #D4B896; --mist: #E8E0D5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--warm-white); color: var(--bark); font-family: 'DM Sans', Georgia, serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(253,250,246,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--mist); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--bark); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta { background: var(--moss); color: var(--cream) !important; padding: 0.55rem 1.4rem !important; border-radius: 2px; opacity: 1 !important; }
+  .nav-cta:hover { background: var(--bark) !important; }
+
+  .page-hero { padding: 10rem 6rem 4rem; background: var(--bark); position: relative; overflow: hidden; }
+  .page-hero::before { content: 'ARCHIVE'; font-family: 'Cormorant Garamond', serif; font-size: 16vw; font-weight: 600; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.04); pointer-events: none; white-space: nowrap; }
+  .page-hero-inner { position: relative; max-width: 760px; }
+  .breadcrumb { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 2rem; }
+  .breadcrumb a { color: var(--sand); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .page-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sand); margin-bottom: 1rem; display: block; }
+  .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 1.2rem; }
+  .page-hero h1 em { font-style: italic; color: var(--sand); }
+  .page-hero p { font-size: 1rem; color: rgba(247,243,238,0.7); max-width: 560px; line-height: 1.9; }
+
+  .archive-body { max-width: 1100px; margin: 0 auto; padding: 5rem 6rem; }
+
+  /*
+    ============================================================
+    HOW TO ADD A RETIRED TANISM TO THIS ARCHIVE
+    ============================================================
+    Each retired Tanism (musing + framework pair) is one
+    ".archive-group" block below. To add a new one:
+
+    1. Copy an entire <div class="archive-group">...</div> block.
+    2. Paste it right before the <!-- NEW GROUPS GO HERE --> marker,
+       so newest retirements appear at the top of the page.
+    3. Update the title, subtitle, card text, and the two href links.
+
+    ROWS: ".archive-grid" is a 2-column grid by default (musing +
+    framework side by side). This is fixed at 2 columns because
+    every Tanism only ever has exactly 2 halves (story + framework),
+    so you will never need a 3rd column inside a single group.
+    Each new ".archive-group" you add automatically starts its own
+    fresh row below the previous one — no grid math to worry about,
+    no limit on how many groups this page can hold.
+    ============================================================
+  */
+  .archive-group { margin-bottom: 5rem; }
+  .archive-group-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.5rem; }
+  .archive-group-title em { font-style: italic; color: var(--clay); }
+  .archive-group-sub { font-size: 0.88rem; opacity: 0.6; margin-bottom: 2rem; }
+  .archive-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .archive-card { background: var(--cream); border: 1px solid var(--mist); padding: 2.2rem; transition: transform 0.3s, box-shadow 0.3s; }
+  .archive-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(44,32,23,0.08); }
+  .archive-tag { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+  .archive-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 0.8rem; }
+  .archive-card p { font-size: 0.88rem; opacity: 0.7; line-height: 1.8; margin-bottom: 1.3rem; }
+  .read-more { display: inline-block; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); border-bottom: 1px solid var(--sand); padding-bottom: 2px; transition: border-color 0.2s; }
+  .read-more:hover { border-color: var(--clay); }
+
+  footer { background: var(--bark); color: var(--cream); padding: 3rem 6rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--sand); }
+  footer p { font-size: 0.82rem; opacity: 0.5; }
+  .footer-contact { text-align: right; }
+  .footer-contact a { display: block; color: var(--sand); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.3rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-hero { padding: 8rem 1.5rem 3rem; }
+    .archive-body { padding: 3rem 1.5rem; }
+    .archive-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pillars">The AWE Method</a></li>
+    <li><a href="index.html#about">About Tan</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="musings.html">Musings & More</a>
+    </div>
+    <span class="page-eyebrow">The Archive</span>
+    <h1>Past Musings<br>and <em>Frameworks</em></h1>
+    <p>Stories and frameworks that have made way for newer ones on the front page — still here, still worth the read.</p>
+  </div>
+</section>
+
+<div class="archive-body">
+
+  <div class="archive-group">
+    <h2 class="archive-group-title">Trigger <em>Happy</em></h2>
+    <p class="archive-group-sub">Most of us get triggered and we are rarely happy about it. But what if triggers were not problems to eliminate — but the practice itself?</p>
+    <div class="archive-grid">
+      <div class="archive-card">
+        <span class="archive-tag">Musing</span>
+        <h3>Trigger Happy — The Story</h3>
+        <p>A story about rejection letters, a YouTube experiment, and the unexpected gift of being triggered.</p>
+        <a href="trigger-happy.html" class="read-more">Read the full piece →</a>
+      </div>
+      <div class="archive-card">
+        <span class="archive-tag">Tanisms™ · Framework</span>
+        <h3>Trigger Happy — The Framework</h3>
+        <p>What if you could look at triggers through a different lens? What if you could become Trigger Happy?</p>
+        <a href="trigger-happy-framework.html" class="read-more">Explore the framework →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW GROUPS GO HERE — copy an entire .archive-group block from above, paste it right below this line, and update the content and links. Newest retirements go at the top, so this marker always stays the insertion point right after the most recent one. -->
+
+</div>
+
+<div id="site-footer"></div>
+<script>
+  fetch('/footer.html')
+    .then(r => r.text())
+    .then(html => document.getElementById('site-footer').innerHTML = html);
+</script>
+
+</body>
+</html>
