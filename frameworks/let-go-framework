@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Let Go — Framework — AWExpedition™</title>
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="icon" href="favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -133,12 +133,12 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">AW<span>Expedition</span>™</a>
+  <a href="../index.html" class="nav-logo">AW<span>Expedition</span>™</a>
   <ul class="nav-links">
-    <li><a href="index.html#pillars">The AWE Method</a></li>
-    <li><a href="index.html#about">About Tan</a></li>
-    <li><a href="index.html#services">Services</a></li>
-    <li><a href="musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
+    <li><a href="../index.html#pillars">The AWE Method</a></li>
+    <li><a href="../index.html#about">About Tan</a></li>
+    <li><a href="../index.html#services">Services</a></li>
+    <li><a href="../musings.html" style="opacity:1;color:var(--clay)">Musings & More</a></li>
     <li><a href="https://calendly.com/awexpedition/30min" class="nav-cta">Book a Call</a></li>
   </ul>
 </nav>
@@ -146,9 +146,9 @@
 <section class="framework-hero">
   <div class="framework-hero-inner">
     <div class="breadcrumb">
-      <a href="musings.html">Musings & More</a>
+      <a href="../musings.html">Musings & More</a>
       <span>/</span>
-      <a href="musings.html#tanisms">Tan's Take on Timeless Truths</a>
+      <a href="../musings.html#tanisms">Tan's Take on Timeless Truths</a>
     </div>
     <span class="framework-tag">Tanism™ · Framework</span>
     <h1>Let<br><em>Go</em></h1>
@@ -239,11 +239,11 @@
     </div>
     <div class="practice-example">
       <span class="example-label">The Lawyer Who Applied It</span>
-      <p>LET GO was originally written for attorneys — a profession built on control, precision, and high-stakes outcomes. The same internal friction that costs a lawyer a negotiation can cost you a conversation, a relationship, a good night's sleep. <a href="articles/CT%20Lawyer%20Letting%20Go%20to%20Level%20Up%20in%20Performance%20and%20Wellness.pdf" target="_blank" rel="noopener">Read the original CT Lawyer piece →</a></p>
+      <p>LET GO was originally written for attorneys — a profession built on control, precision, and high-stakes outcomes. The same internal friction that costs a lawyer a negotiation can cost you a conversation, a relationship, a good night's sleep. <a href="../articles/CT%20Lawyer%20Letting%20Go%20to%20Level%20Up%20in%20Performance%20and%20Wellness.pdf" target="_blank" rel="noopener">Read the original CT Lawyer piece →</a></p>
     </div>
     <div class="practice-example">
       <span class="example-label">Read the Full Story</span>
-      <p>LET GO was born from a driver, a highway, and a two-hour shutdown on I-95. <a href="let-go.html">Read the full story →</a></p>
+      <p>LET GO was born from a driver, a highway, and a two-hour shutdown on I-95. <a href="../musings/let-go.html">Read the full story →</a></p>
     </div>
   </div>
 
@@ -286,13 +286,13 @@
       <p>This is part of the Tanisms™ collection — ideas worth sitting with. Each one is a different handle on the same door.</p>
     </div>
     <div class="tanism-cta-links">
-      <a href="musings.html#tanisms" class="btn-tanism primary">Explore all Tanisms™ →</a>
-      <a href="let-go.html" class="btn-tanism secondary">Read the story →</a>
+      <a href="../musings.html#tanisms" class="btn-tanism primary">Explore all Tanisms™ →</a>
+      <a href="../musings/let-go.html" class="btn-tanism secondary">Read the story →</a>
     </div>
   </div>
 
   <div style="text-align:center;margin:3rem 0 1rem;">
-    <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='musings.html'; return false;" style="display:inline-block;padding:0.7rem 2rem;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cream);background:var(--clay);border-radius:2px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='var(--bark)'" onmouseout="this.style.background='var(--clay)'">← Go Back</a>
+    <a href="#" onclick="history.length > 1 ? history.back() : window.location.href='../musings.html'; return false;" style="display:inline-block;padding:0.7rem 2rem;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cream);background:var(--clay);border-radius:2px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='var(--bark)'" onmouseout="this.style.background='var(--clay)'">← Go Back</a>
   </div>
 
 </div>
